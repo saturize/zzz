@@ -120,13 +120,4 @@ client.on('guildMemberAdd', async (member) => {
     }
 });
 
-if (!process.env.TOKEN) {
-    console.error('Token Discord manquant dans le fichier .env.');
-    process.exit(1); // Arrête l'exécution si le token est manquant
-}
-
-client.login(process.env.TOKEN).catch(error => {
-    console.error('Erreur lors de la connexion du bot :', error);
-});
-
 client.login(process.env.TOKEN);
