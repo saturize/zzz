@@ -1,0 +1,16 @@
+{
+  "prefix": ".",
+  "ownerID": "1272945881603244163",
+  "embedColor": "#000000",
+  "autorole": {
+    "enabled": false,
+    "roleId": null
+  },
+  "snipe": {
+    "lastDeletedMessage": {
+      "content": "",
+      "author": "",
+      "attachments": []
+    }
+  }
+}
