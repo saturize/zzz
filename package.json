@@ -20,5 +20,5 @@
     "mysql2": "^3.11.0",
     "undici": "^6.19.8"
   },
-  "nodeVersion": "22.11.0"
+  "nodeVersion": "21.6.2"
 }
