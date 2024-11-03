@@ -37,7 +37,7 @@ module.exports = {
             .addComponents(
                 new ButtonBuilder()
                     .setStyle(ButtonStyle.Secondary)
-                    .setCustomId('helpEmbed')
+                    .setCustomId('help')
                     .setEmoji('<:help:1302718126831570964>')
             );
 
@@ -93,10 +93,18 @@ helpInteraction: async (interaction) => {
             .setColor(config.embedColor)
             .setDescription("Liste des commandes de paramètres...\n..."),
         
-        helpEmbed: new EmbedBuilder()
-            .setTitle("Help")
+        help: new EmbedBuilder()
+            .setTitle(".gg/saturize")
             .setColor(config.embedColor)
-            .setDescription("Besoin d'aide ? Voici les catégories de commandes...\n...")
+            .setDescription(`
+                ${client.customEmojis.help} **help**\n\n
+                ${client.customEmojis.category} **categories :**\n
+                ${client.customEmojis.moderation} \`moderation\` | *Ban, kick, slow-mode...*\n
+                ${client.customEmojis.info} \`info\` | *serverinfo, userinfo, avatar...*\n
+                ${client.customEmojis.fun} \`fun\` | *Poll, rate, snipe...*\n
+                ${client.customEmojis.interact} \`interactions\` | *Hug, kiss, slap...*\n
+                ${client.customEmojis.settings} \`settings\` | *Admin only commands.*\n\n
+            `)
     };
     
     const selectedEmbed = embedMap[interaction.customId];
@@ -129,7 +137,7 @@ helpInteraction: async (interaction) => {
         .addComponents(
             new ButtonBuilder()
                 .setStyle(ButtonStyle.Secondary)
-                .setCustomId('helpEmbed')
+                .setCustomId('help')
                 .setEmoji('<:help:1302718126831570964>')
         );
 
