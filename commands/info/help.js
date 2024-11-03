@@ -9,47 +9,47 @@ module.exports = {
 
     run: async (client, message, args) => {
         
-        const emojis = client.customEmojis;
+        const { moderation, info, fun, interact, settings, help } = client.customEmojis;
 
         const row = new ActionRowBuilder()
             .addComponents(
                 new ButtonBuilder()
                     .setStyle(2)
                     .setCustomId('mod')
-                    .setEmoji(emojis.moderation),
+                    .setEmoji('<:moderation:1302696364270026853>'),
                 new ButtonBuilder()
                     .setStyle(2)
                     .setCustomId('info')
-                    .setEmoji(emojis.info),
+                    .setEmoji('<:info:1302694232879796265>'),
                 new ButtonBuilder()
                     .setStyle(2)
                     .setCustomId('fun')
-                    .setEmoji(emojis.fun),
+                    .setEmoji('<:fun:1302695666182520874>'),
                 new ButtonBuilder()
                     .setStyle(2)
                     .setCustomId('interactions')
-                    .setEmoji(emojis.interact),
+                    .setEmoji('<:interact:1302695110408011776>'),
                 new ButtonBuilder()
                     .setStyle(2)
                     .setCustomId('settings')
-                    .setEmoji(emojis.settings),
+                    .setEmoji('<:settings:1302714616958418995> '),
                 new ButtonBuilder()
                     .setStyle(2)
                     .setCustomId('help')
-                    .setEmoji(emojis.help),
+                    .setEmoji('<:help:1302718126831570964> '),
             );
 
-        const help = new EmbedBuilder()
+        const helpEmbed = new EmbedBuilder()
             .setTitle(".gg/saturize")
             .setColor(config.embedColor)
             .setDescription(`
-                ${emojis.help} **help**\n\n
-                ${emojis.category} **categories :**\n
-                ${emojis.moderation} \`moderation\` | *Ban, kick, slow-mode...*\n
-                ${emojis.info} \`info\` | *serverinfo, userinfo, avatar...*\n
-                ${emojis.fun} \`fun\` | *Poll, rate, snipe...*\n
-                ${emojis.interact} \`interactions\` | *Hug, kiss, slap...*\n
-                ${emojis.settings} \`settings\` | *Admin only commands.*\n\n
+                ${help} **help**\n\n
+                ${category} **categories :**\n
+                ${moderation} \`moderation\` | *Ban, kick, slow-mode...*\n
+                ${info} \`info\` | *serverinfo, userinfo, avatar...*\n
+                ${fun} \`fun\` | *Poll, rate, snipe...*\n
+                ${interact} \`interactions\` | *Hug, kiss, slap...*\n
+                ${settings} \`settings\` | *Admin only commands.*\n\n
             `)
             .setFooter({
                 text: message.member.displayName,
@@ -58,7 +58,7 @@ module.exports = {
             .setTimestamp()
 
         await message.reply({
-            embeds: [help],
+            embeds: [helpEmbed],
             components: [row]
         });
     }
@@ -93,7 +93,7 @@ helpInteraction: async (interaction) => {
             .setColor(config.embedColor)
             .setDescription("Liste des commandes de paramètres...\n..."),
         
-        help: new EmbedBuilder()
+        helpEmbed: new EmbedBuilder()
             .setTitle("Help")
             .setColor(config.embedColor)
             .setDescription("Besoin d'aide ? Voici les catégories de commandes...\n...")
