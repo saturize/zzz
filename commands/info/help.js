@@ -69,8 +69,7 @@ module.exports = {
 };
 
 
-const helpInteraction = async (interaction) => {
-
+helpInteraction: async (interaction) => {
     const embedMap = {
         mod: new EmbedBuilder()
             .setTitle("Moderation Commands")
@@ -118,5 +117,3 @@ const helpInteraction = async (interaction) => {
         await interaction.reply({ content: "Commande non reconnue.", ephemeral: true });
     }
 };
-
-module.exports.helpInteraction = helpInteraction;
