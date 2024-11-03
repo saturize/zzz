@@ -67,14 +67,11 @@ module.exports = {
 
 
 helpInteraction: async (interaction) => {
-
-    const { moderation, info, fun, interact, settings, help, category } = client.customEmojis;
-    
     const embedMap = {
         mod: new EmbedBuilder()
-            .setTitle("Moderation Commands")
+            .setTitle("<:moderation:1302696364270026853> Moderation Commands")
             .setColor(config.embedColor)
-            .setDescription(`${moderation} Liste des commandes de modération...\n...`),
+            .setDescription("Liste des commandes de modération...\n..."),
         
         info: new EmbedBuilder()
             .setTitle("Information Commands")
