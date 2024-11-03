@@ -11,7 +11,7 @@ exports.run = async (client, message, args) => {
         const deletedMessage = config.snipe.lastDeletedMessage;
 
         if (!deletedMessage.content && (!deletedMessage.attachments || deletedMessage.attachments.length === 0)) {
-            await message.reply(`${decline} Aucun contenu trouvé dans le dernier message supprimé.`);
+            await message.reply(`${decline} Aucun message supprimé trouvé.`);
             return;
         }
 
