@@ -97,11 +97,13 @@ client.on('guildMemberAdd', async (member) => {
     }
 });
 
-// TWITCH NOTIF
+// LOGIN
 client.login(process.env.TOKEN).then(() => {
     console.log('Bot logged in successfully.');
 
-    // check every 60 sec
+    db.connectToDatabase();
+
+    // TWITCH CHECK
     setInterval(() => {
         checkLiveStatus(client);
     }, 60000);
