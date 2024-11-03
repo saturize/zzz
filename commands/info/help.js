@@ -46,12 +46,12 @@ module.exports = {
             .setColor(config.embedColor)
             .setDescription(`
                 ${help} **help**\n\n
-                ${category} **categories :**\n
-                ${moderation} \`moderation\` | *Ban, kick, slow-mode...*\n
+                ${category} **catégories :**\n
+                ${moderation} \`modération\` | *ban, kick, clear...*\n
                 ${info} \`info\` | *serverinfo, userinfo, avatar...*\n
-                ${fun} \`fun\` | *Poll, rate, snipe...*\n
-                ${interact} \`interactions\` | *Hug, kiss, slap...*\n
-                ${settings} \`settings\` | *Admin only commands.*\n\n
+                ${fun} \`fun\` | *poll, rate, snipe...*\n
+                ${interact} \`interactions\` | *hug, kiss, slap...*\n
+                ${settings} \`settings\` | *admin only commands.*\n\n
             `)
             .setFooter({
                 text: message.member.displayName,
@@ -67,11 +67,14 @@ module.exports = {
 
 
 helpInteraction: async (interaction) => {
+
+    const { moderation, info, fun, interact, settings, help, category } = client.customEmojis;
+    
     const embedMap = {
         mod: new EmbedBuilder()
             .setTitle("Moderation Commands")
             .setColor(config.embedColor)
-            .setDescription("Liste des commandes de modération...\n..."),
+            .setDescription(`${moderation} Liste des commandes de modération...\n...`),
         
         info: new EmbedBuilder()
             .setTitle("Information Commands")
