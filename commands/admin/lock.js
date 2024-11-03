@@ -1,9 +1,12 @@
 const { PermissionsBitField } = require('discord.js');
 
 exports.run = async (client, message) => {
+
+    const { approve, decline, warning } = client.customEmojis;
+
     // VERIFY PERM
     if (!message.member.permissions.has(PermissionsBitField.Flags.ManageChannels)) {
-        return message.reply("Vous n'avez pas la permission de gérer les canaux.");
+        return message.reply(`${decline} Vous n'avez pas la permission de gérer les canaux.`);
     }
 
     // GET LOCKED CHANNEL IF NOT GIVEN THEN CURRENT
@@ -15,10 +18,9 @@ exports.run = async (client, message) => {
             SendMessages: false
         });
 
-        message.channel.send("Le salon a été fermé.");
+        message.channel.send(`${approve} Le salon a été fermé.`);
     } catch (error) {
-        console.error('Erreur lors du verrouillage du canal:', error);
-        message.reply("Une erreur s'est produite en essayant de verrouiller le canal.");
+        message.reply(`${warning} Une erreur s'est produite en essayant de verrouiller le canal.`);
     }
 };
 

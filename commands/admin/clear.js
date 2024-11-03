@@ -2,14 +2,11 @@ const { PermissionsBitField } = require('discord.js');
 
 exports.run = async (client, message, args) => {
 
-    // CUSTOM EMOJIS
-    const approve = message.guild.emojis.cache.find(emoji => emoji.name === 'approve');
-    const decline = message.guild.emojis.cache.find(emoji => emoji.name === 'decline');
-    const warning = message.guild.emojis.cache.find(emoji => emoji.name === 'warning');
-
+    const { approve, decline, warning } = client.customEmojis;
+    
     // VERIFY PERM
     if (!message.member.permissions.has(PermissionsBitField.Flags.ManageMessages)) {
-        return message.reply(`${warning} Vous n'avez pas la permission de gérer les messages.`);
+        return message.reply(`${decline} Vous n'avez pas la permission de gérer les messages.`);
     }
 
     // IF ALL THEN DELETE ALL
