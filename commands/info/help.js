@@ -37,7 +37,7 @@ module.exports = {
             .addComponents(
                 new ButtonBuilder()
                     .setStyle(ButtonStyle.Secondary)
-                    .setCustomId('help')
+                    .setCustomId('helpEmbed')
                     .setEmoji('<:help:1302718126831570964>')
             );
 
@@ -63,8 +63,7 @@ module.exports = {
             embeds: [helpEmbed],
             components: [row, row2]
         });
-    }
-};
+    },
 
 
 helpInteraction: async (interaction) => {
@@ -109,4 +108,5 @@ helpInteraction: async (interaction) => {
     } else {
         await interaction.reply({ content: "Commande non reconnue.", ephemeral: true });
     }
+}
 };

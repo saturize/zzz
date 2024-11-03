@@ -9,6 +9,7 @@ const db = require('./database');
 const { checkLiveStatus } = require('./twitchNotifier');
 const helpModule = require('./commands/info/help');
 
+
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
