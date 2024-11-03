@@ -40,16 +40,24 @@ async function getAccessToken() {
 function notifyDiscord(client, streamData) {
     const channel = client.channels.cache.get(process.env.DISCORD_CHANNEL_ID);
     if (channel) {
-        channel.send(`📢 Je suis en live !! ||@saturer||`);
-        const embed = new EmbedBuilder()
-        .setColor('#9146FF')
-        .setTitle(`${process.env.TWITCH_CHANNEL_NAME} est en live !`)
-        .setURL(`https://www.twitch.tv/${process.env.TWITCH_CHANNEL_NAME}`)
-        .setDescription(`@everyone\n\n**Titre du stream :** ${streamData.title}\n**Jeu :** ${streamData.game_name}`)
-        .setThumbnail(`https://static-cdn.jtvnw.net/jtv_user_pictures/${process.env.TWITCH_CHANNEL_NAME}.png`) // CHANNEL PFP
-        .setImage(streamData.thumbnail_url.replace('{width}', '1280').replace('{height}', '720')) // MINIATURE
-        .setTimestamp();
-    channel.send({ embeds: [embed] });
+        channel.send(`📢 Je suis en live !!`).then(() => {
+            const embed = new EmbedBuilder()
+                .setColor('#9146FF')
+                .setAuthor({
+                    name: `${process.env.TWITCH_CHANNEL_NAME} est en live sur Twitch!`,
+                    iconURL: `https://static-cdn.jtvnw.net/jtv_user_pictures/${process.env.TWITCH_CHANNEL_NAME}.png`, // Photo de profil de la chaîne
+                })
+                .setTitle(`${streamData.title}`)
+                .setURL(`https://www.twitch.tv/${process.env.TWITCH_CHANNEL_NAME}`)
+
+                .addFields(
+                    { name: 'Jeu', value:`${streamData.game_name}`, inline: false }
+                )
+                .setImage(streamData.thumbnail_url.replace('{width}', '1280').replace('{height}', '720')) // Miniature
+                .setTimestamp();
+
+            channel.send({ embeds: [embed] });
+        }).catch(console.error)
     } else {
         console.error('Channel not found:', process.env.DISCORD_CHANNEL_ID);
     }
