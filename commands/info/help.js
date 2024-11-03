@@ -14,29 +14,33 @@ module.exports = {
         const row = new ActionRowBuilder()
             .addComponents(
                 new ButtonBuilder()
-                    .setStyle(2)
+                    .setStyle(ButtonStyle.Secondary)
                     .setCustomId('mod')
                     .setEmoji('<:moderation:1302696364270026853>'),
                 new ButtonBuilder()
-                    .setStyle(2)
+                    .setStyle(ButtonStyle.Secondary)
                     .setCustomId('info')
                     .setEmoji('<:info:1302694232879796265>'),
                 new ButtonBuilder()
-                    .setStyle(2)
+                    .setStyle(ButtonStyle.Secondary)
                     .setCustomId('fun')
                     .setEmoji('<:fun:1302695666182520874>'),
                 new ButtonBuilder()
-                    .setStyle(2)
+                    .setStyle(ButtonStyle.Secondary)
                     .setCustomId('interactions')
                     .setEmoji('<:interact:1302695110408011776>'),
                 new ButtonBuilder()
-                    .setStyle(2)
+                    .setStyle(ButtonStyle.Secondary)
                     .setCustomId('settings')
                     .setEmoji('<:settings:1302714616958418995> '),
+            );
+
+        const row2 = new ActionRowBuilder()
+            .addComponents(
                 new ButtonBuilder()
-                    .setStyle(2)
+                    .setStyle(ButtonStyle.Secondary)
                     .setCustomId('help')
-                    .setEmoji('<:help:1302718126831570964> '),
+                    .setEmoji('<:help:1302718126831570964>')
             );
 
         const helpEmbed = new EmbedBuilder()
@@ -59,7 +63,7 @@ module.exports = {
 
         await message.reply({
             embeds: [helpEmbed],
-            components: [row]
+            components: [row, row2]
         });
     }
 };
