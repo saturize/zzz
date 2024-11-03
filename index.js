@@ -3,7 +3,6 @@ const { Client, GatewayIntentBits, Collection } = require('discord.js');
 const fs = require("fs");
 const path = require("path");
 const config = require("./config.json");
-const { afkUsers } = require('./commands/utility/afk');
 
 const client = new Client({
     intents: [
@@ -76,31 +75,6 @@ client.on('interactionCreate', async (interaction) => {
     } catch (error) {
         console.error('Error handling interaction:', error);
     }
-});
-
-// mode AFK
-client.on('messageCreate', message => {
-    if (message.author.bot) return;
-
-    const commandPrefix = config.prefix || '.';
-    const command = message.content.split(' ')[0].slice(commandPrefix.length).toLowerCase();
-
-    if (command === 'afk') {
-        return;
-    }
-
-    if (afkUsers[message.author.id]) {
-        delete afkUsers[message.author.id];
-        message.reply('Tu n\'es plus AFK.');
-    }
-
-    message.mentions.users.forEach(user => {
-        if (afkUsers[user.id]) {
-            const afkInfo = afkUsers[user.id];
-            const timestamp = `<t:${afkInfo.timestamp}:R>`;
-            message.reply(`${user.username} est actuellement AFK : **${afkInfo.reason}** (depuis ${timestamp})`);
-        }
-    });
 });
 
 // Gérer les nouveaux membres pour l'auto-rôle
