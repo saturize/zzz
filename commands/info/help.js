@@ -98,6 +98,8 @@ helpInteraction: async (interaction) => {
             .setColor(config.embedColor)
             .setDescription("Besoin d'aide ? Voici les catégories de commandes...\n...")
     };
+    
+    const selectedEmbed = embedMap[interaction.customId];
 
     const row = new ActionRowBuilder()
         .addComponents(
@@ -131,11 +133,11 @@ helpInteraction: async (interaction) => {
                 .setEmoji('<:help:1302718126831570964>')
         );
 
-
-    const selectedEmbed = embedMap[interaction.customId];
-
     if (selectedEmbed) {
-        await interaction.update({ embeds: [selectedEmbed], components: [] }).catch(err => {
+        await interaction.update({ 
+            embeds: [selectedEmbed], 
+            components: [row, row2] 
+        }).catch(err => {
             console.error('Erreur lors de la mise à jour de l\'interaction:', err);
         });
     } else {
