@@ -76,10 +76,17 @@ module.exports = {
 
     helpInteraction: async (client,interaction) => {
 
-        if (!client.customEmojis) {
-            console.error('Les emojis personnalisés ne sont pas définis.');
-            return await interaction.reply({ content: "Les emojis ne sont pas chargés. Veuillez réessayer plus tard.", ephemeral: true });
-        }
+    // Vérifiez si interaction est défini
+    if (!interaction) {
+        console.error('Interaction est indéfinie.');
+        return;
+    }
+
+    // Vérifiez si client.customEmojis est défini
+    if (!client.customEmojis) {
+        console.error('Les emojis personnalisés ne sont pas définis.');
+        return await interaction.reply({ content: "Les emojis ne sont pas chargés. Veuillez réessayer plus tard.", ephemeral: true });
+    }
         const { moderation, info, fun, interact, settings, help, category } = client.customEmojis;
 
         const embedMap = {
