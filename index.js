@@ -82,6 +82,7 @@ client.on('ready', () => {
 client.buttons.set('activate_autorole', require('./commands/settings/autorole').handleActivateAutorole);
 client.buttons.set('disable_autorole', require('./commands/settings/autorole').handleDisableAutorole);
 client.selectMenus.set('select_autorole', require('./commands/settings/autorole').handleSelectAutorole);
+client.buttons.set('help', require('./commands/info/help').helpInteraction);
 
 // INTERACTIONS
 client.on('interactionCreate', async (interaction) => {
