@@ -56,18 +56,19 @@ client.on('ready', () => {
 
     if (guild) {
         const emojis = {
+            settings: guild.emojis.cache.find(emoji => emoji.name === 'settings'),
+            trash: guild.emojis.cache.find(emoji => emoji.name === 'trash'),
+            fun: guild.emojis.cache.find(emoji => emoji.name === 'fun'),
+            interact: guild.emojis.cache.find(emoji => emoji.name === 'interact'),
+            info: guild.emojis.cache.find(emoji => emoji.name === 'info'),
             approve: guild.emojis.cache.find(emoji => emoji.name === 'approve'),
             decline: guild.emojis.cache.find(emoji => emoji.name === 'decline'),
             warning: guild.emojis.cache.find(emoji => emoji.name === 'warning')
         };
 
         client.customEmojis = emojis;
+        console.log('emojis chargés.');
 
-        console.log('Bot prêt et emojis chargés.');
-
-        if (!emojis.approve) console.warn("Emoji 'approve' non trouvé.");
-        if (!emojis.decline) console.warn("Emoji 'decline' non trouvé.");
-        if (!emojis.warning) console.warn("Emoji 'warning' non trouvé.");
     } else {
         console.error('Guilde non trouvée. Vérifie l\'ID de la guilde.');
     }

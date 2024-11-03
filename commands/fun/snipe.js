@@ -4,20 +4,29 @@ const configPath = path.join(__dirname, '../../config.json');
 let config = require(configPath);
 
 exports.run = async (client, message, args) => {
+
+    const { approve, decline, warning } = client.customEmojis;
+
     if (config.snipe && config.snipe.lastDeletedMessage) {
         const deletedMessage = config.snipe.lastDeletedMessage;
 
+        if (!deletedMessage.content && (!deletedMessage.attachments || deletedMessage.attachments.length === 0)) {
+            await message.reply(`${decline} Aucun contenu trouvé dans le dernier message supprimé.`);
+            return;
+        }
+
+        // Message principal avec le contenu du message supprimé
         let messageContent = `**${deletedMessage.author} a supprimé :**\n${deletedMessage.content || ''}`;
         await message.channel.send(messageContent);
 
-        // attachment
+        // Envoi des pièces jointes, si présentes
         if (deletedMessage.attachments && deletedMessage.attachments.length > 0) {
             for (const attachment of deletedMessage.attachments) {
                 await message.channel.send({ files: [attachment] });
             }
         }
     } else {
-        await message.reply('Aucun message supprimé trouvé.');
+        await message.reply(`${decline} Aucun message supprimé trouvé.`);
     }
 };
 
