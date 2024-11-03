@@ -7,6 +7,7 @@ const path = require("path");
 const config = require("./config.json");
 const db = require('./database');
 const { checkLiveStatus } = require('./twitchNotifier');
+const helpModule = require('./commands/info/help');
 
 const client = new Client({
     intents: [
@@ -83,7 +84,6 @@ client.buttons.set('activate_autorole', require('./commands/settings/autorole').
 client.buttons.set('disable_autorole', require('./commands/settings/autorole').handleDisableAutorole);
 client.selectMenus.set('select_autorole', require('./commands/settings/autorole').handleSelectAutorole);
 
-const helpModule = require('./commands/info/help');
 client.buttons.set('mod', helpModule.helpInteraction);
 client.buttons.set('info', helpModule.helpInteraction);
 client.buttons.set('fun', helpModule.helpInteraction);
