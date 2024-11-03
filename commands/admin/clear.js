@@ -19,7 +19,7 @@ exports.run = async (client, message, args) => {
     }
 
     // Par défaut, supprimez les 30 derniers messages
-    let amount = 30;
+    let amount = 50;
 
     // Si un chiffre est donné après la commande, utilisez ce chiffre
     if (args[0] && !isNaN(args[0])) {

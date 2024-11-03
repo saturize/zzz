@@ -1,4 +1,7 @@
 {
+  "scripts": {
+  "start": "node index.js"
+  },
   "prefix": ".",
   "ownerID": "1272945881603244163",
   "embedColor": "#000000",

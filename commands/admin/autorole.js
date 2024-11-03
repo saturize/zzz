@@ -1,4 +1,4 @@
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder, EmbedBuilder } = require('discord.js');
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder, EmbedBuilder, PermissionsBitField } = require('discord.js');
 const path = require('path');
 const fs = require('fs');
 const configPath = path.join(__dirname, '../../config.json'); 
@@ -9,7 +9,7 @@ module.exports = {
     description: 'Gère les paramètres d\'auto-rôle',
     run: async (client, message, args) => {
         // Vérifie que l'utilisateur a les permissions nécessaires
-        if (!message.member.permissions.has('MANAGE_ROLES')) {
+        if (!message.member.permissions.has(PermissionsBitField.Flags.ManageRoles)) {
             return message.reply('Vous n\'avez pas la permission d\'utiliser cette commande.');
         }
 

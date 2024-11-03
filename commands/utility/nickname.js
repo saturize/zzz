@@ -4,8 +4,14 @@ const config = require(path.join(__dirname, '../../config.json')); // Remonte de
 
 
 exports.run = async (client, message, args) => {
-    // Vérifie si l'utilisateur a mentionné un membre
+
+    // Vérifie si l'utilisateur a la permission de gérer les surnoms
+    if (!message.member.permissions.has(PermissionsBitField.Flags.ManageNicknames)) {
+        return message.reply("Vous n'avez pas la permission de changer les surnoms.");
+    }
+
     const memberToChange = message.mentions.members.first();
+
 
     // Si aucun membre n'est mentionné, le surnom doit être fourni après la commande
     if (!memberToChange) {
@@ -18,11 +24,6 @@ exports.run = async (client, message, args) => {
     // Vérifie si un surnom est fourni
     if (!nouveauSurnom) {
         return message.reply('Veuillez fournir un nouveau surnom.');
-    }
-
-    // Vérifie si l'utilisateur a la permission de gérer les surnoms
-    if (!message.member.permissions.has(PermissionsBitField.Flags.ManageNicknames)) {
-        return message.reply("Vous n'avez pas la permission de changer les surnoms.");
     }
 
     // Vérifie si le bot a les permissions nécessaires

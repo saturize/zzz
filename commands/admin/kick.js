@@ -1,5 +1,7 @@
+const { PermissionsBitField } = require('discord.js');
+
 exports.run = async (client, message, [mention, ...reason]) => {
-    if (!message.member.permissions.has('KICK_MEMBERS')) {
+    if (!message.member.permissions.has(PermissionsBitField.Flags.KickMembers)) {
       return message.reply("Vous n'avez pas la permission d'utiliser cette commande.");
   }
 

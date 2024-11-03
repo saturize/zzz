@@ -37,13 +37,6 @@ exports.run = async (client, message, args) => {
         console.error('Erreur lors de la récupération du GIF:', error);
         message.reply('Une erreur est survenue lors de la récupération du GIF.');
     }
-
-    try {
-        await message.delete();
-        console.log('Message de commande supprimé avec succès.');
-    } catch (error) {
-        console.error('Erreur lors de la suppression du message:', error);
-    }
 };
 
 exports.name = "pat";
