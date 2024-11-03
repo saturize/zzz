@@ -90,7 +90,7 @@ client.buttons.set('info', helpModule.helpInteraction);
 client.buttons.set('fun', helpModule.helpInteraction);
 client.buttons.set('interactions', helpModule.helpInteraction);
 client.buttons.set('settings', helpModule.helpInteraction);
-client.buttons.set('help', helpModule.helpInteraction);
+client.buttons.set('helpEmbed', helpModule.helpInteraction);
 
 // INTERACTIONS
 client.on('interactionCreate', async (interaction) => {
