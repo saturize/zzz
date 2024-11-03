@@ -99,18 +99,13 @@ client.on('guildMemberAdd', async (member) => {
 
 // LOGIN
 client.login(process.env.TOKEN).then(() => {
-    console.log('Bot logged in successfully.');
-    console.log('Connecting to database...');
-    console.log(`Host: ${process.env.DB_HOST}`);
-    console.log(`Port: ${process.env.DB_PORT}`);
-    console.log(`User: ${process.env.DB_USER}`);
-    console.log(`Password: ${process.env.DB_PASS ? 'Provided' : 'Not provided'}`);
-    console.log(`Database: ${process.env.DB_NAME}`);
-    console.log(`Connecting to database at ${process.env.DB_HOST}:${process.env.DB_PORT} as ${process.env.DB_USER}`);
+
+    // DATABASE
     db.connectToDatabase();
 
     // TWITCH CHECK
     setInterval(() => {
         checkLiveStatus(client);
     }, 60000);
+    
 });
