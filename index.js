@@ -35,7 +35,6 @@ for (const file of events) {
 
 // COMMAND HANDLER
 const loadCommands = (dir) => {
-    const commands = new Collection();
     const files = fs.readdirSync(dir);
 
     for (const file of files) {
@@ -51,9 +50,8 @@ const loadCommands = (dir) => {
             client.commands.set(commandName, command);
         }
     }
-    return commands;
 };
-client.commands = loadCommands(path.join(__dirname, 'commands'));
+loadCommands(path.join(__dirname, 'commands'));
 
 client.on('ready', () => {
     const guild = client.guilds.cache.get('1283047850284155022');
@@ -142,11 +140,6 @@ client.on('guildMemberAdd', async (member) => {
         }
     }
 });
-
-module.exports = {
-    client,
-    loadCommands
-};
 
 // LOGIN
 client.login(process.env.TOKEN).then(() => {
