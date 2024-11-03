@@ -37,7 +37,7 @@ module.exports = {
             .addComponents(
                 new ButtonBuilder()
                     .setStyle(ButtonStyle.Secondary)
-                    .setCustomId('help')
+                    .setCustomId('helpEmbed')
                     .setEmoji('<:help:1302718126831570964>')
             );
 
@@ -93,21 +93,11 @@ helpInteraction: async (interaction) => {
             .setColor(config.embedColor)
             .setDescription("Liste des commandes de paramètres...\n..."),
         
-        help: new EmbedBuilder()
-            .setTitle(".gg/saturize")
+        helpEmbed: new EmbedBuilder()
+            .setTitle("Help")
             .setColor(config.embedColor)
-            .setDescription(`
-                ${client.customEmojis.help} **help**\n\n
-                ${client.customEmojis.category} **categories :**\n
-                ${client.customEmojis.moderation} \`moderation\` | *Ban, kick, slow-mode...*\n
-                ${client.customEmojis.info} \`info\` | *serverinfo, userinfo, avatar...*\n
-                ${client.customEmojis.fun} \`fun\` | *Poll, rate, snipe...*\n
-                ${client.customEmojis.interact} \`interactions\` | *Hug, kiss, slap...*\n
-                ${client.customEmojis.settings} \`settings\` | *Admin only commands.*\n\n
-            `)
+            .setDescription("Besoin d'aide ? Voici les catégories de commandes...\n...")
     };
-    
-    const selectedEmbed = embedMap[interaction.customId];
 
     const row = new ActionRowBuilder()
         .addComponents(
@@ -137,15 +127,15 @@ helpInteraction: async (interaction) => {
         .addComponents(
             new ButtonBuilder()
                 .setStyle(ButtonStyle.Secondary)
-                .setCustomId('help')
+                .setCustomId('helpEmbed')
                 .setEmoji('<:help:1302718126831570964>')
         );
 
+
+    const selectedEmbed = embedMap[interaction.customId];
+
     if (selectedEmbed) {
-        await interaction.update({ 
-            embeds: [selectedEmbed], 
-            components: [row, row2] 
-        }).catch(err => {
+        await interaction.update({ embeds: [selectedEmbed], components: [] }).catch(err => {
             console.error('Erreur lors de la mise à jour de l\'interaction:', err);
         });
     } else {
