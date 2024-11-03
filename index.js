@@ -53,7 +53,7 @@ const loadCommands = (dir) => {
     }
     return commands;
 };
-loadCommands(path.join(__dirname, 'commands'));
+client.commands = loadCommands(path.join(__dirname, 'commands'));
 
 client.on('ready', () => {
     const guild = client.guilds.cache.get('1283047850284155022');

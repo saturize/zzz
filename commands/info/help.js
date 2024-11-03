@@ -2,7 +2,7 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('
 const path = require('path');
 const config = require(path.join(__dirname, '../../config.json'));
 const { loadCommands } = require(path.join(__dirname, '../../index.js'));
-const moderationCommands = loadCommands(path.join(__dirname, '../../commands/moderation'));
+const moderationCommands = loadCommands(path.join(__dirname, '../moderation'));
 
 module.exports = {
     name: 'help',
