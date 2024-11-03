@@ -1,8 +1,11 @@
 require('dotenv').config();
+require("./config.json");
+
 const { Client, GatewayIntentBits, Collection } = require('discord.js');
 const fs = require("fs");
 const path = require("path");
 const config = require("./config.json");
+const mysql = require('mysql2');
 const { checkLiveStatus } = require('./twitchNotifier');
 
 const client = new Client({
@@ -46,8 +49,25 @@ const loadCommands = (dir) => {
         }
     }
 };
-
 loadCommands(path.join(__dirname, 'commands'));
+
+// MYSQL DATABASE
+const db = mysql.createConnection({
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
+});
+
+// CONNEXION
+db.connect((err) => {
+    if (err) {
+        console.error('Erreur de connexion à la base de données:', err);
+        return;
+    }
+    console.log('Connecté à la base de données MySQL !');
+});
 
 // BUTTON AND MENU
 client.buttons.set('activate_autorole', require('./commands/admin/autorole').handleActivateAutorole);
