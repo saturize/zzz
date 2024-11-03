@@ -3,6 +3,7 @@ const { Client, GatewayIntentBits, Collection } = require('discord.js');
 const fs = require("fs");
 const path = require("path");
 const config = require("./config.json");
+const { checkLiveStatus } = require('./twitchNotifier');
 
 const client = new Client({
     intents: [
@@ -13,13 +14,13 @@ const client = new Client({
     ],
 });
 
+// CONFIG ENV DISCORD/TWITCH
 client.config = config;
 client.commands = new Collection();
 client.buttons = new Map();
 client.selectMenus = new Map();
 
-
-// Charger les événements
+// EVENT HANDLER
 const events = fs.readdirSync("./events").filter(file => file.endsWith(".js"));
 for (const file of events) {
     const eventName = file.split(".")[0];
@@ -27,7 +28,7 @@ for (const file of events) {
     client.on(eventName, event.bind(null, client));
 }
 
-// Charger les commandes dans les sous-dossiers
+// COMMAND HANDLER
 const loadCommands = (dir) => {
     const files = fs.readdirSync(dir);
 
@@ -94,4 +95,11 @@ client.on('guildMemberAdd', async (member) => {
     }
 });
 
-client.login(process.env.TOKEN);
+client.login(process.env.TOKEN).then(() => {
+    console.log('Bot logged in successfully.');
+
+    // Vérifier l'état du live toutes les 60 secondes
+    setInterval(() => {
+        checkLiveStatus(client);
+    }, 60000); // Vérifie toutes les 60 secondes
+});
