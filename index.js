@@ -56,7 +56,7 @@ client.on('ready', () => {
 
     if (guild) {
         const emojis = {
-            category: guild.emojis.cache.find(emoji => emoji.name === 'filesopen'),
+            category: guild.emojis.cache.find(emoji => emoji.name === 'filesopenwsheet'),
             help: guild.emojis.cache.find(emoji => emoji.name === 'help'),
             moderation: guild.emojis.cache.find(emoji => emoji.name === 'moderation'),
             settings: guild.emojis.cache.find(emoji => emoji.name === 'settings'),
@@ -82,6 +82,8 @@ client.on('ready', () => {
 client.buttons.set('activate_autorole', require('./commands/settings/autorole').handleActivateAutorole);
 client.buttons.set('disable_autorole', require('./commands/settings/autorole').handleDisableAutorole);
 client.selectMenus.set('select_autorole', require('./commands/settings/autorole').handleSelectAutorole);
+
+const helpModule = require('./commands/info/help');
 client.buttons.set('mod', helpModule.helpInteraction);
 client.buttons.set('info', helpModule.helpInteraction);
 client.buttons.set('fun', helpModule.helpInteraction);
