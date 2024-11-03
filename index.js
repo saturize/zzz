@@ -101,6 +101,7 @@ client.on('guildMemberAdd', async (member) => {
 client.login(process.env.TOKEN).then(() => {
     console.log('Bot logged in successfully.');
 
+    console.log(`Connecting to database at ${process.env.DB_HOST}:${process.env.DB_PORT} as ${process.env.DB_USER}`);
     db.connectToDatabase();
 
     // TWITCH CHECK
