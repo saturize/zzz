@@ -52,14 +52,26 @@ const loadCommands = (dir) => {
 loadCommands(path.join(__dirname, 'commands'));
 
 client.on('ready', () => {
-    const emojis = {
-        approve: client.guilds.cache.first().emojis.cache.find(emoji => emoji.name === 'approve'),
-        decline: client.guilds.cache.first().emojis.cache.find(emoji => emoji.name === 'decline'),
-        warning: client.guilds.cache.first().emojis.cache.find(emoji => emoji.name === 'warning')
-    };
+    const guild = client.guilds.cache.get('1283047850284155022');
 
-    client.customEmojis = emojis;
-    console.log('Bot prêt et emojis chargés.');
+    if (guild) {
+        const emojis = {
+            approve: guild.emojis.cache.find(emoji => emoji.name === 'approve'),
+            decline: guild.emojis.cache.find(emoji => emoji.name === 'decline'),
+            warning: guild.emojis.cache.find(emoji => emoji.name === 'warning')
+        };
+
+        client.customEmojis = emojis;
+
+        console.log('Bot prêt et emojis chargés.');
+
+        if (!emojis.approve) console.warn("Emoji 'approve' non trouvé.");
+        if (!emojis.decline) console.warn("Emoji 'decline' non trouvé.");
+        if (!emojis.warning) console.warn("Emoji 'warning' non trouvé.");
+    } else {
+        console.error('Guilde non trouvée. Vérifie l\'ID de la guilde.');
+    }
+
 });
 
 // BUTTON AND MENU

@@ -8,8 +8,8 @@ exports.run = async (client, message, args) => {
     }
 
     const pollMessage = await message.channel.send(`**${question}**`);
-    await pollMessage.react(approve.id);
-    await pollMessage.react(decline.id);
+    await pollMessage.react(approve);
+    await pollMessage.react(decline);
 
     await message.delete();
 };
