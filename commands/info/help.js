@@ -1,7 +1,6 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const path = require('path');
 const config = require(path.join(__dirname, '../../config.json'));
-const customEmojis = require(path.join(__dirname, '../../customEmojis'));
 
 const createHelpButtons = () => {
     
@@ -78,7 +77,7 @@ module.exports = {
     helpInteraction: async (client,interaction) => {
 
         const { moderation, info, fun, interact, settings, help, category } = client.customEmojis;
-        
+
         const embedMap = {
             mod: new EmbedBuilder()
                 .setTitle(`${moderation}Moderation Commands`)
