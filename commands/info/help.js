@@ -64,7 +64,7 @@ module.exports = {
         });
     },
 
-    helpInteraction: async (interaction) => {
+    helpInteraction: async (client, interaction) => {
         const { moderation, info, fun, interact, settings, help, category } = client.customEmojis;
         const embedMap = {
             mod: new EmbedBuilder()
