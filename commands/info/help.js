@@ -3,60 +3,69 @@ const path = require('path');
 const config = require(path.join(__dirname, '../../config.json'));
 
 
-exports.run = (client, message) => {
 
-    const emojis = client.customEmojis;
+module.exports = {
+    name: 'help',
 
-    const row = new ActionRowBuilder()
-    .addComponents(
-        new ButtonBuilder()
-            .setStyle(2)
-            .setCustomId('mod')
-            .setEmoji(emojis.moderation),
-        new ButtonBuilder()
-            .setStyle(2)
-            .setCustomId('info')
-            .setEmoji(emojis.info),
-        new ButtonBuilder()
-            .setStyle(2)
-            .setCustomId('fun')
-            .setEmoji(emojis.fun),
-        new ButtonBuilder()
-            .setStyle(2)
-            .setCustomId('interactions')
-            .setEmoji(emojis.interact),
-        new ButtonBuilder()
-            .setStyle(2)
-            .setCustomId('settings')
-            .setEmoji(emojis.settings),
-        new ButtonBuilder()
-            .setStyle(2)
-            .setCustomId('help')
-            .setEmoji(emojis.help),
-    );
+    run: async (client, message, args) => {
+        
+        const emojis = client.customEmojis;
 
-    const help = new EmbedBuilder()
-        .setTitle(".gg/saturize")
-        .setColor(config.embedColor)
-        .setDescription(`
-            ${emojis.help} **help**\n\n
-            ${emojis.category} **categories :**\n
-            ${emojis.moderation} \`moderation\` | *Ban, kick, slow-mode...*\n
-            ${emojis.info} \`info\` | *serverinfo, userinfo, avatar...*\n
-            ${emojis.fun} \`fun\` | *Poll, rate, snipe...*\n
-            ${emojis.interact} \`interactions\` | *Hug, kiss, slap...*\n
-            ${emojis.settings} \`settings\` | *Admin only commands.*\n\n
-        `)
-        .setFooter({
-            text: message.member.displayName,
-            iconURL: message.author.displayAvatarURL({ dynamic: true })
-        })
-        .setTimestamp()
-}
+        const row = new ActionRowBuilder()
+            .addComponents(
+                new ButtonBuilder()
+                    .setStyle(2)
+                    .setCustomId('mod')
+                    .setEmoji(emojis.moderation),
+                new ButtonBuilder()
+                    .setStyle(2)
+                    .setCustomId('info')
+                    .setEmoji(emojis.info),
+                new ButtonBuilder()
+                    .setStyle(2)
+                    .setCustomId('fun')
+                    .setEmoji(emojis.fun),
+                new ButtonBuilder()
+                    .setStyle(2)
+                    .setCustomId('interactions')
+                    .setEmoji(emojis.interact),
+                new ButtonBuilder()
+                    .setStyle(2)
+                    .setCustomId('settings')
+                    .setEmoji(emojis.settings),
+                new ButtonBuilder()
+                    .setStyle(2)
+                    .setCustomId('help')
+                    .setEmoji(emojis.help),
+            );
+
+        const help = new EmbedBuilder()
+            .setTitle(".gg/saturize")
+            .setColor(config.embedColor)
+            .setDescription(`
+                ${emojis.help} **help**\n\n
+                ${emojis.category} **categories :**\n
+                ${emojis.moderation} \`moderation\` | *Ban, kick, slow-mode...*\n
+                ${emojis.info} \`info\` | *serverinfo, userinfo, avatar...*\n
+                ${emojis.fun} \`fun\` | *Poll, rate, snipe...*\n
+                ${emojis.interact} \`interactions\` | *Hug, kiss, slap...*\n
+                ${emojis.settings} \`settings\` | *Admin only commands.*\n\n
+            `)
+            .setFooter({
+                text: message.member.displayName,
+                iconURL: message.author.displayAvatarURL({ dynamic: true })
+            })
+            .setTimestamp()
+
+        await message.reply({
+            embeds: [help],
+            components: [row]
+        });
+    }
+};
 
 
-bot.on("interactionCreate", async interaction => {
-    if (!interaction.isButton()) return;
+helpInteraction: async (interaction) => {
 
     const embedMap = {
         mod: new EmbedBuilder()
@@ -95,5 +104,4 @@ bot.on("interactionCreate", async interaction => {
     if (selectedEmbed) {
         await interaction.update({ embeds: [selectedEmbed], components: [] });
     }
-
-})
+};
