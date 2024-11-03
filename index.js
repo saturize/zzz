@@ -75,9 +75,9 @@ client.on('ready', () => {
 });
 
 // BUTTON AND MENU
-client.buttons.set('activate_autorole', require('./commands/admin/autorole').handleActivateAutorole);
-client.buttons.set('disable_autorole', require('./commands/admin/autorole').handleDisableAutorole);
-client.selectMenus.set('select_autorole', require('./commands/admin/autorole').handleSelectAutorole);
+client.buttons.set('activate_autorole', require('./commands/settings/autorole').handleActivateAutorole);
+client.buttons.set('disable_autorole', require('./commands/settings/autorole').handleDisableAutorole);
+client.selectMenus.set('select_autorole', require('./commands/settings/autorole').handleSelectAutorole);
 
 // INTERACTIONS
 client.on('interactionCreate', async (interaction) => {
