@@ -1,12 +1,13 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const path = require('path');
 const config = require(path.join(__dirname, '../../config.json'));
+const { loadCommands } = require(path.join(__dirname, '../../index.js'));
+const moderationCommands = loadCommands(path.join(__dirname, '../../commands/moderation'));
 
 module.exports = {
     name: 'help',
 
     run: async (client, message, args) => {
-        
         const { moderation, info, fun, interact, settings, help, category } = client.customEmojis;
 
         const row = new ActionRowBuilder()
@@ -71,7 +72,11 @@ helpInteraction: async (interaction) => {
         mod: new EmbedBuilder()
             .setTitle("<:moderation:1302696364270026853> Moderation Commands")
             .setColor(config.embedColor)
-            .setDescription("Liste des commandes de modération...\n..."),
+            .setDescription(
+                moderationCommands.length > 0 
+                ? moderationCommands.map(cmd => `**${cmd.name}** - ${cmd.description || "Aucune description"}`).join('\n') 
+                : "Aucune commande de modération disponible."
+            ),
         
         info: new EmbedBuilder()
             .setTitle("Information Commands")

@@ -50,6 +50,7 @@ const loadCommands = (dir) => {
             client.commands.set(commandName, command);
         }
     }
+    return commands;
 };
 loadCommands(path.join(__dirname, 'commands'));
 
