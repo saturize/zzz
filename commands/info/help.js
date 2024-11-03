@@ -2,8 +2,6 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('
 const path = require('path');
 const config = require(path.join(__dirname, '../../config.json'));
 
-
-
 module.exports = {
     name: 'help',
 
@@ -103,11 +101,6 @@ helpInteraction: async (interaction) => {
     };
 
     const selectedEmbed = embedMap[interaction.customId];
-
-    await message.reply({
-        embeds: [helpEmbed],
-        components: [row, row2]
-    });
 
     if (selectedEmbed) {
         await interaction.update({ embeds: [selectedEmbed], components: [] }).catch(err => {
