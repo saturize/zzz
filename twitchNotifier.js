@@ -1,3 +1,5 @@
+const { EmbedBuilder } = require('discord.js');
+const config = require("./config.json");
 const axios = require('axios');
 
 let lastStream = null; // Variable pour stocker le dernier stream
@@ -25,7 +27,6 @@ async function checkLiveStatus(client) {
 }
 
 async function getAccessToken() {
-    // Implémente ici la logique pour obtenir un access token avec TWITCH_CLIENT_ID et TWITCH_CLIENT_SECRET
     const response = await axios.post('https://id.twitch.tv/oauth2/token', null, {
         params: {
             client_id: process.env.TWITCH_CLIENT_ID,
@@ -39,7 +40,16 @@ async function getAccessToken() {
 function notifyDiscord(client, streamData) {
     const channel = client.channels.cache.get(process.env.DISCORD_CHANNEL_ID);
     if (channel) {
-        channel.send(`📢 **${process.env.TWITCH_CHANNEL_NAME} est maintenant en direct!** 🎥\n\nRegardez ici: https://www.twitch.tv/${process.env.TWITCH_CHANNEL_NAME}`);
+        channel.send(`📢 Je suis en live !! ||@saturer||`);
+        const embed = new EmbedBuilder()
+        .setColor('#9146FF')
+        .setTitle(`${process.env.TWITCH_CHANNEL_NAME} est en live !`)
+        .setURL(`https://www.twitch.tv/${process.env.TWITCH_CHANNEL_NAME}`)
+        .setDescription(`@everyone\n\n**Titre du stream :** ${streamData.title}\n**Jeu :** ${streamData.game_name}`)
+        .setThumbnail(`https://static-cdn.jtvnw.net/jtv_user_pictures/${process.env.TWITCH_CHANNEL_NAME}.png`) // CHANNEL PFP
+        .setImage(streamData.thumbnail_url.replace('{width}', '1280').replace('{height}', '720')) // MINIATURE
+        .setTimestamp();
+    channel.send({ embeds: [embed] });
     } else {
         console.error('Channel not found:', process.env.DISCORD_CHANNEL_ID);
     }
