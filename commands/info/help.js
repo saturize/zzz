@@ -69,7 +69,7 @@ module.exports = {
 };
 
 
-helpInteraction: async (interaction) => {
+const helpInteraction = async (interaction) => {
 
     const embedMap = {
         mod: new EmbedBuilder()
@@ -105,7 +105,18 @@ helpInteraction: async (interaction) => {
 
     const selectedEmbed = embedMap[interaction.customId];
 
+    await message.reply({
+        embeds: [helpEmbed],
+        components: [row, row2]
+    });
+
     if (selectedEmbed) {
-        await interaction.update({ embeds: [selectedEmbed], components: [] });
+        await interaction.update({ embeds: [selectedEmbed], components: [] }).catch(err => {
+            console.error('Erreur lors de la mise à jour de l\'interaction:', err);
+        });
+    } else {
+        await interaction.reply({ content: "Commande non reconnue.", ephemeral: true });
     }
 };
+
+module.exports.helpInteraction = helpInteraction;

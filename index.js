@@ -82,28 +82,42 @@ client.on('ready', () => {
 client.buttons.set('activate_autorole', require('./commands/settings/autorole').handleActivateAutorole);
 client.buttons.set('disable_autorole', require('./commands/settings/autorole').handleDisableAutorole);
 client.selectMenus.set('select_autorole', require('./commands/settings/autorole').handleSelectAutorole);
-client.buttons.set('help', require('./commands/info/help').helpInteraction);
+client.buttons.set('mod', helpModule.helpInteraction);
+client.buttons.set('info', helpModule.helpInteraction);
+client.buttons.set('fun', helpModule.helpInteraction);
+client.buttons.set('interactions', helpModule.helpInteraction);
+client.buttons.set('settings', helpModule.helpInteraction);
+client.buttons.set('help', helpModule.helpInteraction);
 
 // INTERACTIONS
 client.on('interactionCreate', async (interaction) => {
     try {
         if (interaction.isButton()) {
+            console.log(`Button clicked: ${interaction.customId}`); // Debugging
             const handler = client.buttons.get(interaction.customId);
             if (handler) {
                 await handler(interaction);
             } else {
                 console.error(`No handler found for button with ID ${interaction.customId}`);
+                await interaction.reply({ content: 'This button is not recognized.', ephemeral: true });
             }
         } else if (interaction.isStringSelectMenu()) {
+            console.log(`Select menu used: ${interaction.customId}`); // Debugging
             const handler = client.selectMenus.get(interaction.customId);
             if (handler) {
                 await handler(interaction);
             } else {
                 console.error(`No handler found for select menu with ID ${interaction.customId}`);
+                await interaction.reply({ content: 'This select menu is not recognized.', ephemeral: true });
             }
         }
     } catch (error) {
         console.error('Error handling interaction:', error);
+        if (interaction.deferred || interaction.replied) {
+            await interaction.followUp({ content: 'An error occurred while handling your interaction.', ephemeral: true });
+        } else {
+            await interaction.reply({ content: 'An error occurred while handling your interaction.', ephemeral: true });
+        }
     }
 });
 
