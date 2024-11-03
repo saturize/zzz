@@ -1,6 +1,7 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const path = require('path');
 const config = require(path.join(__dirname, '../../config.json'));
+const customEmojis = require(path.join(__dirname, '../../customEmojis'));
 
 const createHelpButtons = () => {
     const row = new ActionRowBuilder()
@@ -43,20 +44,18 @@ module.exports = {
     name: 'help',
 
     run: async (client, message, args) => {
-        
-        const { moderation, info, fun, interact, settings, help, category } = client.customEmojis;
 
         const helpEmbed = new EmbedBuilder()
             .setTitle(".gg/saturize")
             .setColor(config.embedColor)
             .setDescription(`
-                ${help} **help**\n\n
-                ${category} **categories :**\n
-                ${moderation} \`moderation\` | *Ban, kick, slow-mode...*\n
-                ${info} \`info\` | *serverinfo, userinfo, avatar...*\n
-                ${fun} \`fun\` | *Poll, rate, snipe...*\n
-                ${interact} \`interactions\` | *Hug, kiss, slap...*\n
-                ${settings} \`settings\` | *Admin only commands.*\n\n
+                ${customEmojis.help} **help**\n\n
+                ${customEmojis.category} **categories :**\n
+                ${customEmojis.moderation} \`moderation\` | *Ban, kick, slow-mode...*\n
+                ${customEmojis.info} \`info\` | *serverinfo, userinfo, avatar...*\n
+                ${customEmojis.fun} \`fun\` | *Poll, rate, snipe...*\n
+                ${customEmojis.interact} \`interactions\` | *Hug, kiss, slap...*\n
+                ${customEmojis.settings} \`settings\` | *Admin only commands.*\n\n
             `)
             .setFooter({
                 text: message.member.displayName,
@@ -73,7 +72,7 @@ module.exports = {
     },
 
 
-    helpInteraction: async (client, interaction) => {
+    helpInteraction: async (client,interaction) => {
 
         const { moderation, info, fun, interact, settings, help, category } = client.customEmojis;
 
