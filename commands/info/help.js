@@ -42,7 +42,6 @@ module.exports = {
     name: 'help',
 
     run: async (client, message, args) => {
-
         const helpEmbed = new EmbedBuilder()
             .setTitle(".gg/saturize")
             .setColor(config.embedColor)
@@ -69,8 +68,12 @@ module.exports = {
         });
     },
 
-
     helpInteraction: async (client, interaction) => {
+        // Vérification que l'interaction est définie et a une propriété customId
+        if (!interaction || !interaction.customId) {
+            console.error('Interaction est indéfinie ou customId est manquant');
+            return await interaction.reply({ content: "Interaction invalide.", ephemeral: true });
+        }
 
         const embedMap = {
             mod: new EmbedBuilder()
