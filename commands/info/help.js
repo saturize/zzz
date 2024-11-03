@@ -9,7 +9,7 @@ module.exports = {
 
     run: async (client, message, args) => {
         
-        const { moderation, info, fun, interact, settings, help } = client.customEmojis;
+        const { moderation, info, fun, interact, settings, help, category } = client.customEmojis;
 
         const row = new ActionRowBuilder()
             .addComponents(
