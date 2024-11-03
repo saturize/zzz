@@ -98,11 +98,46 @@ helpInteraction: async (interaction) => {
             .setColor(config.embedColor)
             .setDescription("Besoin d'aide ? Voici les catégories de commandes...\n...")
     };
-
+    
     const selectedEmbed = embedMap[interaction.customId];
 
+    const row = new ActionRowBuilder()
+        .addComponents(
+            new ButtonBuilder()
+                .setStyle(ButtonStyle.Secondary)
+                .setCustomId('mod')
+                .setEmoji('<:moderation:1302696364270026853>'),
+            new ButtonBuilder()
+                .setStyle(ButtonStyle.Secondary)
+                .setCustomId('info')
+                .setEmoji('<:info:1302694232879796265>'),
+            new ButtonBuilder()
+                .setStyle(ButtonStyle.Secondary)
+                .setCustomId('fun')
+                .setEmoji('<:fun:1302695666182520874>'),
+            new ButtonBuilder()
+                .setStyle(ButtonStyle.Secondary)
+                .setCustomId('interactions')
+                .setEmoji('<:interact:1302695110408011776>'),
+            new ButtonBuilder()
+                .setStyle(ButtonStyle.Secondary)
+                .setCustomId('settings')
+                .setEmoji('<:settings:1302714616958418995> ')
+        );
+
+    const row2 = new ActionRowBuilder()
+        .addComponents(
+            new ButtonBuilder()
+                .setStyle(ButtonStyle.Secondary)
+                .setCustomId('helpEmbed')
+                .setEmoji('<:help:1302718126831570964>')
+        );
+
     if (selectedEmbed) {
-        await interaction.update({ embeds: [selectedEmbed], components: [] }).catch(err => {
+        await interaction.update({ 
+            embeds: [selectedEmbed], 
+            components: [row, row2] 
+        }).catch(err => {
             console.error('Erreur lors de la mise à jour de l\'interaction:', err);
         });
     } else {
