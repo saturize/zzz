@@ -104,7 +104,7 @@ client.login(process.env.TOKEN).then(() => {
     console.log(`Host: ${process.env.DB_HOST}`);
     console.log(`Port: ${process.env.DB_PORT}`);
     console.log(`User: ${process.env.DB_USER}`);
-    console.log(`Password: ${process.env.DB_PASSWORD ? 'Provided' : 'Not provided'}`);
+    console.log(`Password: ${process.env.DB_PASS ? 'Provided' : 'Not provided'}`);
     console.log(`Database: ${process.env.DB_NAME}`);
     console.log(`Connecting to database at ${process.env.DB_HOST}:${process.env.DB_PORT} as ${process.env.DB_USER}`);
     db.connectToDatabase();
