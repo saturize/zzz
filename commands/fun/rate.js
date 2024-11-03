@@ -1,6 +1,9 @@
 exports.run = async (client, message, args) => {
+
+    const { approve, decline, warning } = client.customEmojis;
+    
     if (args.length < 1) {
-        return message.reply("Veuillez fournir quelque chose à noter.");
+        return message.reply(`${warning} Veuillez fournir quelque chose à noter.`);
     }
 
     const itemToRate = args.join(' ');

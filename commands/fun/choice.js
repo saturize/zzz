@@ -1,22 +1,22 @@
-module.exports = {
-    name: 'choice',
-    description: 'Choisit au hasard parmi les options fournies.',
-    run: async (client, message, args) => {
-        // JOIN ARG IN ONE CONST THEN SPLIT THEM W ,
-        const options = args.join(' ').split(',');
+exports.run = async (client, message, args) => {
+    
+    const { approve, decline, warning } = client.customEmojis;
 
-        // DELETE SPACES
-        const cleanedOptions = options.map(option => option.trim()).filter(option => option.length > 0);
+    const options = args.join(' ').split(',');
 
-        // AT LEAST 2 OPTION
-        if (cleanedOptions.length < 2) {
-            return message.reply('Veuillez fournir au moins deux options séparées par des virgules.');
-        }
+    // DELETE SPACES
+    const cleanedOptions = options.map(option => option.trim()).filter(option => option.length > 0);
 
-        // RANDOM CHOOSE
-        const randomIndex = Math.floor(Math.random() * cleanedOptions.length);
-        const chosenOption = cleanedOptions[randomIndex];
+    // AT LEAST 2 OPTION
+    if (cleanedOptions.length < 2) {
+        return message.reply(`${warning} Veuillez fournir au moins deux options séparées par des virgules.`);
+    }
 
-        await message.reply(`Je choisis: ${chosenOption}`);
-        }
+    // RANDOM CHOOSE
+    const randomIndex = Math.floor(Math.random() * cleanedOptions.length);
+    const chosenOption = cleanedOptions[randomIndex];
+
+    await message.reply(`Je choisis: ${chosenOption}`);
 };
+
+exports.name = "poll"

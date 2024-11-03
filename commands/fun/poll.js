@@ -23,14 +23,6 @@ exports.run = async (client, message, args) => {
     
     const pollMessage = await message.channel.send({ embeds: [pollEmbed] });
 
-    if (approve && decline) {
-        await pollMessage.react(approve);
-        await pollMessage.react(decline);
-    } else {
-        console.error("Les emojis 'approve' ou 'decline' sont introuvables.");
-    }
-
-
     await message.delete();
 };
 
