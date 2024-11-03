@@ -49,13 +49,13 @@ const loadCommands = (dir) => {
 
 loadCommands(path.join(__dirname, 'commands'));
 
-// Ajouter les gestionnaires de boutons et menus de sélection
+// BUTTON AND MENU
 client.buttons.set('activate_autorole', require('./commands/admin/autorole').handleActivateAutorole);
 client.buttons.set('disable_autorole', require('./commands/admin/autorole').handleDisableAutorole);
 client.selectMenus.set('select_autorole', require('./commands/admin/autorole').handleSelectAutorole);
 
 
-// Gestion des interactions
+// INTERACTIONS
 client.on('interactionCreate', async (interaction) => {
     try {
         if (interaction.isButton()) {
@@ -78,7 +78,7 @@ client.on('interactionCreate', async (interaction) => {
     }
 });
 
-// Gérer les nouveaux membres pour l'auto-rôle
+// AUTOROLE
 client.on('guildMemberAdd', async (member) => {
     const autoroleConfig = config.autorole;
 
@@ -95,11 +95,12 @@ client.on('guildMemberAdd', async (member) => {
     }
 });
 
+// TWITCH NOTIF
 client.login(process.env.TOKEN).then(() => {
     console.log('Bot logged in successfully.');
 
-    // Vérifier l'état du live toutes les 60 secondes
+    // check every 60 sec
     setInterval(() => {
         checkLiveStatus(client);
-    }, 60000); // Vérifie toutes les 60 secondes
+    }, 60000);
 });

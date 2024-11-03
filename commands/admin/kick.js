@@ -1,11 +1,12 @@
 const { PermissionsBitField } = require('discord.js');
 
 exports.run = async (client, message, [mention, ...reason]) => {
+    // VERIFY PERM
     if (!message.member.permissions.has(PermissionsBitField.Flags.KickMembers)) {
       return message.reply("Vous n'avez pas la permission d'utiliser cette commande.");
   }
 
-  // Vérifiez si un utilisateur a été mentionné
+  // VERIFY MENTION
   if (message.mentions.members.size === 0) {
       return message.reply("Veuillez mentionner un utilisateur à exclure.");
   }

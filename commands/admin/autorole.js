@@ -8,7 +8,7 @@ module.exports = {
     name: 'autorole',
     description: 'Gère les paramètres d\'auto-rôle',
     run: async (client, message, args) => {
-        // Vérifie que l'utilisateur a les permissions nécessaires
+        // VERIFY PERM
         if (!message.member.permissions.has(PermissionsBitField.Flags.ManageRoles)) {
             return message.reply('Vous n\'avez pas la permission d\'utiliser cette commande.');
         }
@@ -38,7 +38,7 @@ module.exports = {
     }
 };
 
-// Fonction pour activer l'auto-rôle
+// ACTIVATE AUUTOROLE
 const handleActivateAutorole = async (interaction) => {
     const embed = new EmbedBuilder()
         .setColor(config.embedColor)
@@ -47,10 +47,10 @@ const handleActivateAutorole = async (interaction) => {
         .setTimestamp();
 
     const roleSelectMenu = new StringSelectMenuBuilder()
-        .setCustomId('select_autorole') // Assure-toi que cet ID correspond
+        .setCustomId('select_autorole')
         .setPlaceholder('Choisissez un rôle...')
         .addOptions(
-            interaction.guild.roles.cache.filter(role => role.id !== interaction.guild.id).map(role => ({ // Exclut @everyone
+            interaction.guild.roles.cache.filter(role => role.id !== interaction.guild.id).map(role => ({ // EXCLUDE @everyone
                 label: role.name,
                 value: role.id
             }))
@@ -65,28 +65,28 @@ const handleActivateAutorole = async (interaction) => {
     });
 };
 
-// Fonction pour désactiver l'auto-rôle
+// DESACTIVATE AUTOROLE
 const handleDisableAutorole = async (interaction) => {
     config.autorole.enabled = false;
     config.autorole.roleId = null;
 
-    // Sauvegarder la configuration mise à jour
+    // SAVE CONFIG IN JSON
     fs.writeFileSync(configPath, JSON.stringify(config, null, 2), 'utf-8');
 
     await interaction.update({ content: 'L\'auto-rôle a été désactivé.', components: [] });
 };
 
-// Fonction pour gérer la sélection du rôle
+// ROLE SELECTION GESTION
 const handleSelectAutorole = async (interaction) => {
     const roleId = interaction.values[0];
     const role = interaction.guild.roles.cache.get(roleId);
 
     if (role) {
-        // Enregistrer le rôle dans la configuration
+        // SAVE ROLE IN CONFIG
         config.autorole.enabled = true;
         config.autorole.roleId = roleId;
 
-        // Sauvegarder la configuration mise à jour dans config.json
+        // SAVE IN JSON
         fs.writeFileSync(configPath, JSON.stringify(config, null, 2), 'utf-8');
 
         await interaction.reply({ content: `Le rôle automatique a été défini sur ${role.name}.`, ephemeral: true });
@@ -95,7 +95,7 @@ const handleSelectAutorole = async (interaction) => {
     }
 };
 
-// Exporte les fonctions de gestion des interactions
+// EXPORT INTERACTION GESTION
 module.exports.handleActivateAutorole = handleActivateAutorole;
 module.exports.handleDisableAutorole = handleDisableAutorole;
 module.exports.handleSelectAutorole = handleSelectAutorole;

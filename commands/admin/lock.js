@@ -1,21 +1,20 @@
 const { PermissionsBitField } = require('discord.js');
 
 exports.run = async (client, message) => {
-    // Vérifie si l'auteur a les permissions nécessaires
+    // VERIFY PERM
     if (!message.member.permissions.has(PermissionsBitField.Flags.ManageChannels)) {
         return message.reply("Vous n'avez pas la permission de gérer les canaux.");
     }
 
-    // Récupère le canal à verrouiller (canal mentionné ou canal actuel)
+    // GET LOCKED CHANNEL IF NOT GIVEN THEN CURRENT
     const channel = message.mentions.channels.first() || message.channel;
 
-    // Modifie les permissions pour empêcher les membres d'envoyer des messages (everyone)
+    // MODIFY PERM SO @everyone CANNOT SEND MSG
     try {
         await channel.permissionOverwrites.edit(channel.guild.roles.everyone, {
             SendMessages: false
         });
 
-        // Envoie un message simple indiquant que le canal est fermé
         message.channel.send("Le salon a été fermé.");
     } catch (error) {
         console.error('Erreur lors du verrouillage du canal:', error);

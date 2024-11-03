@@ -1,13 +1,11 @@
 const { EmbedBuilder, ChannelType } = require('discord.js');
 const path = require('path');
-const config = require(path.join(__dirname, '../../config.json')); // Remonte de deux niveaux pour trouver config.json
+const config = require(path.join(__dirname, '../../config.json'));
 
 
 exports.run = async (client, message, args) => {
-    // Récupérer le canal mentionné ou le canal actuel si aucun n'est mentionné
     const channel = message.mentions.channels.first() || message.channel;
 
-    // Créer l'embed pour afficher les informations sur le canal
     const channelEmbed = new EmbedBuilder()
         .setColor(config.embedColor)
         .setTitle('Informations sur le salon')
@@ -21,11 +19,9 @@ exports.run = async (client, message, args) => {
         .setFooter({ text: `Demandé par ${message.author.username}`, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
         .setTimestamp();
 
-    // Envoyer l'embed dans le canal
     message.channel.send({ embeds: [channelEmbed] });
 };
 
-// Fonction pour obtenir le nom du type de canal
 function getChannelTypeName(type) {
     switch (type) {
         case ChannelType.GuildText:

@@ -1,11 +1,11 @@
 const { PermissionsBitField, EmbedBuilder } = require('discord.js');
 const path = require('path');
-const config = require(path.join(__dirname, '../../config.json')); // Remonte de deux niveaux pour trouver config.json
+const config = require(path.join(__dirname, '../../config.json'));
 
 
 exports.run = async (client, message, args) => {
 
-    // Vérifie si l'utilisateur a la permission de gérer les surnoms
+    // VERIFY PERM
     if (!message.member.permissions.has(PermissionsBitField.Flags.ManageNicknames)) {
         return message.reply("Vous n'avez pas la permission de changer les surnoms.");
     }
@@ -13,31 +13,30 @@ exports.run = async (client, message, args) => {
     const memberToChange = message.mentions.members.first();
 
 
-    // Si aucun membre n'est mentionné, le surnom doit être fourni après la commande
+    // IF NO USER MENTIONNED
     if (!memberToChange) {
         return message.reply('Veuillez mentionner un membre dont vous souhaitez changer le surnom.');
     }
 
-    // Exclure la mention du membre des arguments pour obtenir le surnom
+    // EXCLUDE MENTION IN ARGS
     const nouveauSurnom = args.slice(1).join(' ');
 
-    // Vérifie si un surnom est fourni
+    // NAME GIVEN ?
     if (!nouveauSurnom) {
         return message.reply('Veuillez fournir un nouveau surnom.');
     }
 
-    // Vérifie si le bot a les permissions nécessaires
+    // VERIFY BOT PERM
     if (!message.guild.members.me.permissions.has(PermissionsBitField.Flags.ManageNicknames)) {
         return message.reply("Je n'ai pas la permission de changer les surnoms des membres.");
     }
 
-    // Vérifie si le bot est placé plus haut que le membre dans la hiérarchie des rôles
+    // VERIFY HIERARCHY ROLE PERM
     if (memberToChange.roles.highest.position >= message.guild.members.me.roles.highest.position) {
         return message.reply("Je ne peux pas changer le surnom de ce membre car il est au-dessus de moi dans la hiérarchie des rôles.");
     }
 
     try {
-        // Change le surnom du membre
         await memberToChange.setNickname(nouveauSurnom);
 
         const nicknameEmbed = new EmbedBuilder()

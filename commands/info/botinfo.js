@@ -1,11 +1,10 @@
 const { EmbedBuilder, version } = require('discord.js');
 const moment = require('moment');
 const path = require('path');
-const config = require(path.join(__dirname, '../../config.json')); // Remonte de deux niveaux pour trouver config.json
-
+const config = require(path.join(__dirname, '../../config.json'));
 
 exports.run = async (client, message) => {
-    const uptime = moment.duration(client.uptime).humanize(); // Formate l'uptime du bot
+    const uptime = moment.duration(client.uptime).humanize();
 
     const botInfoEmbed = new EmbedBuilder()
         .setColor(config.embedColor)

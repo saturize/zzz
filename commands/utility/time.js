@@ -1,10 +1,10 @@
 const { EmbedBuilder } = require('discord.js');
 const path = require('path');
 const config = require(path.join(__dirname, '../../config.json'));
-const moment = require('moment-timezone'); // Utilisez moment-timezone pour gérer les fuseaux horaires
+const moment = require('moment-timezone');
 
 exports.run = async (client, message, args) => {
-    // Liste des fuseaux horaires allant de UTC+06:00 à UTC-06:00
+    // UTC+06:00 TO UTC-06:00
     const timezones = [
         { offset: '-06:00', name: 'Central Standard Time', tz: 'America/Chicago' },
         { offset: '-05:00', name: 'Eastern Standard Time', tz: 'America/New_York' },

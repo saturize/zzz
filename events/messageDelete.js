@@ -6,13 +6,13 @@ let config = require(configPath);
 module.exports = async (client, message) => {
     if (message.author.bot) return;
 
-    // into config.json
+    // INTO CONFIG
     config.snipe.lastDeletedMessage = {
         content: message.content,
         author: message.author.username,
         attachments: message.attachments.map(attachment => attachment.url)
     };
 
-    // save last config
+    // SAVE LAST CONFIG
     fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
 };
