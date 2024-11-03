@@ -56,6 +56,9 @@ client.on('ready', () => {
 
     if (guild) {
         const emojis = {
+            category: guild.emojis.cache.find(emoji => emoji.name === 'filesopen'),
+            help: guild.emojis.cache.find(emoji => emoji.name === 'help'),
+            moderation: guild.emojis.cache.find(emoji => emoji.name === 'moderation'),
             settings: guild.emojis.cache.find(emoji => emoji.name === 'settings'),
             trash: guild.emojis.cache.find(emoji => emoji.name === 'trash'),
             fun: guild.emojis.cache.find(emoji => emoji.name === 'fun'),

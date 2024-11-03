@@ -14,7 +14,6 @@ exports.run = async (client, message, args) => {
     const pollEmbed = new EmbedBuilder()
         .setColor(config.embedColor)
         .setTitle(`${question}`)
-        .setFooter({ text: `Réagissez avec "approve" pour oui et "decline" pour non.` })
         .setTimestamp()
         .setAuthor({
             name: message.author.username,
