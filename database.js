@@ -9,15 +9,14 @@ const pool = mysql.createPool({
     database: process.env.DB_NAME
 });
 
-const connectToDatabase = () => {
-    pool.getConnection((err, connection) => {
-        if (err) {
-            console.error('Erreur de connexion à la base de données:', err);
-            return;
-        }
+const connectToDatabase = async () => {
+    try {
+        const connection = await pool.getConnection();
         console.log('Connecté à la base de données MySQL !');
         connection.release();
-    });
+    } catch (err) {
+        console.error('Erreur de connexion à la base de données:', err);
+    }
 };
 
 module.exports = {
