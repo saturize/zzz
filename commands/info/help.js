@@ -4,6 +4,7 @@ const config = require(path.join(__dirname, '../../config.json'));
 const customEmojis = require(path.join(__dirname, '../../customEmojis'));
 
 const createHelpButtons = () => {
+    
     const row = new ActionRowBuilder()
         .addComponents(
             new ButtonBuilder()
@@ -45,17 +46,19 @@ module.exports = {
 
     run: async (client, message, args) => {
 
+        const { moderation, info, fun, interact, settings, help, category } = client.customEmojis;
+
         const helpEmbed = new EmbedBuilder()
             .setTitle(".gg/saturize")
             .setColor(config.embedColor)
             .setDescription(`
-                ${customEmojis.help} **help**\n\n
-                ${customEmojis.category} **categories :**\n
-                ${customEmojis.moderation} \`moderation\` | *Ban, kick, slow-mode...*\n
-                ${customEmojis.info} \`info\` | *serverinfo, userinfo, avatar...*\n
-                ${customEmojis.fun} \`fun\` | *Poll, rate, snipe...*\n
-                ${customEmojis.interact} \`interactions\` | *Hug, kiss, slap...*\n
-                ${customEmojis.settings} \`settings\` | *Admin only commands.*\n\n
+                ${help} **help**\n\n
+                ${category} **categories :**\n
+                ${moderation} \`moderation\` | *Ban, kick, slow-mode...*\n
+                ${info} \`info\` | *serverinfo, userinfo, avatar...*\n
+                ${fun} \`fun\` | *Poll, rate, snipe...*\n
+                ${interact} \`interactions\` | *Hug, kiss, slap...*\n
+                ${settings} \`settings\` | *Admin only commands.*\n\n
             `)
             .setFooter({
                 text: message.member.displayName,
@@ -74,9 +77,11 @@ module.exports = {
 
     helpInteraction: async (client,interaction) => {
 
+        const { moderation, info, fun, interact, settings, help, category } = client.customEmojis;
+        
         const embedMap = {
             mod: new EmbedBuilder()
-                .setTitle(`${customEmojis.moderation} Moderation Commands`)
+                .setTitle(`${moderation}Moderation Commands`)
                 .setColor(config.embedColor)
                 .setDescription("Liste des commandes de modération...\n..."),
         
