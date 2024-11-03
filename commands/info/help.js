@@ -3,7 +3,6 @@ const path = require('path');
 const config = require(path.join(__dirname, '../../config.json'));
 
 const createHelpButtons = () => {
-    
     const row = new ActionRowBuilder()
         .addComponents(
             new ButtonBuilder()
@@ -39,12 +38,10 @@ const createHelpButtons = () => {
     return [row, row2];
 };
 
-
 module.exports = {
     name: 'help',
 
     run: async (client, message, args) => {
-
         const { moderation, info, fun, interact, settings, help, category } = client.customEmojis;
 
         const helpEmbed = new EmbedBuilder()
@@ -63,7 +60,7 @@ module.exports = {
                 text: message.member.displayName,
                 iconURL: message.author.displayAvatarURL({ dynamic: true })
             })
-            .setTimestamp()
+            .setTimestamp();
 
         const [row, row2] = createHelpButtons();
 
@@ -74,47 +71,35 @@ module.exports = {
     },
 
 
-    helpInteraction: async (client,interaction) => {
-
-    // Vérifiez si interaction est défini
-    if (!interaction) {
-        console.error('Interaction est indéfinie.');
-        return;
-    }
-
-    // Vérifiez si client.customEmojis est défini
-    if (!client.customEmojis) {
-        console.error('Les emojis personnalisés ne sont pas définis.');
-        return await interaction.reply({ content: "Les emojis ne sont pas chargés. Veuillez réessayer plus tard.", ephemeral: true });
-    }
+    helpInteraction: async (client, interaction) => {
         const { moderation, info, fun, interact, settings, help, category } = client.customEmojis;
 
         const embedMap = {
             mod: new EmbedBuilder()
-                .setTitle(`${moderation}Moderation Commands`)
+                .setTitle(`${moderation} Moderation Commands`)
                 .setColor(config.embedColor)
                 .setDescription("Liste des commandes de modération...\n..."),
-        
+
             info: new EmbedBuilder()
                 .setTitle("Information Commands")
                 .setColor(config.embedColor)
                 .setDescription("Liste des commandes d'information...\n..."),
-        
+
             fun: new EmbedBuilder()
                 .setTitle("Fun Commands")
                 .setColor(config.embedColor)
                 .setDescription("Liste des commandes fun...\n..."),
-        
+
             interactions: new EmbedBuilder()
                 .setTitle("Interactions Commands")
                 .setColor(config.embedColor)
                 .setDescription("Liste des commandes d'interactions...\n..."),
-        
+
             settings: new EmbedBuilder()
                 .setTitle("Settings Commands")
                 .setColor(config.embedColor)
                 .setDescription("Liste des commandes de paramètres...\n..."),
-        
+
             helpEmbed: new EmbedBuilder()
                 .setTitle("Help")
                 .setColor(config.embedColor)
@@ -124,6 +109,7 @@ module.exports = {
         const selectedEmbed = embedMap[interaction.customId];
         const [row, row2] = createHelpButtons();
 
+        // Mise à jour de l'interaction avec l'embed choisi
         if (selectedEmbed) {
             await interaction.update({ embeds: [selectedEmbed], components: [row, row2] }).catch(err => {
                 console.error('Erreur lors de la mise à jour de l\'interaction:', err);
