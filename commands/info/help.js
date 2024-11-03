@@ -6,6 +6,7 @@ module.exports = {
     name: 'help',
 
     run: async (client, message, args) => {
+        
         const { moderation, info, fun, interact, settings, help, category } = client.customEmojis;
 
         const row = new ActionRowBuilder()
@@ -36,7 +37,7 @@ module.exports = {
             .addComponents(
                 new ButtonBuilder()
                     .setStyle(ButtonStyle.Secondary)
-                    .setCustomId('help')
+                    .setCustomId('helpEmbed')
                     .setEmoji('<:help:1302718126831570964>')
             );
 
@@ -56,7 +57,7 @@ module.exports = {
                 text: message.member.displayName,
                 iconURL: message.author.displayAvatarURL({ dynamic: true })
             })
-            .setTimestamp();
+            .setTimestamp()
 
         await message.reply({
             embeds: [helpEmbed],
@@ -64,47 +65,48 @@ module.exports = {
         });
     },
 
-    helpInteraction: async (client, interaction) => {
-        const embedMap = {
-            mod: new EmbedBuilder()
-                .setTitle(`<:moderation:1302696364270026853> Moderation Commands`)
-                .setColor(config.embedColor)
-                .setDescription("Liste des commandes de modération...\n..."),
 
-            info: new EmbedBuilder()
-                .setTitle("Information Commands")
-                .setColor(config.embedColor)
-                .setDescription("Liste des commandes d'information...\n..."),
+helpInteraction: async (interaction) => {
+    const embedMap = {
+        mod: new EmbedBuilder()
+            .setTitle("Moderation Commands")
+            .setColor(config.embedColor)
+            .setDescription("Liste des commandes de modération...\n..."),
+        
+        info: new EmbedBuilder()
+            .setTitle("Information Commands")
+            .setColor(config.embedColor)
+            .setDescription("Liste des commandes d'information...\n..."),
+        
+        fun: new EmbedBuilder()
+            .setTitle("Fun Commands")
+            .setColor(config.embedColor)
+            .setDescription("Liste des commandes fun...\n..."),
+        
+        interactions: new EmbedBuilder()
+            .setTitle("Interactions Commands")
+            .setColor(config.embedColor)
+            .setDescription("Liste des commandes d'interactions...\n..."),
+        
+        settings: new EmbedBuilder()
+            .setTitle("Settings Commands")
+            .setColor(config.embedColor)
+            .setDescription("Liste des commandes de paramètres...\n..."),
+        
+        helpEmbed: new EmbedBuilder()
+            .setTitle("Help")
+            .setColor(config.embedColor)
+            .setDescription("Besoin d'aide ? Voici les catégories de commandes...\n...")
+    };
 
-            fun: new EmbedBuilder()
-                .setTitle("Fun Commands")
-                .setColor(config.embedColor)
-                .setDescription("Liste des commandes fun...\n..."),
+    const selectedEmbed = embedMap[interaction.customId];
 
-            interactions: new EmbedBuilder()
-                .setTitle("Interactions Commands")
-                .setColor(config.embedColor)
-                .setDescription("Liste des commandes d'interactions...\n..."),
-
-            settings: new EmbedBuilder()
-                .setTitle("Settings Commands")
-                .setColor(config.embedColor)
-                .setDescription("Liste des commandes de paramètres...\n..."),
-
-            helpEmbed: new EmbedBuilder()
-                .setTitle("Help")
-                .setColor(config.embedColor)
-                .setDescription("Besoin d'aide ? Voici les catégories de commandes...\n...")
-        };
-
-        const selectedEmbed = embedMap[interaction.customId];
-
-        if (selectedEmbed) {
-            await interaction.update({ embeds: [selectedEmbed], components: [] }).catch(err => {
-                console.error('Erreur lors de la mise à jour de l\'interaction:', err);
-            });
-        } else {
-            await interaction.reply({ content: "Commande non reconnue.", ephemeral: true });
-        }
+    if (selectedEmbed) {
+        await interaction.update({ embeds: [selectedEmbed], components: [] }).catch(err => {
+            console.error('Erreur lors de la mise à jour de l\'interaction:', err);
+        });
+    } else {
+        await interaction.reply({ content: "Commande non reconnue.", ephemeral: true });
     }
+}
 };
