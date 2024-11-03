@@ -51,11 +51,21 @@ const loadCommands = (dir) => {
 };
 loadCommands(path.join(__dirname, 'commands'));
 
+client.on('ready', () => {
+    const emojis = {
+        approve: client.guilds.cache.first().emojis.cache.find(emoji => emoji.name === 'approve'),
+        decline: client.guilds.cache.first().emojis.cache.find(emoji => emoji.name === 'decline'),
+        warning: client.guilds.cache.first().emojis.cache.find(emoji => emoji.name === 'warning')
+    };
+
+    client.customEmojis = emojis;
+    console.log('Bot prêt et emojis chargés.');
+});
+
 // BUTTON AND MENU
 client.buttons.set('activate_autorole', require('./commands/admin/autorole').handleActivateAutorole);
 client.buttons.set('disable_autorole', require('./commands/admin/autorole').handleDisableAutorole);
 client.selectMenus.set('select_autorole', require('./commands/admin/autorole').handleSelectAutorole);
-
 
 // INTERACTIONS
 client.on('interactionCreate', async (interaction) => {

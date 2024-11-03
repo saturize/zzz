@@ -9,9 +9,6 @@ exports.run = async (client, message, args) => {
 
         // HAVE BANNER ?
         const bannerURL = fetchedUser.bannerURL({ dynamic: true, size: 512 });
-        if (!bannerURL) {
-            return message.reply('Cet utilisateur n\'a pas de bannière.');
-        }
 
         const bannerEmbed = new EmbedBuilder()
             .setColor(config.embedColor)

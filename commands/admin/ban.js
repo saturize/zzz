@@ -1,6 +1,7 @@
 const { PermissionsBitField } = require('discord.js');
 
 exports.run = async (client, message, args) => {
+
     // VERIFY PERM
     if (!message.member.permissions.has(PermissionsBitField.Flags.BanMembers)) {
         return message.reply("Vous n'avez pas la permission de bannir des membres.");

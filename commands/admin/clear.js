@@ -1,12 +1,16 @@
 const { PermissionsBitField } = require('discord.js');
 
 exports.run = async (client, message, args) => {
+
+    // CUSTOM EMOJIS
+    const approve = message.guild.emojis.cache.find(emoji => emoji.name === 'approve');
+    const decline = message.guild.emojis.cache.find(emoji => emoji.name === 'decline');
+    const warning = message.guild.emojis.cache.find(emoji => emoji.name === 'warning');
+
     // VERIFY PERM
     if (!message.member.permissions.has(PermissionsBitField.Flags.ManageMessages)) {
-        return message.reply("Vous n'avez pas la permission de gérer les messages.");
+        return message.reply(`${warning} Vous n'avez pas la permission de gérer les messages.`);
     }
-
-    const verif = message.guild.emojis.cache.find(emoji => emoji.name === 'verif');
 
     // IF ALL THEN DELETE ALL
     if (args[0] === "all") {
@@ -16,7 +20,7 @@ exports.run = async (client, message, args) => {
             await message.channel.bulkDelete(fetched, true);
         } while (fetched.size >= 2);
 
-        return message.channel.send(`Tous les messages du salon ont été supprimés.`);
+        return message.channel.send(`${approve} Tous les messages du salon ont été supprimés.`);
     }
 
     // DEFAULT DEL 50
@@ -26,7 +30,7 @@ exports.run = async (client, message, args) => {
     if (args[0] && !isNaN(args[0])) {
         amount = parseInt(args[0]);
         if (amount > 100) {
-            return message.reply("Vous ne pouvez pas supprimer plus de 100 messages à la fois.");
+            return message.reply(`${decline} Vous ne pouvez pas supprimer plus de 100 messages à la fois.`);
         }
     }
 
@@ -37,16 +41,16 @@ exports.run = async (client, message, args) => {
         const userMessages = messages.filter(m => m.author.id === user.id);
         await message.channel.bulkDelete(userMessages, true).catch(err => {
             console.error(err);
-            return message.reply("Une erreur s'est produite lors de la suppression des messages.");
+            return message.reply(`${warning} Une erreur s'est produite lors de la suppression des messages.`);
         });
-        return message.channel.send(`${verif} ${userMessages.size} messages de ${user.tag} ont été supprimés.`);
+        return message.channel.send(`${approve} ${userMessages.size} messages de ${user.tag} ont été supprimés.`);
     }
 
     await message.channel.bulkDelete(amount, true).catch(err => {
         console.error(err);
-        return message.reply("Une erreur s'est produite lors de la suppression des messages.");
+        return message.reply(`${warning} Une erreur s'est produite lors de la suppression des messages.`);
     });
-    return message.channel.send(`${verif} ${amount} messages ont été supprimés.`);
+    return message.channel.send(`${approve} ${amount} messages ont été supprimés.`);
 };
 
 exports.name = "clear";
