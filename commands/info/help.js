@@ -42,19 +42,18 @@ module.exports = {
     name: 'help',
 
     run: async (client, message, args) => {
-        const { moderation, info, fun, interact, settings, help, category } = client.customEmojis;
 
         const helpEmbed = new EmbedBuilder()
             .setTitle(".gg/saturize")
             .setColor(config.embedColor)
             .setDescription(`
-                ${help} **help**\n\n
-                ${category} **categories :**\n
-                ${moderation} \`moderation\` | *Ban, kick, slow-mode...*\n
-                ${info} \`info\` | *serverinfo, userinfo, avatar...*\n
-                ${fun} \`fun\` | *Poll, rate, snipe...*\n
-                ${interact} \`interactions\` | *Hug, kiss, slap...*\n
-                ${settings} \`settings\` | *Admin only commands.*\n\n
+                <:help:1302718126831570964> **help**\n\n
+                <:filesopenwsheet:1302714227068240053>  **categories :**\n
+                <:moderation:1302696364270026853> \`moderation\` | *Ban, kick, slow-mode...*\n
+                <:info:1302694232879796265> \`info\` | *serverinfo, userinfo, avatar...*\n
+                <:fun:1302695666182520874> \`fun\` | *Poll, rate, snipe...*\n
+                <:interact:1302695110408011776> \`interactions\` | *Hug, kiss, slap...*\n
+                <:settings:1302714616958418995> \`settings\` | *Admin only commands.*\n\n
             `)
             .setFooter({
                 text: message.member.displayName,
@@ -72,11 +71,10 @@ module.exports = {
 
 
     helpInteraction: async (client, interaction) => {
-        const { moderation, info, fun, interact, settings, help, category } = client.customEmojis;
 
         const embedMap = {
             mod: new EmbedBuilder()
-                .setTitle(`${moderation} Moderation Commands`)
+                .setTitle(`<:moderation:1302696364270026853> Moderation Commands`)
                 .setColor(config.embedColor)
                 .setDescription("Liste des commandes de modération...\n..."),
 
