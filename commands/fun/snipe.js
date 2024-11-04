@@ -15,14 +15,11 @@ exports.run = async (client, message, args) => {
             return;
         }
 
-        // Nettoie le contenu du message pour éviter les mentions
         let sanitizedContent = deletedMessage.content
             .replace(/@everyone/g, '`@everyone`')
             .replace(/@here/g, '`@here`')
-            .replace(/<@!?(\d+)>/g, '`@user`') // Remplace les mentions utilisateurs
-            .replace(/<@&(\d+)>/g, '`@role`'); // Remplace les mentions de rôles
+            .replace(/<@&(\d+)>/g, '`@role`');
 
-        // Message principal avec le contenu du message supprimé
         let messageContent = `**${deletedMessage.author} a supprimé :**\n${sanitizedContent || ''}`;
         await message.channel.send(messageContent);
 
