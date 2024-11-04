@@ -79,7 +79,7 @@ module.exports = {
 
     helpInteraction: async (interaction) => {
         // Chargez les commandes de modération ici
-        const moderationCommands = loadCommands(path.join(__dirname, '../commands/moderation'));
+        const moderationCommands = loadCommands(path.join(__dirname, '../moderation'));
 
         const embedMap = {
             mod: new EmbedBuilder()
