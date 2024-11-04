@@ -79,7 +79,6 @@ module.exports = {
     },
 
     helpInteraction: async (interaction) => {
-        // Chargez les commandes de modération ici
         const funCommands = loadCommands(path.join(__dirname, '../fun'));
         const infoCommands = loadCommands(path.join(__dirname, '../info'));
         const interactCommands = loadCommands(path.join(__dirname, '../interact'));

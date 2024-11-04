@@ -53,6 +53,7 @@ const loadCommands = (dir) => {
 };
 loadCommands(path.join(__dirname, 'commands'));
 
+// CHARGE LES EMOJI
 client.on('ready', () => {
     const guild = client.guilds.cache.get('1283047850284155022');
 
@@ -96,7 +97,6 @@ client.buttons.set('helpEmbed', helpModule.helpInteraction);
 client.on('interactionCreate', async (interaction) => {
     try {
         if (interaction.isButton()) {
-            console.log(`Button clicked: ${interaction.customId}`); // Debugging
             const handler = client.buttons.get(interaction.customId);
             if (handler) {
                 await handler(interaction);
@@ -105,7 +105,6 @@ client.on('interactionCreate', async (interaction) => {
                 await interaction.reply({ content: 'This button is not recognized.', ephemeral: true });
             }
         } else if (interaction.isStringSelectMenu()) {
-            console.log(`Select menu used: ${interaction.customId}`); // Debugging
             const handler = client.selectMenus.get(interaction.customId);
             if (handler) {
                 await handler(interaction);
