@@ -19,6 +19,7 @@ module.exports = {
     name: 'help',
 
     run: async (client, message, args) => {
+
         const { moderation, info, fun, interact, settings, help, category } = client.customEmojis;
 
         const row = new ActionRowBuilder()
@@ -79,42 +80,70 @@ module.exports = {
 
     helpInteraction: async (interaction) => {
         // Chargez les commandes de modération ici
+        const funCommands = loadCommands(path.join(__dirname, '../fun'));
+        const infoCommands = loadCommands(path.join(__dirname, '../info'));
+        const interactCommands = loadCommands(path.join(__dirname, '../interact'));
         const moderationCommands = loadCommands(path.join(__dirname, '../moderation'));
+        const settingsCommands = loadCommands(path.join(__dirname, '../settings'));
 
         const embedMap = {
             mod: new EmbedBuilder()
-                .setTitle("<:moderation:1302696364270026853> Moderation Commands")
+                .setTitle("<:moderation:1302696364270026853> modération")
                 .setColor(config.embedColor)
                 .setDescription(
                     moderationCommands.length > 0 
-                    ? moderationCommands.map(cmd => `**${cmd.name}** - ${cmd.description || "Aucune description"}`).join('\n') 
+                    ? moderationCommands.map(cmd => `\`${cmd.name}\` - ${cmd.description || "Aucune description"}`).join('\n') 
                     : "Aucune commande de modération disponible."
                 ),
             
             info: new EmbedBuilder()
-                .setTitle("Information Commands")
+                .setTitle("<:info:1302694232879796265> informations")
                 .setColor(config.embedColor)
-                .setDescription("Liste des commandes d'information...\n..."),
+                .setDescription(
+                    infoCommands.length > 0 
+                    ? infoCommands.map(cmd => `\`${cmd.name}\` - ${cmd.description || "Aucune description"}`).join('\n') 
+                    : "Aucune commande de modération disponible."
+                ),
             
             fun: new EmbedBuilder()
-                .setTitle("Fun Commands")
+                .setTitle("<:fun:1302695666182520874> fun")
                 .setColor(config.embedColor)
-                .setDescription("Liste des commandes fun...\n..."),
+                .setDescription(
+                    funCommands.length > 0 
+                    ? funCommands.map(cmd => `\`${cmd.name}\` - ${cmd.description || "Aucune description"}`).join('\n') 
+                    : "Aucune commande de modération disponible."
+                ),
             
             interactions: new EmbedBuilder()
-                .setTitle("Interactions Commands")
+                .setTitle("<:interact:1302695110408011776> interactions")
                 .setColor(config.embedColor)
-                .setDescription("Liste des commandes d'interactions...\n..."),
+                .setDescription(
+                    interactCommands.length > 0 
+                    ? interactCommands.map(cmd => `\`${cmd.name}\` - ${cmd.description || "Aucune description"}`).join('\n') 
+                    : "Aucune commande de modération disponible."
+                ),
             
             settings: new EmbedBuilder()
-                .setTitle("Settings Commands")
+                .setTitle("<:settings:1302714616958418995> settings")
                 .setColor(config.embedColor)
-                .setDescription("Liste des commandes de paramètres...\n..."),
+                .setDescription(
+                    settingsCommands.length > 0 
+                    ? settingsCommands.map(cmd => `\`${cmd.name}\` - ${cmd.description || "Aucune description"}`).join('\n') 
+                    : "Aucune commande de modération disponible."
+                ),
             
             helpEmbed: new EmbedBuilder()
-                .setTitle("Help")
+                .setTitle(".gg/saturize")
                 .setColor(config.embedColor)
-                .setDescription("Besoin d'aide ? Voici les catégories de commandes...\n...")
+                .setDescription(`
+                    <:help:1302718126831570964>  **help**\n\n
+                    <:filesopenwsheet:1302714227068240053>  **catégories :**\n
+                    <:moderation:1302696364270026853> \`modération\` | *ban, kick, clear...*\n
+                    <:info:1302694232879796265> \`info\` | *serverinfo, userinfo, avatar...*\n
+                    <:fun:1302695666182520874> \`fun\` | *poll, rate, snipe...*\n
+                    <:interact:1302695110408011776> \`interactions\` | *hug, kiss, slap...*\n
+                    <:settings:1302714616958418995> \`settings\` | *admin only commands.*\n\n
+                `)
         };
 
         const selectedEmbed = embedMap[interaction.customId];
