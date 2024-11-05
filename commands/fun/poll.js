@@ -26,3 +26,4 @@ exports.run = async (client, message, args) => {
 };
 
 exports.name = "poll";
+exports.description = "Crée un sondage (oui/non) avec des réactions."

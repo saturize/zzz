@@ -1,6 +1,6 @@
 exports.run = async (client, message, args) => {
     
-    const { approve, decline, warning } = client.customEmojis;
+    const { warning } = client.customEmojis;
 
     const options = args.join(' ').split(',');
 
@@ -19,4 +19,5 @@ exports.run = async (client, message, args) => {
     await message.reply(`Je choisis: ${chosenOption}`);
 };
 
-exports.name = "poll"
+exports.name = "choice"
+exports.description = "Choisi aléatoirement entre deux options données par l'utilisateur."

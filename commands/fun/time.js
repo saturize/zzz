@@ -38,3 +38,4 @@ exports.run = async (client, message, args) => {
 };
 
 exports.name = 'time';
+exports.description = "Affiche les fuseaux horaires à travers le monde."

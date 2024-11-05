@@ -15,3 +15,4 @@ exports.run = async (client, message, args) => {
 };
 
 exports.name = "rate";
+exports.description = "Note au hasard un élément que l'utilisateur rentre."

@@ -36,3 +36,4 @@ exports.run = async (client, message, args) => {
 
 
 exports.name = 'snipe';
+exports.description = "Envoie le dernier message supprimé."
