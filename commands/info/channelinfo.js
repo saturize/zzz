@@ -46,3 +46,4 @@ function getChannelTypeName(type) {
 }
 
 exports.name = "channelinfo";
+exports.description = "Affiche les infos du salon.";

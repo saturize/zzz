@@ -24,3 +24,4 @@ exports.run = async (client, message, args) => {
     }
 };
 exports.name = "ban";
+exports.description = "Permet de bannir un membre.";

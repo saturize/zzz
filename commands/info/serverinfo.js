@@ -20,3 +20,4 @@ exports.run = (client, message) => {
     message.channel.send({ embeds: [serverInfoEmbed] });
 };
 exports.name = "serverinfo";
+exports.description = "Affiche les infos du serveur.";

@@ -19,3 +19,4 @@ exports.run = (client, message) => {
 };
 
 exports.name = "emojilist";
+exports.description = "Affiche les emojis du serveur.";

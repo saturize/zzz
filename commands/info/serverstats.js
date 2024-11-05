@@ -34,3 +34,4 @@ exports.run = async (client, message) => {
 };
 
 exports.name = "serverstats";
+exports.description = "Affiche les stats du serveur.";

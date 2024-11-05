@@ -21,3 +21,4 @@ exports.run = async (client, message) => {
 };
 
 exports.name = "serverbanner";
+exports.description = "Affiche la bannière du serveur.";

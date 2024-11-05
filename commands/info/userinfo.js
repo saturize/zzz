@@ -47,3 +47,4 @@ exports.run = async (client, message, args) => {
 };
 
 exports.name = "userinfo";
+exports.description = "Affiche les infos d'un utilisateur.";

@@ -40,3 +40,4 @@ exports.run = async (client, message, args) => {
 };
 
 exports.name = "pat";
+exports.description = "Caresse un utilisateur.";

@@ -8,3 +8,4 @@ exports.run = async (client, message, args) => {
 };
 
 exports.name = "ping";
+exports.description = "Affiche la latence du message et de l'API.";

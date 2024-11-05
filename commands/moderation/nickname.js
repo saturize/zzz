@@ -54,3 +54,4 @@ exports.run = async (client, message, args) => {
 };
 
 exports.name = "nickname";
+exports.description = "Change le pseudo d'un membre.";

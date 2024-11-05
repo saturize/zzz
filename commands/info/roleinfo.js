@@ -38,3 +38,4 @@ exports.run = (client, message, args) => {
 };
 
 exports.name = "roleinfo";
+exports.description = "Affiche les informations sur un rôle.";

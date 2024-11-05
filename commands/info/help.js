@@ -191,3 +191,4 @@ module.exports = {
         }
     }
 };
+exports.description = "Affiche l'entièreté des commandes disponibles.";

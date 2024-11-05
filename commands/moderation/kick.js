@@ -27,3 +27,4 @@ exports.run = async (client, message, [mention, ...reason]) => {
 };
 
 exports.name = "kick";
+exports.description = "Exclue un membre.";

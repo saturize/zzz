@@ -24,3 +24,4 @@ exports.run = async (client, message, args) => {
 };
 
 exports.name = "unban";
+exports.description = "Permet de dé-ban un membre.";

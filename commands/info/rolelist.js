@@ -34,3 +34,4 @@ exports.run = (client, message, args) => {
 };
 
 exports.name = "rolelist";
+exports.description = "Affiche une liste des membres ayant ce rôle.";

@@ -25,3 +25,4 @@ exports.run = async (client, message) => {
 };
 
 exports.name = "lock";
+exports.description = "Permet de fermer un salon.";

@@ -40,3 +40,4 @@ exports.run = async (client, message, args) => {
 };
 
 exports.name = "slap";
+exports.description = "Gifle un utilisateur.";

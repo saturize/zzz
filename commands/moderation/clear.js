@@ -51,3 +51,4 @@ exports.run = async (client, message, args) => {
 };
 
 exports.name = "clear";
+exports.description = "Permet de clear des messages.";

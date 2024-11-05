@@ -38,3 +38,4 @@ exports.run = async (client, message, args) => {
 };
 
 exports.name = `setcolor`;
+exports.description = "Permet de changer la couleur des embed.";

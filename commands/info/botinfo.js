@@ -26,3 +26,4 @@ exports.run = async (client, message) => {
 };
 
 exports.name = "botinfo";
+exports.description = "Affiche les infos du bot.";

@@ -18,3 +18,4 @@ exports.run = async (client, message, args) => {
 };
 
 exports.name = "setprefix";
+exports.description = "Permet de changer le préfix du bot.";

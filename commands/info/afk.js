@@ -18,3 +18,4 @@ exports.run = async (client, message, args) => {
 
 exports.name = 'afk';
 exports.afkUsers = afkUsers;
+exports.description = "Permet de se mettre afk et répondre automatiquement aux mentions.";

@@ -23,3 +23,4 @@ exports.run = async (client, message) => {
 };
 
 exports.name = "unlock";
+exports.description = "Permet de rouvrir un salon.";

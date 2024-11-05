@@ -23,3 +23,4 @@ exports.run = async (client, message, args) => {
 };
 
 exports.name = "say";
+exports.description = "Permet de parler à la place du bot.";

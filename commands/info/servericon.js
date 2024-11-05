@@ -16,3 +16,4 @@ exports.run = async (client, message) => {
 };
 
 exports.name = "servericon";
+exports.description = "Affiche l'icône du serveur.";
