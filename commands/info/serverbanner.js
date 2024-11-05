@@ -12,7 +12,6 @@ exports.run = async (client, message) => {
 
     const bannerEmbed = new EmbedBuilder()
         .setColor(config.embedColor)
-        .setTitle(`Bannière du serveur ${guild.name}`)
         .setImage(guild.bannerURL({ dynamic: true, size: 512 }))
         .setFooter({ text: `Demandé par ${message.author.tag}`, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
         .setTimestamp();

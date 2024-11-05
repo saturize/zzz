@@ -15,7 +15,6 @@ exports.run = async (client, message, args) => {
 
     const bannerEmbed = new EmbedBuilder()
         .setColor(config.embedColor)
-        .setTitle(`Bannière de ${fetchedUser.username}`)
         .setImage(bannerURL)
         .setFooter({ text: `Demandé par ${message.author.username}`, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
         .setTimestamp();

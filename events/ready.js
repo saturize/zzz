@@ -22,10 +22,6 @@ module.exports = async (client) => {
 
         client.guilds.cache.forEach(guild => {
             console.log(`Guild: ${guild.name} (${guild.id})`);
-            guild.members.fetch();
-            guild.members.cache.forEach(member => {
-                console.log(`Member: ${member.user.tag} (${member.id})`);
-            });
         });
     } catch (error) {
         console.error('Error fetching guilds:', error);
