@@ -6,6 +6,10 @@ const config = require(path.join(__dirname, '../../config.json'));
 exports.run = async (client, message) => {
     const uptime = moment.duration(client.uptime).humanize();
 
+    const fetchedBotUser = await client.users.fetch(client.user.id, { force: true });
+    const bannerURL = fetchedBotUser.bannerURL({ dynamic: true, size: 512 });
+
+
     const botInfoEmbed = new EmbedBuilder()
         .setColor(config.embedColor)
         .setTitle(`Informations sur le robot : ${client.user.username}`)
@@ -22,6 +26,10 @@ exports.run = async (client, message) => {
         .setFooter({ text: `Demandé par ${message.author.username}`, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
         .setTimestamp();
 
+    if (bannerURL) {
+        botInfoEmbed.setImage(bannerURL);
+    }
+    
     message.channel.send({ embeds: [botInfoEmbed] });
 };
 
