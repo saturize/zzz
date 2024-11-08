@@ -8,6 +8,7 @@ const config = require("./config.json");
 const db = require('./database');
 const { checkLiveStatus } = require('./twitchNotifier');
 const helpModule = require('./commands/info/help');
+const welcomeEvent = require('./events/welcomeEvent');
 
 
 const client = new Client({
@@ -123,9 +124,7 @@ client.on('interactionCreate', async (interaction) => {
 });
 
 // WELCOME
-client.on('guildMemberAdd', member => {
-    client.emit('guildMemberAdd', member);
-});
+welcomeEvent(client);
 
 // AUTOROLE
 client.on('guildMemberAdd', async (member) => {

@@ -1,6 +1,6 @@
 const { EmbedBuilder } = require('discord.js');
 const path = require('path');
-const config = require(path.join(__dirname, './config.json'));
+const config = require(path.join(__dirname, '../../config.json'));
 
 exports.run = async (client, message, args) => {
     const welcomeChannelId = config.welcomeChannelId; 
