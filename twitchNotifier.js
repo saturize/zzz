@@ -40,7 +40,6 @@ async function getAccessToken() {
 function notifyDiscord(client, streamData) {
     const channel = client.channels.cache.get(process.env.DISCORD_CHANNEL_ID);
     if (channel) {
-        channel.send(`📢 Je suis en live !! || @everyone ||`).then(() => {
             const embed = new EmbedBuilder()
                 .setColor('#9146FF')
                 .setAuthor({
@@ -54,10 +53,12 @@ function notifyDiscord(client, streamData) {
                     { name: 'Jeu', value:`${streamData.game_name}`, inline: false }
                 )
                 .setImage(streamData.thumbnail_url.replace('{width}', '1280').replace('{height}', '720')) // Miniature
+                .setFooter({ text: `ｓａｔｕｒｉｚｅ`})
                 .setTimestamp();
 
-            channel.send({ embeds: [embed] });
-        }).catch(console.error)
+            channel.send({ 
+                content: `📢 Je suis en live !! || @everyone ||`,
+                embeds: [embed] });
     } else {
         console.error('Channel not found:', process.env.DISCORD_CHANNEL_ID);
     }

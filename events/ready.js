@@ -11,9 +11,9 @@ module.exports = async (client) => {
     
         client.user.setPresence({
             status: 'dnd',
-            activities: [
-                { name: '.gg/saturize', type: ActivityType.Playing }
-            ]
+            // activities: [
+            //    { name: '.gg/saturize', type: ActivityType.Playing }
+            //]
         });
 
     try {

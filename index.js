@@ -78,7 +78,6 @@ client.on('ready', () => {
     } else {
         console.error('Guilde non trouvée. Vérifie l\'ID de la guilde.');
     }
-
 });
 
 // BUTTON AND MENU
@@ -121,6 +120,11 @@ client.on('interactionCreate', async (interaction) => {
             await interaction.reply({ content: 'An error occurred while handling your interaction.', ephemeral: true });
         }
     }
+});
+
+// WELCOME
+client.on('guildMemberAdd', member => {
+    client.emit('guildMemberAdd', member);
 });
 
 // AUTOROLE
