@@ -31,6 +31,7 @@ for (const file of events) {
     const eventName = file.split(".")[0];
     const event = require(`./events/${file}`);
     client.on(eventName, event.bind(null, client));
+    console.log(`Événement chargé : ${eventName}`);
 }
 
 // COMMAND HANDLER
