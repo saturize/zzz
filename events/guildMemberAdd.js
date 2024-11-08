@@ -1,4 +1,4 @@
-const { Client, GatewayIntentBits } = require('discord.js');
+const { EmbedBuilder, Client, GatewayIntentBits } = require('discord.js');
 const path = require('path');
 const configPath = path.join(__dirname, '../config.json');
 const config = require(configPath);
