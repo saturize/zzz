@@ -8,7 +8,6 @@ const config = require("./config.json");
 const db = require('./database');
 const { checkLiveStatus } = require('./twitchNotifier');
 const helpModule = require('./commands/info/help');
-const welcomeEvent = require('./events/welcomeEvent');
 
 
 const client = new Client({
@@ -31,7 +30,7 @@ const events = fs.readdirSync("./events").filter(file => file.endsWith(".js"));
 for (const file of events) {
     const eventName = file.split(".")[0];
     const event = require(`./events/${file}`);
-    event(client);
+    client.on(eventName, event.bind(null, client));
 }
 
 // COMMAND HANDLER
@@ -122,9 +121,6 @@ client.on('interactionCreate', async (interaction) => {
         }
     }
 });
-
-// WELCOME
-welcomeEvent(client);
 
 // AUTOROLE
 client.on('guildMemberAdd', async (member) => {
