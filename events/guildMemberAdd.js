@@ -25,9 +25,9 @@ module.exports = async (client, member) => {
         const welcomeEmbed = new EmbedBuilder()
             .setColor(config.embedColor || '#00FF00')
             .setTitle(`Bienvenue sur ${member.guild.name}!`)
-            .setDescription(`Coucou <@${member.user.id}> ! Nous sommes ravis de t'accueillir sur **${member.guild.name}**. Amuse-toi bien ! 🎉`)
+            .setDescription(`Coucou <@${member.user.id}> ! Bienvenue sur **${member.guild.name}**.`)
             .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
-            .setFooter({ text: `Nous sommes maintenant ${member.guild.memberCount} membres!` })
+            .setFooter({ text: `Nous sommes maintenant ${member.guild.memberCount} membres` })
             .setTimestamp();
 
         // Envoi du message dans le canal de bienvenue
