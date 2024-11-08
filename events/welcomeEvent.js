@@ -22,5 +22,5 @@ exports.run = async (client, message, args) => {
     });
 };
 
-exports.name = "welcomeEmbed";
+exports.name = "welcomeEvent";
 exports.description = "Envoie un message de bienvenue dans le canal de bienvenue spécifié avec une mention.";
