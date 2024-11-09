@@ -27,23 +27,23 @@ module.exports = {
                 new ButtonBuilder()
                     .setStyle(ButtonStyle.Secondary)
                     .setCustomId('mod')
-                    .setEmoji('<:moderation:1302696364270026853>'),
+                    .setEmoji('<:moderation:1303136513214648450>'),
                 new ButtonBuilder()
                     .setStyle(ButtonStyle.Secondary)
                     .setCustomId('info')
-                    .setEmoji('<:info:1302694232879796265>'),
+                    .setEmoji('<:info:1303131655829196901>'),
                 new ButtonBuilder()
                     .setStyle(ButtonStyle.Secondary)
                     .setCustomId('fun')
-                    .setEmoji('<:fun:1302695666182520874>'),
+                    .setEmoji('<:joystick:1303136478481879147>'),
                 new ButtonBuilder()
                     .setStyle(ButtonStyle.Secondary)
                     .setCustomId('interactions')
-                    .setEmoji('<:interact:1302695110408011776>'),
+                    .setEmoji('<:interact:1303136470026031104>'),
                 new ButtonBuilder()
                     .setStyle(ButtonStyle.Secondary)
                     .setCustomId('settings')
-                    .setEmoji('<:settings:1302714616958418995>')
+                    .setEmoji('<:settings:1303136510488481823>')
             );
 
         const row2 = new ActionRowBuilder()
@@ -51,7 +51,7 @@ module.exports = {
                 new ButtonBuilder()
                     .setStyle(ButtonStyle.Secondary)
                     .setCustomId('helpEmbed')
-                    .setEmoji('<:help:1302718126831570964>')
+                    .setEmoji('<:help:1303136456109457439>')
             );
 
         const helpEmbed = new EmbedBuilder()
