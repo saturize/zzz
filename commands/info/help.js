@@ -31,7 +31,7 @@ module.exports = {
                 new ButtonBuilder()
                     .setStyle(ButtonStyle.Secondary)
                     .setCustomId('info')
-                    .setEmoji('<:info:1303131655829196901>'),
+                    .setEmoji('<:fun:1303136478481879147>'),
                 new ButtonBuilder()
                     .setStyle(ButtonStyle.Secondary)
                     .setCustomId('fun')
