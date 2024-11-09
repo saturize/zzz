@@ -8,6 +8,7 @@ const config = require("./config.json");
 const db = require('./database');
 const { checkLiveStatus } = require('./twitchNotifier');
 const helpModule = require('./commands/info/help');
+const emojiHandler = require('./emojiHandler');
 
 
 const client = new Client({
@@ -24,6 +25,11 @@ client.config = config;
 client.commands = new Collection();
 client.buttons = new Map();
 client.selectMenus = new Map();
+
+// CHARGE LES EMOJI
+client.on('ready', async () => {
+    client.customEmojis = await emojiHandler(client);
+});
 
 // EVENT HANDLER
 const events = fs.readdirSync("./events").filter(file => file.endsWith(".js"));
@@ -53,33 +59,6 @@ const loadCommands = (dir) => {
     }
 };
 loadCommands(path.join(__dirname, 'commands'));
-
-// CHARGE LES EMOJI
-client.on('ready', () => {
-    const guild = client.guilds.cache.get('1283047850284155022');
-
-    if (guild) {
-        const emojis = {
-            category: guild.emojis.cache.find(emoji => emoji.name === 'filesopenwsheet'),
-            help: guild.emojis.cache.find(emoji => emoji.name === 'help'),
-            moderation: guild.emojis.cache.find(emoji => emoji.name === 'moderation'),
-            settings: guild.emojis.cache.find(emoji => emoji.name === 'settings'),
-            trash: guild.emojis.cache.find(emoji => emoji.name === 'trash'),
-            fun: guild.emojis.cache.find(emoji => emoji.name === 'fun'),
-            interact: guild.emojis.cache.find(emoji => emoji.name === 'interact'),
-            info: guild.emojis.cache.find(emoji => emoji.name === 'info'),
-            approve: guild.emojis.cache.find(emoji => emoji.name === 'approve'),
-            decline: guild.emojis.cache.find(emoji => emoji.name === 'decline'),
-            warning: guild.emojis.cache.find(emoji => emoji.name === 'warning')
-        };
-
-        client.customEmojis = emojis;
-        console.log('emojis chargés.');
-
-    } else {
-        console.error('Guilde non trouvée. Vérifie l\'ID de la guilde.');
-    }
-});
 
 // BUTTON AND MENU
 client.buttons.set('activate_autorole', require('./commands/settings/autorole').handleActivateAutorole);

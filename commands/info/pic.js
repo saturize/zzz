@@ -12,5 +12,7 @@ exports.run = (client, message, args) => {
         .setTimestamp();
     message.channel.send({ embeds: [avatarEmbed] });
 };
+
 exports.name = "pic";
+exports.aliases = ["avatar", "icon"];
 exports.description = "Affiche l'avatar d'un membre.";
