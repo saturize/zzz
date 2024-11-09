@@ -2,7 +2,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const emojiHandler = async (client) => {
-    const guildId = process.env.GUILD_ID;  // L'ID de la guilde depuis le .env
+    const guildId = process.env.GUILD_ID;
     const guild = await client.guilds.fetch(guildId);
 
     if (!guild) {
@@ -10,7 +10,11 @@ const emojiHandler = async (client) => {
         return null;
     }
 
-    // Crée un objet avec les emojis sous forme clé-nom : valeur-emoji
+    console.log('Emojis du serveur :');
+    guild.emojis.cache.forEach((emoji) => {
+        console.log(`Nom: ${emoji.name}, ID: ${emoji.id}`);
+    });
+
     const emojis = {};
     guild.emojis.cache.forEach((emoji) => {
         emojis[emoji.name] = emoji;
