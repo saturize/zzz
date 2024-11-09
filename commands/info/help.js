@@ -27,23 +27,23 @@ module.exports = {
                 new ButtonBuilder()
                     .setStyle(ButtonStyle.Secondary)
                     .setCustomId('mod')
-                    .setEmoji('<:moderation:1302696364270026853>'),
+                    .setEmoji(moderation),
                 new ButtonBuilder()
                     .setStyle(ButtonStyle.Secondary)
                     .setCustomId('info')
-                    .setEmoji('<:info:1302694232879796265>'),
+                    .setEmoji(info),
                 new ButtonBuilder()
                     .setStyle(ButtonStyle.Secondary)
                     .setCustomId('fun')
-                    .setEmoji('<:fun:1302695666182520874>'),
+                    .setEmoji(fun),
                 new ButtonBuilder()
                     .setStyle(ButtonStyle.Secondary)
                     .setCustomId('interactions')
-                    .setEmoji('<:interact:1302695110408011776>'),
+                    .setEmoji(interact),
                 new ButtonBuilder()
                     .setStyle(ButtonStyle.Secondary)
                     .setCustomId('settings')
-                    .setEmoji('<:settings:1302714616958418995>')
+                    .setEmoji(settings)
             );
 
         const row2 = new ActionRowBuilder()
@@ -51,7 +51,7 @@ module.exports = {
                 new ButtonBuilder()
                     .setStyle(ButtonStyle.Secondary)
                     .setCustomId('helpEmbed')
-                    .setEmoji('<:help:1302718126831570964>')
+                    .setEmoji(help)
             );
 
         const helpEmbed = new EmbedBuilder()
@@ -85,9 +85,11 @@ module.exports = {
         const moderationCommands = loadCommands(path.join(__dirname, '../moderation'));
         const settingsCommands = loadCommands(path.join(__dirname, '../settings'));
 
+        const { moderation, info, fun, interact, settings, help } = client.customEmojis;
+
         const embedMap = {
             mod: new EmbedBuilder()
-                .setTitle("<:moderation:1302696364270026853> modération")
+                .setTitle(`${moderation} modération`)
                 .setColor(config.embedColor)
                 .setDescription(
                     moderationCommands.length > 0 

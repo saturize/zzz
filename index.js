@@ -6,9 +6,10 @@ const fs = require("fs");
 const path = require("path");
 const config = require("./config.json");
 const db = require('./database');
+
+const emojiHandler = require('./emojiHandler');
 const { checkLiveStatus } = require('./twitchNotifier');
 const helpModule = require('./commands/info/help');
-const emojiHandler = require('./emojiHandler');
 
 
 const client = new Client({
