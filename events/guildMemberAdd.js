@@ -37,7 +37,7 @@ module.exports = async (client, member) => {
 
         // Envoi de l'embed de bienvenue dans le salon "welcome"
         await welcomeChannel.send({
-            content: `Bienvenue, <@${member.user.id}>!`,
+            content: `<@${member.user.id}>`,
             embeds: [welcomeEmbed]
         });
         console.log(`Message de bienvenue envoyé à ${member.user.tag} dans le salon welcome.`);
