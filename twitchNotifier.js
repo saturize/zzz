@@ -37,30 +37,38 @@ async function getAccessToken() {
     return response.data.access_token;
 }
 
-function notifyDiscord(client, streamData) {
+async function notifyDiscord(client, streamData) {
     const channel = client.channels.cache.get(process.env.DISCORD_CHANNEL_ID);
-    if (channel) {
-            const embed = new EmbedBuilder()
-                .setColor('#9146FF')
-                .setAuthor({
-                    name: `${process.env.TWITCH_CHANNEL_NAME} est en live sur Twitch!`,
-                    // iconURL: `https://static-cdn.jtvnw.net/jtv_user_pictures/${process.env.TWITCH_CHANNEL_NAME}.png`, // PFP (marche pas ):)
-                })
-                .setTitle(`${streamData.title}`)
-                .setURL(`https://www.twitch.tv/${process.env.TWITCH_CHANNEL_NAME}`)
+    const guild = client.guilds.cache.get(process.env.GUILD_ID); // Assurez-vous d'avoir l'ID de la guilde dans le .env
+    const roleId = '1305023872407703572';
 
-                .addFields(
-                    { name: 'Jeu', value:`${streamData.game_name}`, inline: false }
-                )
-                .setImage(streamData.thumbnail_url.replace('{width}', '1280').replace('{height}', '720')) // Miniature
-                .setFooter({ text: `ｓａｔｕｒｉｚｅ`})
-                .setTimestamp();
+    if (channel && guild) {
+        const role = guild.roles.cache.get(roleId);
 
-            channel.send({ 
-                content: `📢 Je suis en live !! || @everyone ||`,
-                embeds: [embed] });
+        if (!role) {
+            console.error(`Rôle non trouvé avec l'ID : ${roleId}`);
+            return;
+        }
+
+        const embed = new EmbedBuilder()
+            .setColor('#9146FF')
+            .setAuthor({
+                name: `${process.env.TWITCH_CHANNEL_NAME} est en live sur Twitch!`,
+                // iconURL: `https://static-cdn.jtvnw.net/jtv_user_pictures/${process.env.TWITCH_CHANNEL_NAME}.png`,
+            })
+            .setTitle(`${streamData.title}`)
+            .setURL(`https://www.twitch.tv/${process.env.TWITCH_CHANNEL_NAME}`)
+            .addFields({ name: 'Jeu', value: `${streamData.game_name}`, inline: false })
+            .setImage(streamData.thumbnail_url.replace('{width}', '1280').replace('{height}', '720'))
+            .setFooter({ text: `ｓａｔｕｒｉｚｅ` })
+            .setTimestamp();
+
+        channel.send({
+            content: `📢 Je suis en live !! ||<@&${roleId}>||`,
+            embeds: [embed]
+        });
     } else {
-        console.error('Channel not found:', process.env.DISCORD_CHANNEL_ID);
+        console.error('Channel ou guilde non trouvés');
     }
 }
 
