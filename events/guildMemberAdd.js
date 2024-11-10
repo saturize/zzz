@@ -30,7 +30,7 @@ module.exports = async (client, member) => {
         const welcomeEmbed = new EmbedBuilder()
             .setColor(config.embedColor)
             .setTitle(`${member.guild.name}`)
-            .setDescription(`Coucou <@${member.user.id}> ! Bienvenue à toi.  \n- Nous t'invitons à aller choisir tes rôles dans ${rolesChannelLink}.`)
+            .setDescription(`Coucou <@${member.user.id}> ! Bienvenue à toi.  \n- Nous t'invitons à aller choisir tes rôles dans ${rolesChannelLink} (si tu n'en as pas choisi).`)
             .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
             .setFooter({ text: `Nous sommes maintenant ${member.guild.memberCount} membres` })
             .setTimestamp();
