@@ -29,8 +29,8 @@ module.exports = async (client, member) => {
         // Création de l'embed de bienvenue pour le salon "welcome"
         const welcomeEmbed = new EmbedBuilder()
             .setColor(config.embedColor)
-            .setTitle(`Bienvenue sur ${member.guild.name}!`)
-            .setDescription(`Coucou <@${member.user.id}> ! Bienvenue sur **${member.guild.name}**. Nous t'invitons à aller choisir tes rôles dans le salon dédié ${rolesChannelLink}.`)
+            .setTitle(`${member.guild.name}`)
+            .setDescription(`Coucou <@${member.user.id}> ! Bienvenue à toi.  \n- Nous t'invitons à aller choisir tes rôles dans ${rolesChannelLink}.`)
             .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
             .setFooter({ text: `Nous sommes maintenant ${member.guild.memberCount} membres` })
             .setTimestamp();
@@ -45,7 +45,7 @@ module.exports = async (client, member) => {
         // Création de l'embed pour le salon "général"
         const generalWelcomeEmbed = new EmbedBuilder()
             .setColor(config.embedColor)
-            .setDescription(`Veuillez accueillir <@${member.user.id}> comme il se doit!`)
+            .setDescription(`**Veuillez accueillir <@${member.user.id}> comme il se doit!**`)
             .setTimestamp();
 
         // Envoi de l'embed dans le salon "général"
