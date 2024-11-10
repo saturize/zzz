@@ -40,7 +40,7 @@ async function getAccessToken() {
 async function notifyDiscord(client, streamData) {
     const channel = client.channels.cache.get(process.env.DISCORD_CHANNEL_ID);
     const guild = client.guilds.cache.get(process.env.GUILD_ID);
-    const roleId = '1305023872407703572';
+    const roleId = '1305023708511076373';
 
     if (channel && guild) {
         const role = guild.roles.cache.get(roleId);
