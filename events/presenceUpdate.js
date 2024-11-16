@@ -1,24 +1,28 @@
-require('dotenv').config();
-const { ActivityType, GatewayIntentBits } = require('discord.js');
+const { ActivityType } = require('discord.js');
+require('dotenv').config(); // Charger les variables d'environnement
 
-// Assurez-vous que votre client Discord a les intentions appropriées
-// Inclure GatewayIntentBits.GuildPresences dans les intents du client pour lire les statuts
 module.exports = async (oldMember, newMember) => {
     try {
+        // Récupérer le GUILD_ID depuis les variables d'environnement
         const guildId = process.env.GUILD_ID;
+
         // Vérification de l'existence de newMember et de newMember.guild
         if (!newMember || !newMember.guild) {
             console.error('Erreur : newMember ou newMember.guild est indéfini');
             return; // Sortir si newMember ou newMember.guild est indéfini
         }
-        
+
+        // Assurez-vous que le bot est bien dans la bonne guilde (vérification de l'ID de guilde)
         if (newMember.guild.id !== guildId) return;
 
-        // Vérifier si le membre a une présence
+        // Vérifier si le membre a une présence et des activités
         if (!newMember.presence || !newMember.presence.activities.length) {
             console.log(`${newMember.user.tag} n'a pas de présence définie ou d'activités.`);
             return; // Sortir si le membre est hors ligne ou n'a aucune activité
         }
+
+        // Debugging : Afficher toutes les activités disponibles
+        console.log(`${newMember.user.tag} activités :`, newMember.presence.activities);
 
         // Récupérer l'ID du rôle à attribuer
         const customRoleId = '1305215473960489011'; // Remplacez ceci par l'ID réel de votre rôle
@@ -36,6 +40,9 @@ module.exports = async (oldMember, newMember) => {
             console.log(`Aucun statut personnalisé détecté pour ${newMember.user.tag}`);
             return; // Sortir si aucun statut personnalisé n'est trouvé
         }
+
+        // Debugging : Afficher le statut personnalisé pour vérifier
+        console.log(`Statut personnalisé de ${newMember.user.tag} :`, customStatus.state);
 
         // Vérification du contenu du statut personnalisé
         if (customStatus.state && (customStatus.state.includes('.gg/saturize') || customStatus.state.includes('/saturize'))) {
