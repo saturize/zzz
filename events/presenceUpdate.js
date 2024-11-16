@@ -1,56 +1,62 @@
-const { ActivityType } = require('discord.js');
+require("dotenv").config();
+const { ActivityType } = require("discord.js");
 
 module.exports = async (oldMember, newMember) => {
     try {
+        // Vérification de la guilde
+        const guildId = process.env.GUILD_ID;
+        if (newMember.guild.id !== guildId) {
+            console.log(`Membre ignoré car hors de la guilde cible (${guildId}).`);
+            return; // Ignorer les membres d'autres guildes
+        }
 
         console.log(
             `${newMember.user.tag} activités détectées :`,
             newMember.presence?.activities || "Aucune activité"
         );
-        
-        if (!oldMember || !newMember) return;
 
+        // Récupération de la guilde et du rôle
         const guild = newMember.guild;
-        const customStatusRoleId = '1305215473960489011';
+        const customStatusRoleId = '1305215473960489011'; // ID du rôle
         const customStatusRole = guild.roles.cache.get(customStatusRoleId);
         const vanity = '.gg/saturize';
 
         if (!customStatusRole) {
             console.error("Le rôle pour le statut est introuvable ou supprimé.");
-            return;
+            return; // Sortir si le rôle n'existe pas
         }
 
-        // Vérifiez les activités du membre
-        const statusStates = newMember.presence?.activities
-            .filter(activity => activity.type === 4)
-            .map(activity => activity.state); // Récupérer tous les "state" des activités personnalisées
-
-        if (!statusStates || statusStates.length === 0) {
-            console.log(`${newMember.user.tag} n'a pas de statut personnalisé.`);
-        } else {
-            console.log(`Statut(s) détecté(s) pour ${newMember.user.tag}:`, statusStates);
+        // Vérification des activités
+        const activities = newMember.presence?.activities;
+        if (!activities || activities.length === 0) {
+            console.log(`${newMember.user.tag} activités détectées : Aucune activité`);
+            return; // Sortir si aucune activité n'est détectée
         }
 
-        const member = guild.members.cache.get(newMember.user.id); // Récupérer le membre dans la guilde
+        // Debugging : Afficher toutes les activités
+        activities.forEach((activity, index) => {
+            console.log(`Activité ${index + 1}:`);
+            console.log(`  Type : ${activity.type}`);
+            console.log(`  Nom : ${activity.name}`);
+            console.log(`  Détails : ${activity.details}`);
+            console.log(`  Statut personnalisé : ${activity.state}`);
+        });
 
-        if (!member) {
-            console.error(`Impossible de trouver le membre ${newMember.user.tag} dans la guilde.`);
-            return;
-        }
-
-        // Si le statut contient le vanity
-        if (statusStates && statusStates.some(state => state?.includes(vanity))) {
-            if (!member.roles.cache.has(customStatusRoleId)) {
-                await member.roles.add(customStatusRole);
-                console.log(`Rôle ${customStatusRole.name} attribué à ${newMember.user.tag} pour son statut personnalisé.`);
-            } else {
-                console.log(`${newMember.user.tag} a déjà le rôle ${customStatusRole.name}.`);
+        // Recherche de l'activité personnalisée
+        const customStatus = activities.find(activity => activity.type === ActivityType.Custom);
+        if (customStatus?.state && customStatus.state.includes(vanity)) {
+            if (!newMember.roles.cache.has(customStatusRoleId)) {
+                await newMember.roles.add(customStatusRole);
+                console.log(
+                    `Rôle "${customStatusRole.name}" attribué à ${newMember.user.tag} pour le statut personnalisé.`
+                );
             }
         } else {
-            // Si le rôle est déjà présent, mais le statut ne correspond plus
-            if (member.roles.cache.has(customStatusRoleId)) {
-                await member.roles.remove(customStatusRole);
-                console.log(`Rôle ${customStatusRole.name} retiré de ${newMember.user.tag} car le statut ne correspond plus.`);
+            if (newMember.roles.cache.has(customStatusRoleId)) {
+                await newMember.roles.remove(customStatusRole);
+                console.log(
+                    `Rôle "${customStatusRole.name}" retiré de ${newMember.user.tag} car le statut ne correspond plus.`
+                );
             }
         }
     } catch (error) {
