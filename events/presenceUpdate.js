@@ -1,8 +1,8 @@
-/* const { ActivityType } = require('discord.js');
+const { ActivityType } = require('discord.js');
 require('dotenv').config(); // Charger les variables d'environnement
 
 module.exports = async (oldMember, newMember) => {
-    try {
+    /* try {
         // Vérification que le membre a une présence et des activités
         if (!newMember.presence || !newMember.presence.activities) {
             console.log(`${newMember.user.tag} n'a pas de présence ou d'activités.`);
@@ -45,5 +45,5 @@ module.exports = async (oldMember, newMember) => {
         }
     } catch (error) {
         console.error("Erreur dans l'événement presenceUpdate :", error);
-    }
-}; */
+    }*/
+}; 
