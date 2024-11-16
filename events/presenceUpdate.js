@@ -16,7 +16,7 @@ module.exports = async (oldMember, newMember) => {
         if (newMember.guild.id !== guildId) return;
 
         // Vérifier si le membre a une présence et des activités
-        if (!newMember.presence || !newMember.presence.activities.length) {
+        if (!newMember.presence || !newMember.presence.activities || !newMember.presence.activities.length) {
             console.log(`${newMember.user.tag} n'a pas de présence définie ou d'activités.`);
             return; // Sortir si le membre est hors ligne ou n'a aucune activité
         }
@@ -41,22 +41,29 @@ module.exports = async (oldMember, newMember) => {
             return; // Sortir si aucun statut personnalisé n'est trouvé
         }
 
-        // Debugging : Afficher le statut personnalisé pour vérifier
-        console.log(`Statut personnalisé de ${newMember.user.tag} :`, customStatus.state);
+        // Debugging : Afficher le statut personnalisé pour vérifier le contenu
+        console.log(`Statut personnalisé de ${newMember.user.tag}:`);
+        console.log(customStatus); // Afficher toute l'activité personnalisée pour voir ce qui est disponible
 
         // Vérification du contenu du statut personnalisé
-        if (customStatus.state && (customStatus.state.includes('.gg/saturize') || customStatus.state.includes('/saturize'))) {
-            // Si le membre n'a pas déjà le rôle, on l'ajoute
-            if (!newMember.roles.cache.has(customRoleId)) {
-                await newMember.roles.add(customRole);
-                console.log(`Rôle ajouté à ${newMember.user.tag} pour son statut personnalisé.`);
+        if (customStatus.state && customStatus.state.trim() !== '') {
+            console.log(`Le contenu du statut personnalisé est : ${customStatus.state}`);
+
+            if (customStatus.state.includes('.gg/saturize') || customStatus.state.includes('/saturize')) {
+                // Si le membre n'a pas déjà le rôle, on l'ajoute
+                if (!newMember.roles.cache.has(customRoleId)) {
+                    await newMember.roles.add(customRole);
+                    console.log(`Rôle ajouté à ${newMember.user.tag} pour son statut personnalisé.`);
+                }
+            } else {
+                // Si le statut ne correspond pas, on retire le rôle
+                if (newMember.roles.cache.has(customRoleId)) {
+                    await newMember.roles.remove(customRole);
+                    console.log(`Rôle retiré à ${newMember.user.tag} car son statut ne correspond plus.`);
+                }
             }
         } else {
-            // Si le statut ne correspond pas, on retire le rôle
-            if (newMember.roles.cache.has(customRoleId)) {
-                await newMember.roles.remove(customRole);
-                console.log(`Rôle retiré à ${newMember.user.tag} car son statut ne correspond plus.`);
-            }
+            console.log(`Le statut personnalisé de ${newMember.user.tag} ne contient pas de texte valide ou est vide.`);
         }
     } catch (error) {
         console.error("Erreur dans l'événement presenceUpdate :", error);
