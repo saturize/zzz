@@ -1,12 +1,18 @@
-const { ActivityType } = require('discord.js');
+require('dotenv').config();
+const { ActivityType, GatewayIntentBits } = require('discord.js');
 
+// Assurez-vous que votre client Discord a les intentions appropriées
+// Inclure GatewayIntentBits.GuildPresences dans les intents du client pour lire les statuts
 module.exports = async (oldMember, newMember) => {
     try {
+        const guildId = process.env.GUILD_ID;
         // Vérification de l'existence de newMember et de newMember.guild
         if (!newMember || !newMember.guild) {
             console.error('Erreur : newMember ou newMember.guild est indéfini');
             return; // Sortir si newMember ou newMember.guild est indéfini
         }
+        
+        if (newMember.guild.id !== guildId) return;
 
         // Vérifier si le membre a une présence
         if (!newMember.presence || !newMember.presence.activities.length) {
