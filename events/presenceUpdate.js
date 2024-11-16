@@ -2,8 +2,26 @@ const { ActivityType } = require('discord.js');
 
 module.exports = async (oldPresence, newPresence) => {
     try {
+        
+        // Vérification de la guilde
+        const guild = newPresence.guild;
+        if (!guild) {
+            console.error('Guilde introuvable dans presenceUpdate.');
+            return;
+        }
+
+        // Vérification du rôle
         const specialRoleId = '1305215473960489011';
-        const role = newPresence.guild.roles.cache.get(specialRoleId);
+        const role = guild.roles.cache.get(specialRoleId);
+        if (!role) {
+            console.error(`Le rôle avec l'ID ${specialRoleId} est introuvable dans la guilde ${guild.name}.`);
+            return;
+        }
+
+
+
+
+        
 
         if (!role) {
             console.error("Le rôle pour le statut est introuvable.");
