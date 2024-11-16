@@ -5,14 +5,13 @@ const config = require(configPath);
 
 module.exports = async (client, member) => {
     try {
+        // WELCOME
         console.log(`Nouvel utilisateur: ${member.user.tag} a rejoint le serveur ${member.guild.name}`);
 
-        // IDs des salons à partir de la configuration ou directement dans le code
-        const welcomeChannelId = '1302408288738213898'; // ID du salon "welcome"
-        const generalChannelId = '1302407890899963914'; // ID du salon "général"
+        const welcomeChannelId = '1302408288738213898'; // welcome
+        const generalChannelId = '1302407890899963914'; // général
         const rolesChannelLink = 'https://discord.com/channels/1284920847441858703/1305170147505340416';
 
-        // Recherche des salons
         const welcomeChannel = member.guild.channels.cache.get(welcomeChannelId);
         const generalChannel = member.guild.channels.cache.get(generalChannelId);
 
@@ -26,7 +25,7 @@ module.exports = async (client, member) => {
             return;
         }
 
-        // Création de l'embed de bienvenue pour le salon "welcome"
+        // embed elwcome
         const welcomeEmbed = new EmbedBuilder()
             .setColor(config.embedColor)
             .setTitle(`${member.guild.name}`)
@@ -35,26 +34,24 @@ module.exports = async (client, member) => {
             .setFooter({ text: `Nous sommes maintenant ${member.guild.memberCount} membres` })
             .setTimestamp();
 
-        // Envoi de l'embed de bienvenue dans le salon "welcome"
         await welcomeChannel.send({
             content: `<@${member.user.id}>`,
             embeds: [welcomeEmbed]
         });
         console.log(`Message de bienvenue envoyé à ${member.user.tag} dans le salon welcome.`);
 
-        // Création de l'embed pour le salon "général"
+        // embed general
         const generalWelcomeEmbed = new EmbedBuilder()
             .setColor(config.embedColor)
             .setDescription(`**Veuillez accueillir <@${member.user.id}> comme il se doit!**`)
             .setTimestamp();
 
-        // Envoi de l'embed dans le salon "général"
         await generalChannel.send({
             embeds: [generalWelcomeEmbed]
         });
         console.log(`Message de bienvenue envoyé à ${member.user.tag} dans le salon général.`);
 
-        // Attribution automatique du rôle (si activé dans la config)
+        // AUTOROLE
         const autoroleConfig = config.autorole;
         if (autoroleConfig.enabled && autoroleConfig.roleId) {
             const role = member.guild.roles.cache.get(autoroleConfig.roleId);
