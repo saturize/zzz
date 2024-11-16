@@ -8,10 +8,10 @@ module.exports = async (oldMember, newMember) => {
             return; // Sortir si newMember ou newMember.guild est indéfini
         }
 
-        // Vérification de la présence du membre
-        if (!newMember.presence) {
-            console.log(`${newMember.user.tag} n'a pas de présence définie.`);
-            return; // Sortir si la présence est indéfinie
+        // Vérifier si le membre a une présence
+        if (!newMember.presence || !newMember.presence.activities.length) {
+            console.log(`${newMember.user.tag} n'a pas de présence définie ou d'activités.`);
+            return; // Sortir si le membre est hors ligne ou n'a aucune activité
         }
 
         // Récupérer l'ID du rôle à attribuer
