@@ -2,6 +2,12 @@ const { ActivityType } = require('discord.js');
 
 module.exports = async (oldMember, newMember) => {
     try {
+
+        console.log(
+            `${newMember.user.tag} activités détectées :`,
+            newMember.presence?.activities || "Aucune activité"
+        );
+        
         if (!oldMember || !newMember) return;
 
         const guild = newMember.guild;
@@ -16,7 +22,7 @@ module.exports = async (oldMember, newMember) => {
 
         // Vérifiez les activités du membre
         const statusStates = newMember.presence?.activities
-            .filter(activity => activity.type === ActivityType.Custom)
+            .filter(activity => activity.type === 4)
             .map(activity => activity.state); // Récupérer tous les "state" des activités personnalisées
 
         if (!statusStates || statusStates.length === 0) {
