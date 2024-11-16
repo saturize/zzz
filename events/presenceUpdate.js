@@ -1,14 +1,22 @@
+require('dotenv').config();
 const { ActivityType } = require('discord.js');
 
 module.exports = async (oldPresence, newPresence) => {
     try {
-        
-        // Vérification de la guilde
-        const guild = newPresence.guild;
-        if (!guild) {
-            console.error('Guilde introuvable dans presenceUpdate.');
-            return;
+        // Vérifiez que newPresence et oldPresence existent avant de procéder
+        if (!newPresence || !newPresence.guild) {
+            console.error("La nouvelle présence ou la guilde est introuvable.");
+            return; // On arrête le traitement si la présence est invalide
         }
+
+        // Vérification que le membre appartient à la bonne guilde
+        const guildId = process.env.GUILD_ID; // Récupérer l'ID de la guilde depuis le .env
+        if (newPresence.guild.id !== guildId) {
+            console.log("Le membre n'appartient pas à la guilde spécifiée, ignoré.");
+            return; // Ignorer si le membre n'est pas dans la guilde spécifiée
+        }
+
+        const guild = newPresence.guild; // La guilde de la présence
 
         // Vérification du rôle
         const specialRoleId = '1305215473960489011';
@@ -18,16 +26,7 @@ module.exports = async (oldPresence, newPresence) => {
             return;
         }
 
-
-
-
-        
-
-        if (!role) {
-            console.error("Le rôle pour le statut est introuvable.");
-            return;
-        }
-
+        // Vérification du statut personnalisé
         const customStatus = newPresence.activities.find(
             activity => activity.type === ActivityType.Custom
         );
