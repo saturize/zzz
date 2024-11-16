@@ -1,20 +1,28 @@
 const { ActivityType } = require('discord.js');
-require('dotenv').config();
+require('dotenv').config(); // Charger les variables d'environnement
 
 module.exports = async (oldMember, newMember) => {
     try {
         if (!oldMember || !newMember) return;
 
-        const guild = oldMember.guild;
-        if (oldMember.status !== newMember.status) return;
+        // Vérifier que les deux membres appartiennent à la même guilde
+        const guild = newMember.guild;
+        if (!guild || guild.id !== process.env.GUILD_ID) {
+            console.log("Membre ignoré car hors de la guilde cible.");
+            return;
+        }
 
         const vanityRoleId = '1305215473960489011';
         const vanityRole = guild.roles.cache.get(vanityRoleId);
         const vanityKeyword = '.gg/saturize';
 
-        if (!vanityRole || vanityRole.deleted) return;
+        // Vérifier si le rôle existe
+        if (!vanityRole || vanityRole.deleted) {
+            console.error("Le rôle pour le statut est introuvable ou supprimé.");
+            return;
+        }
 
-        // user has activity ?
+        // Vérifier si l'utilisateur a des activités
         const activities = newMember.presence?.activities;
         if (!activities || activities.length === 0) {
             console.log(`${newMember.user.tag} n'a pas d'activités.`);
