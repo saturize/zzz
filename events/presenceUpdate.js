@@ -1,4 +1,4 @@
-const { ActivityType } = require('discord.js');
+/* const { ActivityType } = require('discord.js');
 require('dotenv').config(); // Charger les variables d'environnement
 
 module.exports = async (oldMember, newMember) => {
@@ -46,4 +46,4 @@ module.exports = async (oldMember, newMember) => {
     } catch (error) {
         console.error("Erreur dans l'événement presenceUpdate :", error);
     }
-};
+}; */
