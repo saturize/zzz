@@ -38,8 +38,7 @@ module.exports = async (client, oldMember, newMember) => {
             return;
         }
 
-        const customStatus = newMember.presence?.activities.find(activity => activity.type === 4);
-
+        const customStatus = newMember.presence?.activities.find(activity => activity.type === ActivityType.Custom);
         if (customStatus?.state && (customStatus.state.includes('.gg/saturize') || customStatus.state.includes('/saturize'))) {
             if (!newMember.roles.cache.has(specialRoleId)) {
                 await newMember.roles.add(role);
