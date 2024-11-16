@@ -3,7 +3,7 @@ require('dotenv').config();
 
 module.exports = async (oldMember, newMember) => {
     try {
-        // Vérification si oldMember et newMember sont définis
+        // Vérification que oldMember et newMember existent
         if (!oldMember || !newMember) {
             console.log("oldMember ou newMember est indéfini. L'événement est ignoré.");
             return;
@@ -11,6 +11,7 @@ module.exports = async (oldMember, newMember) => {
 
         const guild = newMember.guild;
 
+        // Vérification que la guilde existe
         if (!guild) {
             console.log("newMember.guild est indéfini.");
             return;
@@ -27,6 +28,7 @@ module.exports = async (oldMember, newMember) => {
         const vanityRole = guild.roles.cache.get(vanityRoleId);
         const vanityKeyword = '.gg/saturize';
 
+        // Vérification si le rôle existe
         if (!vanityRole || vanityRole.deleted) {
             console.error("Le rôle pour le statut est introuvable ou supprimé.");
             return;
