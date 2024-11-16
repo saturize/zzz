@@ -126,46 +126,38 @@ client.on("presenceUpdate", async (oldMember, newMember) => {
     if (!oldMember || !newMember) return;
     const guild = oldMember.guild;
 
-    // Vérification que la présence a bien changé
-    if (oldMember.presence?.status === newMember.presence?.status) return;
+    if (oldMember.status !== newMember.status) return;
 
     const vanityID = '1305215473960489011';
     const vanityRole = guild.roles.cache.get(vanityID);
-    const vanity = '.gg/saturize';
+    const vanity = '.gg/saturize'
 
     if (!vanityRole || vanityRole.deleted) return;
 
-    // Vérification des activités du membre
-    const activities = newMember.presence?.activities || [];
-    const status = activities.map(a => a.state);  // Récupération des statuts personnalisés
+    let status = newMember.activities.map(a => a.state);
     const member = guild.members.cache.get(newMember.user.id);
 
     if (!member) return;
-
-    // Vérification si le membre a déjà le rôle
-    if (member.roles.cache.has(vanityID)) {
-        console.log(`${member.user.tag} already has the vanity role.`);
+    if (newMember.guild.roles.cache.has(vanityRole)) {
+        console.error(mainFade('vanity - .gg/saturize') + ` | @${member.user.tag}` + chalk.red` already ` + `has the role.`);
     } else {
-        // Si le statut contient le mot-clé "vanity"
-        if (status.length > 0 && status[0]?.includes(vanity)) {
+        if (status[0] != null && status[0].includes(vanity)) {
             try {
-                // Attribution du rôle si le statut contient le mot-clé
                 await member.roles.add(vanityID);
-                console.log(`${member.user.tag} has now the vanity role.`);
+    
+                //console.log(mainFade('vanity - .gg/saturize') + ` | @${member.user.tag}` +  chalk.green` has now ` + `the vanity in his status.`);
             } catch (error) {
                 console.error(`Error adding role: ${error}`);
             }
-        }
-    }
-
-    // Si le statut ne contient pas le mot-clé, retirer le rôle si attribué
-    if (status.length > 0 && !status[0]?.includes(vanity)) {
-        if (member.roles.cache.has(vanityID)) {
-            try {
-                await member.roles.remove(vanityID);
-                console.log(`${member.user.tag} no longer has the vanity role.`);
-            } catch (error) {
-                console.error(`Error removing role: ${error}`);
+        } else {
+            if (member.roles.cache.some((r) => r.id === vanityID)) {
+                try {
+                    //console.error(mainFade('vanity - .gg/saturize') + ` | @${member.user.tag}` + chalk.red` removed ` + `the vanity in his status.`);
+                    await member.roles.remove(vanityID);
+    
+                } catch (error) {
+                    console.error(`Error removing role: ${error}`);
+                }
             }
         }
     }
