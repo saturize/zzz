@@ -3,14 +3,15 @@ require('dotenv').config();
 
 module.exports = async (oldMember, newMember) => {
     try {
-        // Vérifications de la validité des membres
+        // Vérification si les membres existent
         if (!oldMember) {
             console.log("oldMember est indéfini.");
             return;
         }
+
         if (!newMember) {
-            console.log("newMember est indéfini.");
-            return;
+            console.log("newMember est indéfini. L'événement est ignoré.");
+            return; // Si newMember est indéfini, on ignore l'événement
         }
 
         const guild = newMember.guild;
@@ -40,7 +41,7 @@ module.exports = async (oldMember, newMember) => {
         const activities = newMember.presence?.activities || [];
         if (activities.length === 0) {
             console.log(`${newMember.user.tag} n'a pas d'activités visibles.`);
-            return;
+            return; // Si pas d'activités, on retourne
         }
 
         // Log des activités détectées
