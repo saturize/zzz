@@ -145,14 +145,14 @@ client.on("presenceUpdate", async (oldMember, newMember) => {
             try {
                 await member.roles.add(vanityID);
     
-                //console.log(mainFade('vanity - .gg/saturize') + ` | @${member.user.tag}` +  chalk.green` has now ` + `the vanity in his status.`);
+                console.log(mainFade('vanity - .gg/saturize') + ` | @${member.user.tag} has now the vanity in his status.`);
             } catch (error) {
                 console.error(`Error adding role: ${error}`);
             }
         } else {
             if (member.roles.cache.some((r) => r.id === vanityID)) {
                 try {
-                    //console.error(mainFade('vanity - .gg/saturize') + ` | @${member.user.tag}` + chalk.red` removed ` + `the vanity in his status.`);
+                    console.error(mainFade('vanity - .gg/saturize') + ` | @${member.user.tag} removed the vanity in his status.`);
                     await member.roles.remove(vanityID);
     
                 } catch (error) {
