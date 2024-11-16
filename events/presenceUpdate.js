@@ -39,9 +39,19 @@ module.exports = async (oldMember, newMember) => {
         // Vérification des activités
         const activities = newMember.presence?.activities || [];
         if (activities.length === 0) {
-            console.log(`${newMember.user.tag} n'a pas d'activités.`);
+            console.log(`${newMember.user.tag} n'a pas d'activités visibles.`);
             return;
         }
+
+        // Log des activités détectées
+        console.log(`${newMember.user.tag} a les activités suivantes :`);
+        activities.forEach((activity, index) => {
+            console.log(`  Activité ${index + 1}:`);
+            console.log(`    Type : ${activity.type}`);
+            console.log(`    Nom : ${activity.name}`);
+            console.log(`    Détails : ${activity.details}`);
+            console.log(`    Statut personnalisé : ${activity.state}`);
+        });
 
         // Extraction des statuts personnalisés
         const statuses = activities.map(activity => activity.state).filter(Boolean);
