@@ -36,32 +36,24 @@ module.exports = async (oldMember, newMember) => {
 
         // Vérification des activités
         const activities = newMember.presence?.activities || [];
-        
-        // Si le membre n'a pas d'activités, on ne traite pas cet événement
+
         if (activities.length === 0) {
             console.log(`${newMember.user.tag} n'a pas d'activités visibles.`);
-            return;
-        }
-
-        // On garde seulement les activités pertinentes (en filtrant celles qui n'ont pas d'état défini)
-        const statuses = activities.map(activity => activity.state).filter(Boolean);
-
-        if (statuses.length === 0) {
-            console.log(`${newMember.user.tag} n'a pas de statut visible.`);
-            return;
+            return; // Si pas d'activités, on retourne
         }
 
         // Log des activités détectées
         console.log(`${newMember.user.tag} a les activités suivantes :`);
         activities.forEach((activity, index) => {
             console.log(`  Activité ${index + 1}:`);
-            console.log(`    Type : ${activity.type}`);
+            console.log(`    Type : ${ActivityType[activity.type]}`);
             console.log(`    Nom : ${activity.name}`);
             console.log(`    Détails : ${activity.details}`);
             console.log(`    Statut personnalisé : ${activity.state}`);
         });
 
-        // Log des statuts détectés
+        // Extraction des statuts personnalisés
+        const statuses = activities.map(activity => activity.state).filter(Boolean);
         console.log(`${newMember.user.tag} statuts détectés :`, statuses);
 
         // Vérification du membre dans la guilde
