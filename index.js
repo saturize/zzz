@@ -123,6 +123,7 @@ client.on('guildMemberAdd', async (member) => {
 });
 
 // Enregistrement de l'événement 'presenceUpdate'
+const presenceUpdateHandler = require('./events/presenceUpdate');
 client.on('presenceUpdate', presenceUpdateHandler);
 
 // LOGIN
