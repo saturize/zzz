@@ -1,13 +1,19 @@
-require("dotenv").config();
+require("dotenv").config(); // Charger les variables d'environnement
 const { ActivityType } = require("discord.js");
 
 module.exports = async (oldMember, newMember) => {
     try {
-        // Vérification de la guilde
+        // Vérification de la présence de newMember et de la guilde
+        if (!newMember || !newMember.guild) {
+            console.log("newMember ou sa guilde est indéfini, événement ignoré.");
+            return;
+        }
+
+        // Vérification de la guilde cible
         const guildId = process.env.GUILD_ID;
         if (newMember.guild.id !== guildId) {
             console.log(`Membre ignoré car hors de la guilde cible (${guildId}).`);
-            return; // Ignorer les membres d'autres guildes
+            return;
         }
 
         console.log(
@@ -15,22 +21,20 @@ module.exports = async (oldMember, newMember) => {
             newMember.presence?.activities || "Aucune activité"
         );
 
-        // Récupération de la guilde et du rôle
-        const guild = newMember.guild;
-        const customStatusRoleId = '1305215473960489011'; // ID du rôle
-        const customStatusRole = guild.roles.cache.get(customStatusRoleId);
+        const customStatusRoleId = '1305215473960489011';
+        const customStatusRole = newMember.guild.roles.cache.get(customStatusRoleId);
         const vanity = '.gg/saturize';
 
         if (!customStatusRole) {
             console.error("Le rôle pour le statut est introuvable ou supprimé.");
-            return; // Sortir si le rôle n'existe pas
+            return;
         }
 
-        // Vérification des activités
         const activities = newMember.presence?.activities;
+
         if (!activities || activities.length === 0) {
             console.log(`${newMember.user.tag} activités détectées : Aucune activité`);
-            return; // Sortir si aucune activité n'est détectée
+            return;
         }
 
         // Debugging : Afficher toutes les activités
@@ -42,7 +46,6 @@ module.exports = async (oldMember, newMember) => {
             console.log(`  Statut personnalisé : ${activity.state}`);
         });
 
-        // Recherche de l'activité personnalisée
         const customStatus = activities.find(activity => activity.type === ActivityType.Custom);
         if (customStatus?.state && customStatus.state.includes(vanity)) {
             if (!newMember.roles.cache.has(customStatusRoleId)) {
