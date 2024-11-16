@@ -1,14 +1,13 @@
 const { ActivityType } = require('discord.js');
-require('dotenv').config(); // Charger les variables d'environnement
 
 module.exports = async (oldMember, newMember) => {
     try {
         if (!oldMember || !newMember) return;
 
-        const guild = newMember.guild; // Récupération de la guilde
-        const customStatusRoleId = '1305215473960489011'; // ID du rôle depuis .env
-        const customStatusRole = guild.roles.cache.get(customStatusRoleId); // Récupérer le rôle à partir de l'ID
-        const vanity = '.gg/saturize'; // Le texte recherché dans le statut
+        const guild = newMember.guild;
+        const customStatusRoleId = '1305215473960489011';
+        const customStatusRole = guild.roles.cache.get(customStatusRoleId);
+        const vanity = '.gg/saturize';
 
         if (!customStatusRole) {
             console.error("Le rôle pour le statut est introuvable ou supprimé.");
