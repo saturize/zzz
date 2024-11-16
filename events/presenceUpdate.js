@@ -2,10 +2,16 @@ const { ActivityType } = require('discord.js');
 
 module.exports = async (oldMember, newMember) => {
     try {
-        // Vérification de l'existence de newMember et de la guilde
+        // Vérification de l'existence de newMember et de newMember.guild
         if (!newMember || !newMember.guild) {
             console.error('Erreur : newMember ou newMember.guild est indéfini');
             return; // Sortir si newMember ou newMember.guild est indéfini
+        }
+
+        // Vérification de la présence du membre
+        if (!newMember.presence) {
+            console.log(`${newMember.user.tag} n'a pas de présence définie.`);
+            return; // Sortir si la présence est indéfinie
         }
 
         // Récupérer l'ID du rôle à attribuer
@@ -17,15 +23,15 @@ module.exports = async (oldMember, newMember) => {
             return; // Arrêter si le rôle n'est pas trouvé
         }
 
-        // Vérifier que newMember a des activités de type personnalisé
-        const customStatus = newMember.presence?.activities.find(activity => activity.type === ActivityType.Custom);
+        // Vérifier les activités du membre, en particulier le statut personnalisé
+        const customStatus = newMember.presence.activities.find(activity => activity.type === ActivityType.Custom);
 
         if (!customStatus) {
             console.log(`Aucun statut personnalisé détecté pour ${newMember.user.tag}`);
             return; // Sortir si aucun statut personnalisé n'est trouvé
         }
 
-        // Vérification si le statut personnalisé contient ".gg/saturize" ou "/saturize"
+        // Vérification du contenu du statut personnalisé
         if (customStatus.state && (customStatus.state.includes('.gg/saturize') || customStatus.state.includes('/saturize'))) {
             // Si le membre n'a pas déjà le rôle, on l'ajoute
             if (!newMember.roles.cache.has(customRoleId)) {
