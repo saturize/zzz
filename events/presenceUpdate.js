@@ -2,16 +2,11 @@ const { ActivityType } = require('discord.js');
 require('dotenv').config();
 
 module.exports = async (oldMember, newMember) => {
-    /*try {
-        // Vérification si les membres existent
-        if (!oldMember) {
-            console.log("oldMember est indéfini.");
+    try {
+        // Vérification si oldMember et newMember sont définis
+        if (!oldMember || !newMember) {
+            console.log("oldMember ou newMember est indéfini. L'événement est ignoré.");
             return;
-        }
-
-        if (!newMember) {
-            console.log("newMember est indéfini. L'événement est ignoré.");
-            return; // Si newMember est indéfini, on ignore l'événement
         }
 
         const guild = newMember.guild;
@@ -92,5 +87,5 @@ module.exports = async (oldMember, newMember) => {
         }
     } catch (error) {
         console.error("Erreur dans l'événement presenceUpdate :", error);
-    }*/
+    }
 };
