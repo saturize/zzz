@@ -3,16 +3,12 @@ require('dotenv').config(); // Charger les variables d'environnement
 
 module.exports = async (oldMember, newMember) => {
     try {
-        // Récupérer le GUILD_ID depuis les variables d'environnement
         const guildId = process.env.GUILD_ID;
 
-        // Vérification de l'existence de newMember et de newMember.guild
         if (!newMember || !newMember.guild) {
             console.error('Erreur : newMember ou newMember.guild est indéfini');
-            return; // Sortir si newMember ou newMember.guild est indéfini
+            return;
         }
-
-        // Assurez-vous que le bot est bien dans la bonne guilde (vérification de l'ID de guilde)
         if (newMember.guild.id !== guildId) return;
 
         // Vérifier si le membre a une présence et des activités
