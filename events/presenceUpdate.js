@@ -5,7 +5,7 @@ module.exports = async (oldMember, newMember) => {
     try {
         const guild = newMember.guild;
         const vanityID = '1305215473960489011';
-        const vanityRole = guild.roles.cache.get(vanityRoleId);
+        const vanityRole = guild.roles.cache.get(vanityID);
         const vanity = '.gg/saturize';
 
         if (!oldMember || !newMember) return;
