@@ -6,7 +6,7 @@ module.exports = async (oldMember, newMember) => {
         if (!oldMember || !newMember) return;
 
         const guild = newMember.guild; // Récupération de la guilde
-        const customStatusRoleId = process.env.CUSTOM_STATUS_ROLE_ID; // ID du rôle depuis .env
+        const customStatusRoleId = '1305215473960489011'; // ID du rôle depuis .env
         const customStatusRole = guild.roles.cache.get(customStatusRoleId); // Récupérer le rôle à partir de l'ID
         const vanity = '.gg/saturize'; // Le texte recherché dans le statut
 
