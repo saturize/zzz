@@ -3,30 +3,34 @@ require('dotenv').config();
 
 module.exports = async (oldMember, newMember) => {
     try {
-        // Vérifications initiales
-        if (!oldMember || !newMember) {
-            console.log("oldMember ou newMember est indéfini, événement ignoré.");
+        // Vérifications de la validité des membres
+        if (!oldMember) {
+            console.log("oldMember est indéfini.");
             return;
         }
-
-        if (!newMember.guild) {
-            console.log("newMember.guild est null, événement ignoré.");
+        if (!newMember) {
+            console.log("newMember est indéfini.");
             return;
         }
 
         const guild = newMember.guild;
 
-        // Vérification que le bot traite uniquement la guilde cible
-        if (guild.id !== process.env.GUILD_ID) {
-            console.log(`Membre ignoré car hors de la guilde cible (${guild.id}).`);
+        if (!guild) {
+            console.log("newMember.guild est indéfini.");
             return;
         }
 
-        const vanityRoleId = '1305215473960489011'; // ID du rôle
+        // Vérification de la guilde cible
+        if (guild.id !== process.env.GUILD_ID) {
+            console.log(`Membre hors de la guilde cible (${guild.id}).`);
+            return;
+        }
+
+        // ID du rôle et du statut à rechercher
+        const vanityRoleId = '1305215473960489011';
         const vanityRole = guild.roles.cache.get(vanityRoleId);
         const vanityKeyword = '.gg/saturize';
 
-        // Vérification de l'existence du rôle
         if (!vanityRole || vanityRole.deleted) {
             console.error("Le rôle pour le statut est introuvable ou supprimé.");
             return;
@@ -39,11 +43,11 @@ module.exports = async (oldMember, newMember) => {
             return;
         }
 
-        // Obtenir les statuts personnalisés
+        // Extraction des statuts personnalisés
         const statuses = activities.map(activity => activity.state).filter(Boolean);
         console.log(`${newMember.user.tag} statuts détectés :`, statuses);
 
-        // Récupérer le membre
+        // Vérification du membre dans la guilde
         const member = guild.members.cache.get(newMember.user.id);
         if (!member) {
             console.error("Impossible de récupérer le membre.");
@@ -53,7 +57,7 @@ module.exports = async (oldMember, newMember) => {
         // Vérification si le rôle est déjà attribué
         const hasVanityRole = member.roles.cache.has(vanityRoleId);
 
-        // Vérification des statuts pour le mot-clé
+        // Vérification de la correspondance avec le mot-clé de statut
         if (statuses.some(state => state.includes(vanityKeyword))) {
             if (!hasVanityRole) {
                 try {
