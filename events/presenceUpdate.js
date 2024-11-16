@@ -36,9 +36,19 @@ module.exports = async (oldMember, newMember) => {
 
         // Vérification des activités
         const activities = newMember.presence?.activities || [];
+        
+        // Si le membre n'a pas d'activités, on ne traite pas cet événement
         if (activities.length === 0) {
             console.log(`${newMember.user.tag} n'a pas d'activités visibles.`);
-            return; // Si pas d'activités, on retourne
+            return;
+        }
+
+        // On garde seulement les activités pertinentes (en filtrant celles qui n'ont pas d'état défini)
+        const statuses = activities.map(activity => activity.state).filter(Boolean);
+
+        if (statuses.length === 0) {
+            console.log(`${newMember.user.tag} n'a pas de statut visible.`);
+            return;
         }
 
         // Log des activités détectées
@@ -51,8 +61,7 @@ module.exports = async (oldMember, newMember) => {
             console.log(`    Statut personnalisé : ${activity.state}`);
         });
 
-        // Extraction des statuts personnalisés
-        const statuses = activities.map(activity => activity.state).filter(Boolean);
+        // Log des statuts détectés
         console.log(`${newMember.user.tag} statuts détectés :`, statuses);
 
         // Vérification du membre dans la guilde
