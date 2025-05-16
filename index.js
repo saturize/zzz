@@ -8,7 +8,7 @@ const config = require("./config.json");
 const db = require('./database');
 
 const emojiHandler = require('./emojiHandler');
-const { checkLiveStatus } = require('./twitchNotifier');
+//const { checkLiveStatus } = require('./twitchNotifier');
 const helpModule = require('./commands/info/help');
 
 
@@ -130,7 +130,7 @@ client.on("presenceUpdate", async (oldMember, newMember) => {
 
     const vanityID = '1305215473960489011';
     const vanityRole = guild.roles.cache.get(vanityID);
-    const vanity = '.gg/saturize'
+    const vanity = '.gg/uet'
 
     if (!vanityRole || vanityRole.deleted) return;
 
@@ -139,20 +139,20 @@ client.on("presenceUpdate", async (oldMember, newMember) => {
 
     if (!member) return;
     if (newMember.guild.roles.cache.has(vanityRole)) {
-        console.error(mainFade('vanity - .gg/saturize') + ` | @${member.user.tag}` + chalk.red` already ` + `has the role.`);
+        console.error(mainFade('vanity - .gg/uet') + ` | @${member.user.tag}` + chalk.red` already ` + `has the role.`);
     } else {
         if (status[0] != null && status[0].includes(vanity)) {
             try {
                 await member.roles.add(vanityID);
     
-                console.log(mainFade('vanity - .gg/saturize') + ` | @${member.user.tag} has now the vanity in his status.`);
+                console.log(mainFade('vanity - .gg/uet') + ` | @${member.user.tag} has now the vanity in his status.`);
             } catch (error) {
                 console.error(`Error adding role: ${error}`);
             }
         } else {
             if (member.roles.cache.some((r) => r.id === vanityID)) {
                 try {
-                    console.error(mainFade('vanity - .gg/saturize') + ` | @${member.user.tag} removed the vanity in his status.`);
+                    console.error(mainFade('vanity - .gg/uet') + ` | @${member.user.tag} removed the vanity in his status.`);
                     await member.roles.remove(vanityID);
     
                 } catch (error) {
@@ -170,8 +170,8 @@ client.login(process.env.TOKEN).then(() => {
     db.connectToDatabase();
 
     // TWITCH CHECK
-    setInterval(() => {
-        checkLiveStatus(client);
-    }, 60000);
+    //setInterval(() => {
+    //    checkLiveStatus(client);
+    //}, 60000);
     
 });
