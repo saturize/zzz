@@ -1,5 +1,4 @@
 require('dotenv').config();
-require("./config.json");
 
 const { Client, GatewayIntentBits, Collection } = require('discord.js');
 const fs = require("fs");
@@ -10,8 +9,6 @@ const db = require('./database');
 const emojiHandler = require('./emojiHandler');
 //const { checkLiveStatus } = require('./twitchNotifier');
 const helpModule = require('./commands/info/help');
-
-
 
 const client = new Client({
     intents: [
