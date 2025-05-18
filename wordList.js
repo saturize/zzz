@@ -17,19 +17,40 @@ function loadAdjectivesList() {
       try {
         const adjObj = JSON.parse(line);
         
-        // WORD
         if (adjObj.pos === "adj" && adjObj.word) {
-          // SINGLE ONLY
-          const isSingular = true;
+        
+            // PLURAL ??
+          let isPlural = false;
           
-          if (adjObj.forms && Array.isArray(adjObj.forms)) {
-            const mainForm = adjObj.forms.find(form => form.form === adjObj.word);
-            if (mainForm && mainForm.tags && mainForm.tags.includes("plural")) {
-              continue;
+          if (adjObj.senses && Array.isArray(adjObj.senses)) {
+            for (const sense of adjObj.senses) {
+              if (
+                (sense.tags && sense.tags.includes("plural")) || 
+                (sense.glosses && sense.glosses.some(gloss => gloss.includes("plural of")))
+              ) {
+                isPlural = true;
+                break;
+              }
             }
           }
           
-          adjectivesList.push(adjObj.word);
+          if (
+            adjObj.word.includes("pluriel") || 
+            adjObj.word.includes("pluraux") || 
+            (adjObj.head_templates && adjObj.head_templates.some(
+              template => template.expansion && (
+                template.expansion.includes("plural") || 
+                template.expansion.includes("pluriel") || 
+                template.expansion.includes("pluraux")
+              )
+            ))
+          ) {
+            isPlural = true;
+          }
+          
+          if (!isPlural) {
+            adjectivesList.push(adjObj.word);
+          }
         }
       } catch (parseError) {
         console.error('Erreur lors du parsing d\'une ligne JSON:', parseError);
