@@ -12,20 +12,14 @@ function loadAdjectivesList() {
       try {
         const adjObj = JSON.parse(line);
 
-        const hasFormOf = adjObj.senses?.some(sense => sense.tags?.includes("form-of"));
-        if (hasFormOf) continue;
+        if (!adjObj.word) continue;
 
-        // IGNORE PLURAL
-        const isPlural =
-          adjObj.senses?.some(sense =>
-            sense.tags?.includes("plural") ||
-            sense.glosses?.some(gloss => gloss.toLowerCase().includes("plural of"))
-          ) ||
-          adjObj.word.endsWith("s");
+        const word = adjObj.word.trim();
 
-        if (isPlural) continue;
+        // NO PLURAL
+        if (word.endsWith('s')) continue;
 
-        adjectivesList.add(adjObj.word);
+        adjectivesList.add(word);
 
       } catch (err) {
         console.error('Erreur parsing ligne JSON:', err);
@@ -33,14 +27,12 @@ function loadAdjectivesList() {
     }
 
     const finalList = Array.from(adjectivesList);
-    console.log(`✔️ ${finalList.length} adjectifs singuliers chargés`);
+    console.log(`✔️ ${finalList.length} adjectifs singuliers sans 's' finaux`);
     return finalList;
 
   } catch (error) {
-    console.error('Erreur chargement fichier adjectifs:', error);
-    return [
-      "belle", "motivé", "gentille", "sombre", "énergique"
-    ];
+    console.error('Erreur chargement adjectifs:', error);
+    return ["motivé", "créative", "gentille"];
   }
 }
 
