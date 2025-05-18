@@ -1,9 +1,20 @@
-// Importer la liste des adjectifs
 const adjectives = require('../wordList');
 
 module.exports = (client, message) => {
   // IGNORE BOTS
   if (message.author.bot) return;
+
+  // SINGE
+    if (content.includes('singe')) {
+    try {
+      const filePath = path.join(__dirname, '../ressources/singe.jpg');
+      message.channel.send({
+        files: [filePath]
+      });
+    } catch (error) {
+      console.error('Erreur en envoyant l\'image du singe:', error);
+    }
+  }
 
   // JEUNE ET ...
   const content = message.content.toLowerCase();
