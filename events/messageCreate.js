@@ -5,12 +5,16 @@ module.exports = (client, message) => {
   if (message.author.bot) return;
 
   // SINGE
-    if (content.includes('singe')) {
+  if (content.includes('singe')) {
     try {
       const filePath = path.join(__dirname, '../ressources/singe.jpg');
-      message.channel.send({
-        files: [filePath]
-      });
+      
+      if (fs.existsSync(filePath)) {
+        message.channel.send({ files: [filePath] });
+      } else {
+        console.warn('Image non trouvée :', filePath);
+      }
+      
     } catch (error) {
       console.error('Erreur en envoyant l\'image du singe:', error);
     }
