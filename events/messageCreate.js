@@ -4,6 +4,8 @@ module.exports = (client, message) => {
   // IGNORE BOTS
   if (message.author.bot) return;
 
+const content = message.content.toLowerCase();
+
   // SINGE
   if (content.includes('singe')) {
     try {
@@ -21,7 +23,6 @@ module.exports = (client, message) => {
   }
 
   // JEUNE ET ...
-  const content = message.content.toLowerCase();
   if (content.includes('jeune')) {
     try {
       const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];
@@ -33,7 +34,8 @@ module.exports = (client, message) => {
     }
   }
 
-  // IGNORE MSG NOT STARTING W PREFIX
+
+// IGNORE MSG NOT STARTING W PREFIX
   if (message.content.indexOf(client.config.prefix) !== 0) return;
 
   // STANDARD COMMAND
