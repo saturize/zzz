@@ -4,70 +4,45 @@ const path = require('path');
 function loadAdjectivesList() {
   try {
     const filePath = path.join(__dirname, 'ressources', 'kaikki.org-dictionary-French-by-pos-adj.jsonl');
-    
-    // LECTURE
     const fileContent = fs.readFileSync(filePath, 'utf8');
-    
-    // PARSING LIGNE
     const lines = fileContent.trim().split('\n');
-    const adjectivesList = [];
-    
-    // PARSING
+    const adjectivesList = new Set();
+
     for (const line of lines) {
       try {
         const adjObj = JSON.parse(line);
-        
-        if (adjObj.pos === "adj" && adjObj.word) {
-        
-            // PLURAL ??
-          let isPlural = false;
-          
-          if (adjObj.senses && Array.isArray(adjObj.senses)) {
-            for (const sense of adjObj.senses) {
-              if (
-                (sense.tags && sense.tags.includes("plural")) || 
-                (sense.glosses && sense.glosses.some(gloss => gloss.includes("plural of")))
-              ) {
-                isPlural = true;
-                break;
-              }
-            }
-          }
-          
-          if (
-            adjObj.word.includes("pluriel") || 
-            adjObj.word.includes("pluraux") || 
-            (adjObj.head_templates && adjObj.head_templates.some(
-              template => template.expansion && (
-                template.expansion.includes("plural") || 
-                template.expansion.includes("pluriel") || 
-                template.expansion.includes("pluraux")
-              )
-            ))
-          ) {
-            isPlural = true;
-          }
-          
-          if (!isPlural) {
-            adjectivesList.push(adjObj.word);
-          }
-        }
-      } catch (parseError) {
-        console.error('Erreur lors du parsing d\'une ligne JSON:', parseError);
+
+        const hasFormOf = adjObj.senses?.some(sense => sense.tags?.includes("form-of"));
+        if (hasFormOf) continue;
+
+        // IGNORE PLURAL
+        const isPlural =
+          adjObj.senses?.some(sense =>
+            sense.tags?.includes("plural") ||
+            sense.glosses?.some(gloss => gloss.toLowerCase().includes("plural of"))
+          ) ||
+          adjObj.word.endsWith("s");
+
+        if (isPlural) continue;
+
+        adjectivesList.add(adjObj.word);
+
+      } catch (err) {
+        console.error('Erreur parsing ligne JSON:', err);
       }
     }
-    
-    console.log(`Chargement réussi de ${adjectivesList.length} adjectifs (uniquement singulier)`);
-    return adjectivesList;
+
+    const finalList = Array.from(adjectivesList);
+    console.log(`✔️ ${finalList.length} adjectifs singuliers chargés`);
+    return finalList;
+
   } catch (error) {
-    console.error('Erreur lors du chargement des adjectifs:', error);
+    console.error('Erreur chargement fichier adjectifs:', error);
     return [
-      "motivé", "dynamique", "innovant", "créatif", "ambitieux", 
-      "énergique", "talentueux", "passionné", "entreprenant", "déterminé"
+      "belle", "motivé", "gentille", "sombre", "énergique"
     ];
   }
 }
 
 const adjectives = loadAdjectivesList();
-
 module.exports = adjectives;
