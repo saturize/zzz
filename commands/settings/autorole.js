@@ -9,7 +9,7 @@ module.exports = {
     description: 'Gère les paramètres d\'auto-rôle',
     run: async (client, message, args) => {
         // VERIFY PERM
-        if (config.ownerIDs.includes(message.author.id)) {
+        if (!config.ownerIDs.includes(message.author.id)) {
             return message.reply('Vous n\'avez pas la permission d\'utiliser cette commande.');
         }
 

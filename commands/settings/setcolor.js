@@ -6,7 +6,7 @@ exports.run = async (client, message, args) => {
     const { approve, decline, warning } = client.customEmojis;
 
     // VERIFY PERM
-    if (config.ownerIDs.includes(message.author.id)) {
+    if (!config.ownerIDs.includes(message.author.id)) {
         return message.reply(`${decline} Vous n'avez pas la permission de changer la couleur d'embed.`);
     }
 
