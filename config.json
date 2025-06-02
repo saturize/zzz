@@ -3,7 +3,7 @@
   "start": "node index.js"
   },
   "prefix": ".",
-  "ownerID": "1272945881603244163",
+  "ownerIDs": ["1272945881603244163", "1175244679172866142"],
   "embedColor": "#FFFFFF",
   "autorole": {
     "enabled": false,

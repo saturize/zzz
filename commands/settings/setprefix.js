@@ -5,7 +5,7 @@ exports.run = async (client, message, args) => {
     const { approve, decline, warning } = client.customEmojis;
 
     // VERIFY PERM
-    if (message.author.id !== client.config.ownerID) return message.reply(`${decline} Vous n\'avez pas la permission d\'utiliser cette commande.`);
+    if (config.ownerIDs.includes(message.author.id)) return message.reply(`${decline} Vous n\'avez pas la permission d\'utiliser cette commande.`);
 
     const newPrefix = args[0];
     if (!newPrefix) return message.reply(`${warning} Veuillez fournir un nouveau préfixe.`);
