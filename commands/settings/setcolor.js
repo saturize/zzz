@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const config = require('../config.json');
 
 exports.run = async (client, message, args) => {
 

@@ -1,4 +1,5 @@
 const fs = require('fs');
+const config = require('../config.json');
 
 exports.run = async (client, message, args) => {
     
@@ -8,7 +9,7 @@ exports.run = async (client, message, args) => {
     if (!config.ownerIDs.includes(message.author.id)) {
         return message.reply(`${decline} Vous n'avez pas la permission d'utiliser cette commande.`);
     }
-    
+
     const newPrefix = args[0];
     if (!newPrefix) return message.reply(`${warning} Veuillez fournir un nouveau préfixe.`);
 
