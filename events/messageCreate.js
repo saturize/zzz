@@ -2,11 +2,8 @@ const path = require('path');
 const fs = require('fs');
 const adjectives = require('../wordList');
 
-module.exports = async (client, message) => {
-  // IGNORE BOTS
-  if (message.author.bot) return;
-
-  // BOOST SYSTEM MESSAGE
+module.exports = async (client,message) => {
+    // BOOST SYSTEM MESSAGE
       const boostTypes = [
     MessageType.GuildBoost,
     MessageType.GuildBoostTier1,
@@ -31,8 +28,12 @@ module.exports = async (client, message) => {
 
     console.log(`${message.author.tag} a boosté le serveur.`);
   }
+}
 
 
+module.exports = (client, message) => {
+  // IGNORE BOTS
+  if (message.author.bot) return;
 
   const content = message.content.toLowerCase();
 
