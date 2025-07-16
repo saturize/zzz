@@ -59,12 +59,12 @@ module.exports = {
             .setColor(config.embedColor)
             .setDescription(`
                 ${help} **help**\n\n
-                ${defragment} **catégories :**\n
-                ${laptop} \`modération\` | *ban, kick, clear...*\n
-                ${template_empty} \`info\` | *serverinfo, userinfo, avatar...*\n
-                ${joystick} \`fun\` | *poll, rate, snipe...*\n
+                ${category} **catégories :**\n
+                ${moderation} \`modération\` | *ban, kick, clear...*\n
+                ${info} \`info\` | *serverinfo, userinfo, avatar...*\n
+                ${fun} \`fun\` | *poll, rate, snipe...*\n
                 ${interact} \`interactions\` | *hug, kiss, slap...*\n
-                ${key_padlock} \`settings\` | *admin only commands.*\n\n
+                ${settings} \`settings\` | *admin only commands.*\n\n
             `)
             .setFooter({
                 text: message.member.displayName,
