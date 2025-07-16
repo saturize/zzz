@@ -5,12 +5,12 @@ const config = require(configPath);
 
 module.exports = async (client, member) => {
     try {
+        
         // WELCOME
         console.log(`Nouvel utilisateur: ${member.user.tag} a rejoint le serveur ${member.guild.name}`);
 
-        const welcomeChannelId = '1302408288738213898'; // welcome
-        const generalChannelId = '1302407890899963914'; // général
-        const rolesChannelLink = 'https://discord.com/channels/1284920847441858703/1305170147505340416';
+        const welcomeChannelId = '1381770068555337818'; // welcome
+        const generalChannelId = '1381758032022601780'; // général
 
         const welcomeChannel = member.guild.channels.cache.get(welcomeChannelId);
         const generalChannel = member.guild.channels.cache.get(generalChannelId);
@@ -25,11 +25,11 @@ module.exports = async (client, member) => {
             return;
         }
 
-        // embed elwcome
+        // embed welcome
         const welcomeEmbed = new EmbedBuilder()
             .setColor(config.embedColor)
             .setTitle(`${member.guild.name}`)
-            .setDescription(`Coucou <@${member.user.id}> ! Bienvenue à toi.  \n- Nous t'invitons à aller choisir tes rôles dans ${rolesChannelLink} si besoin.`)
+            .setDescription(`Coucou <@${member.user.id}> ! Bienvenue à toi.  \n- Hésite pas à venir sur Twitch :3`)
             .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
             .setFooter({ text: `Nous sommes maintenant ${member.guild.memberCount} membres` })
             .setTimestamp();

@@ -2,11 +2,39 @@ const path = require('path');
 const fs = require('fs');
 const adjectives = require('../wordList');
 
-module.exports = (client, message) => {
+module.exports = async (client, message) => {
   // IGNORE BOTS
   if (message.author.bot) return;
 
-const content = message.content.toLowerCase();
+  // BOOST SYSTEM MESSAGE
+      const boostTypes = [
+    MessageType.GuildBoost,
+    MessageType.GuildBoostTier1,
+    MessageType.GuildBoostTier2,
+    MessageType.GuildBoostTier3
+  ];
+
+  if (boostTypes.includes(message.type)) {
+      const boostCount = message.guild.premiumSubscriptionCount;
+      const boostLevel = message.guild.premiumTier;
+    const embed = new EmbedBuilder()
+      .setColor(client.config.embed?.color || '#f47fff')
+      .setDescription(`
+        Merci ${message.author} d'avoir boosté le serveur !
+        Nous somme maintenant à **${boostCount} boosts**, le serveur est niveau **${boostLevel}**.
+      `);
+
+    await message.channel.send({
+      content: `${message.author}`,
+      embeds: [embed]
+    });
+
+    console.log(`${message.author.tag} a boosté le serveur.`);
+  }
+
+
+
+  const content = message.content.toLowerCase();
 
   // SINGE
   if (content.includes('singe')) {
