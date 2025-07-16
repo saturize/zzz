@@ -16,7 +16,7 @@ module.exports = async (client,message) => {
       const boostCount = message.guild.premiumSubscriptionCount;
       const boostLevel = message.guild.premiumTier;
     const embed = new EmbedBuilder()
-      .setColor(client.config.embed?.color || '#f47fff')
+      .setColor('#f47fff')
       .setDescription(`
         Merci ${message.author} d'avoir boosté le serveur !
         Nous sommes maintenant à **${boostCount} boosts**, le serveur est niveau **${boostLevel}**.
