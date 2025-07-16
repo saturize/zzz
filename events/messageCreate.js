@@ -1,9 +1,10 @@
 const path = require('path');
 const fs = require('fs');
 const adjectives = require('../wordList');
+const { EmbedBuilder, MessageType } = require('discord.js');
 
 module.exports = async (client,message) => {
-    // BOOST SYSTEM MESSAGE
+  // BOOST
       const boostTypes = [
     MessageType.GuildBoost,
     MessageType.GuildBoostTier1,
@@ -18,7 +19,7 @@ module.exports = async (client,message) => {
       .setColor(client.config.embed?.color || '#f47fff')
       .setDescription(`
         Merci ${message.author} d'avoir boosté le serveur !
-        Nous somme maintenant à **${boostCount} boosts**, le serveur est niveau **${boostLevel}**.
+        Nous sommes maintenant à **${boostCount} boosts**, le serveur est niveau **${boostLevel}**.
       `);
 
     await message.channel.send({
