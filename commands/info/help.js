@@ -75,7 +75,7 @@ const row3 = new ActionRowBuilder()
                 ${joystick} \`fun\` | *poll, rate, snipe...*\n
                 ${interact} \`interactions\` | *hug, kiss, slap...*\n
                 ${settings} \`settings\` | *admin only commands.*\n
-                ${settings} \`stream\` | *live, setup, planning...*\n\n
+                ${twitch} \`stream\` | *live, setup, planning...*\n\n
             `)
             .setFooter({
                 text: message.member.displayName,
