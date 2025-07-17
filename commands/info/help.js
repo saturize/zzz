@@ -136,7 +136,7 @@ module.exports = {
                 .setColor(config.embedColor)
                 .setDescription(`
                     <:help:1394845035241148598>  **help**\n\n
-                    <:filesopenwsheet:1302714227068240053>  **catégories :**\n
+                    <:regedit:1395194047676547113>  **catégories :**\n
                     <:accessibility_key:1394845540465901659> \`modération\` | *ban, kick, clear...*\n
                     <:notepad_file:1394838818506674246> \`info\` | *serverinfo, userinfo, avatar...*\n
                     <:joystick:1394844617928740925> \`fun\` | *poll, rate, snipe...*\n
