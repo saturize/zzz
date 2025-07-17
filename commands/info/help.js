@@ -27,23 +27,23 @@ module.exports = {
                 new ButtonBuilder()
                     .setStyle(ButtonStyle.Secondary)
                     .setCustomId('mod')
-                    .setEmoji('<:moderation:1303136513214648450>'),
+                    .setEmoji('<:accessibility_key:1394845540465901659>'),
                 new ButtonBuilder()
                     .setStyle(ButtonStyle.Secondary)
                     .setCustomId('info')
-                    .setEmoji('<:notepad_file:1394838818506674246> '),
+                    .setEmoji('<:notepad_file:1394838818506674246>'),
                 new ButtonBuilder()
                     .setStyle(ButtonStyle.Secondary)
                     .setCustomId('fun')
-                    .setEmoji('<:joystick:1303136478481879147>'),
+                    .setEmoji('<:joystick:1394844617928740925>'),
                 new ButtonBuilder()
                     .setStyle(ButtonStyle.Secondary)
                     .setCustomId('interactions')
-                    .setEmoji('<:interact:1303136470026031104>'),
+                    .setEmoji('<:interact:1395196085181350059>'),
                 new ButtonBuilder()
                     .setStyle(ButtonStyle.Secondary)
                     .setCustomId('settings')
-                    .setEmoji('<:settings:1303136510488481823>')
+                    .setEmoji('<:settings:1395193663889473659>')
             );
 
         const row2 = new ActionRowBuilder()
@@ -51,7 +51,7 @@ module.exports = {
                 new ButtonBuilder()
                     .setStyle(ButtonStyle.Secondary)
                     .setCustomId('helpEmbed')
-                    .setEmoji('<:help:1303136456109457439>')
+                    .setEmoji('<:help:1394845035241148598>')
             );
 
         const helpEmbed = new EmbedBuilder()
@@ -87,7 +87,7 @@ module.exports = {
 
         const embedMap = {
             mod: new EmbedBuilder()
-                .setTitle("<:moderation:1302696364270026853> modération")
+                .setTitle("<:accessibility_key:1394845540465901659> modération")
                 .setColor(config.embedColor)
                 .setDescription(
                     moderationCommands.length > 0 
@@ -96,7 +96,7 @@ module.exports = {
                 ),
             
             info: new EmbedBuilder()
-                .setTitle("<:info:1302694232879796265> informations")
+                .setTitle("<:notepad_file:1394838818506674246> informations")
                 .setColor(config.embedColor)
                 .setDescription(
                     infoCommands.length > 0 
@@ -105,7 +105,7 @@ module.exports = {
                 ),
             
             fun: new EmbedBuilder()
-                .setTitle("<:fun:1302695666182520874> fun")
+                .setTitle("<:joystick:1394844617928740925> fun")
                 .setColor(config.embedColor)
                 .setDescription(
                     funCommands.length > 0 
@@ -114,7 +114,7 @@ module.exports = {
                 ),
             
             interactions: new EmbedBuilder()
-                .setTitle("<:interact:1302695110408011776> interactions")
+                .setTitle("<:interact:1395196085181350059> interactions")
                 .setColor(config.embedColor)
                 .setDescription(
                     interactCommands.length > 0 
@@ -123,7 +123,7 @@ module.exports = {
                 ),
             
             settings: new EmbedBuilder()
-                .setTitle("<:settings:1302714616958418995> settings")
+                .setTitle("<:settings:1395193663889473659> settings")
                 .setColor(config.embedColor)
                 .setDescription(
                     settingsCommands.length > 0 
@@ -135,13 +135,13 @@ module.exports = {
                 .setTitle(".gg/saturize")
                 .setColor(config.embedColor)
                 .setDescription(`
-                    <:help:1302718126831570964>  **help**\n\n
+                    <:help:1394845035241148598>  **help**\n\n
                     <:filesopenwsheet:1302714227068240053>  **catégories :**\n
-                    <:moderation:1302696364270026853> \`modération\` | *ban, kick, clear...*\n
-                    <:info:1302694232879796265> \`info\` | *serverinfo, userinfo, avatar...*\n
-                    <:fun:1302695666182520874> \`fun\` | *poll, rate, snipe...*\n
-                    <:interact:1302695110408011776> \`interactions\` | *hug, kiss, slap...*\n
-                    <:settings:1302714616958418995> \`settings\` | *admin only commands.*\n\n
+                    <:accessibility_key:1394845540465901659> \`modération\` | *ban, kick, clear...*\n
+                    <:notepad_file:1394838818506674246> \`info\` | *serverinfo, userinfo, avatar...*\n
+                    <:joystick:1394844617928740925> \`fun\` | *poll, rate, snipe...*\n
+                    <:interact:1395196085181350059> \`interactions\` | *hug, kiss, slap...*\n
+                    <:settings:1395193663889473659> \`settings\` | *admin only commands.*\n\n
                 `)
         };
 
@@ -152,23 +152,23 @@ module.exports = {
                 new ButtonBuilder()
                     .setStyle(ButtonStyle.Secondary)
                     .setCustomId('mod')
-                    .setEmoji('<:moderation:1302696364270026853>'),
+                    .setEmoji('<:accessibility_key:1394845540465901659>'),
                 new ButtonBuilder()
                     .setStyle(ButtonStyle.Secondary)
                     .setCustomId('info')
-                    .setEmoji('<:info:1302694232879796265>'),
+                    .setEmoji('<:notepad_file:1394838818506674246>'),
                 new ButtonBuilder()
                     .setStyle(ButtonStyle.Secondary)
                     .setCustomId('fun')
-                    .setEmoji('<:fun:1302695666182520874>'),
+                    .setEmoji('<:joystick:1394844617928740925>'),
                 new ButtonBuilder()
                     .setStyle(ButtonStyle.Secondary)
                     .setCustomId('interactions')
-                    .setEmoji('<:interact:1302695110408011776>'),
+                    .setEmoji('<:interact:1395196085181350059>'),
                 new ButtonBuilder()
                     .setStyle(ButtonStyle.Secondary)
                     .setCustomId('settings')
-                    .setEmoji('<:settings:1302714616958418995>')
+                    .setEmoji('<:settings:1395193663889473659>')
             );
 
         const row2 = new ActionRowBuilder()
@@ -176,7 +176,7 @@ module.exports = {
                 new ButtonBuilder()
                     .setStyle(ButtonStyle.Secondary)
                     .setCustomId('helpEmbed')
-                    .setEmoji('<:help:1302718126831570964>')
+                    .setEmoji('<:help:1394845035241148598>')
             );
 
         if (selectedEmbed) {
