@@ -20,7 +20,7 @@ module.exports = {
 
     run: async (client, message, args) => {
 
-        const { accessibility_key, notepad_file, joystick, interact, settings, help, regedit } = client.customEmojis;
+        const { accessibility_key, notepad_file, joystick, interact, settings, help, regedit, twitch } = client.customEmojis;
 
         const row = new ActionRowBuilder()
             .addComponents(
@@ -43,7 +43,11 @@ module.exports = {
                 new ButtonBuilder()
                     .setStyle(ButtonStyle.Secondary)
                     .setCustomId('settings')
-                    .setEmoji('<:settings:1395193663889473659>')
+                    .setEmoji('<:settings:1395193663889473659>'),
+                new ButtonBuilder()
+                    .setStyle(ButtonStyle.Secondary)
+                    .setCustomId('stream')
+                    .setEmoji('<:twitch:1395205392283471943>')
             );
 
         const row2 = new ActionRowBuilder()
@@ -64,7 +68,8 @@ module.exports = {
                 ${notepad_file} \`info\` | *serverinfo, userinfo, avatar...*\n
                 ${joystick} \`fun\` | *poll, rate, snipe...*\n
                 ${interact} \`interactions\` | *hug, kiss, slap...*\n
-                ${settings} \`settings\` | *admin only commands.*\n\n
+                ${settings} \`settings\` | *admin only commands.*\n
+                ${settings} \`stream\` | *live, setup, planning...*\n\n
             `)
             .setFooter({
                 text: message.member.displayName,
@@ -84,6 +89,7 @@ module.exports = {
         const interactCommands = loadCommands(path.join(__dirname, '../interact'));
         const moderationCommands = loadCommands(path.join(__dirname, '../moderation'));
         const settingsCommands = loadCommands(path.join(__dirname, '../settings'));
+        const streamCommands = loadCommands(path.join(__dirname, '../stream'));
 
         const embedMap = {
             mod: new EmbedBuilder()
@@ -130,6 +136,15 @@ module.exports = {
                     ? settingsCommands.map(cmd => `\`${cmd.name}\` - ${cmd.description || "Aucune description"}`).join('\n') 
                     : "Aucune commande de modération disponible."
                 ),
+
+            stream: new EmbedBuilder()
+                .setTitle("<:twitch:1395205392283471943> stream")
+                .setColor(config.embedColor)
+                .setDescription(
+                    streamCommands.length > 0 
+                    ? streamCommands.map(cmd => `\`${cmd.name}\` - ${cmd.description || "Aucune description"}`).join('\n') 
+                    : "Aucune commande de stream disponible."
+                ),
             
             helpEmbed: new EmbedBuilder()
                 .setTitle(".gg/saturize")
@@ -141,7 +156,8 @@ module.exports = {
                     <:notepad_file:1394838818506674246> \`info\` | *serverinfo, userinfo, avatar...*\n
                     <:joystick:1394844617928740925> \`fun\` | *poll, rate, snipe...*\n
                     <:interact:1395196085181350059> \`interactions\` | *hug, kiss, slap...*\n
-                    <:settings:1395193663889473659> \`settings\` | *admin only commands.*\n\n
+                    <:settings:1395193663889473659> \`settings\` | *admin only commands.*\n
+                    <:twitch:1395205392283471943> \`stream\` | *live, setup, planning...*\n\n
                 `)
         };
 
@@ -168,7 +184,11 @@ module.exports = {
                 new ButtonBuilder()
                     .setStyle(ButtonStyle.Secondary)
                     .setCustomId('settings')
-                    .setEmoji('<:settings:1395193663889473659>')
+                    .setEmoji('<:settings:1395193663889473659>'),
+                new ButtonBuilder()
+                    .setStyle(ButtonStyle.Secondary)
+                    .setCustomId('stream')
+                    .setEmoji('<:twitch:1395205392283471943>')
             );
 
         const row2 = new ActionRowBuilder()
