@@ -20,7 +20,7 @@ module.exports = {
 
     run: async (client, message, args) => {
 
-        const { moderation, info, fun, interact, settings, help, category } = client.customEmojis;
+        const { accessibility_key, notepad_file, joystick, interact, settings, help, regedit } = client.customEmojis;
 
         const row = new ActionRowBuilder()
             .addComponents(
@@ -31,7 +31,7 @@ module.exports = {
                 new ButtonBuilder()
                     .setStyle(ButtonStyle.Secondary)
                     .setCustomId('info')
-                    .setEmoji('<:fun:1303136478481879147>'),
+                    .setEmoji('<:notepad_file:1394838818506674246> '),
                 new ButtonBuilder()
                     .setStyle(ButtonStyle.Secondary)
                     .setCustomId('fun')
@@ -58,11 +58,11 @@ module.exports = {
             .setTitle(".gg/saturize")
             .setColor(config.embedColor)
             .setDescription(`
-                <:help:1394845035241148598> **help**\n\n
-                ${category} **catégories :**\n
-                <:accessibility_key:1394845540465901659> \`modération\` | *ban, kick, clear...*\n
-                ${info} \`info\` | *serverinfo, userinfo, avatar...*\n
-                ${fun} \`fun\` | *poll, rate, snipe...*\n
+                ${help} **help**\n\n
+                ${regedit} **catégories :**\n
+                ${accessibility_key} \`modération\` | *ban, kick, clear...*\n
+                ${notepad_file} \`info\` | *serverinfo, userinfo, avatar...*\n
+                ${joystick} \`fun\` | *poll, rate, snipe...*\n
                 ${interact} \`interactions\` | *hug, kiss, slap...*\n
                 ${settings} \`settings\` | *admin only commands.*\n\n
             `)
