@@ -4,16 +4,27 @@ const config = require(path.join(__dirname, '../../config.json'));
 
 exports.run = (client, message, args) => {
     const planningEmbed = new EmbedBuilder()
-        .setTitle("Planning de stream :")
         .setColor(config.embedColor)
         .setDescription(`\n
-**Lundi** — \`16h00\` — Jeu Solo\n
-**Mardi** — \`16h00\` — Jeu Solo\n
-**Mercredi** — \`16h00\` — Valorant\n
-**Jeudi** — \`OFFLINE\`\n
-**Vendredi** — \`21h00\` — League of Legends\n
-**Samedi** — \`21h00\` — Valorant\n
-**Dimanche** — \`OFFLINE\`
+# Set-up PC
+\`GPU :\` MSI GeForce RTX3070
+\`CPU :\` AMD RYZEN 7 3700X
+\`Watercooling :\` MSI CORELIQUID 240R
+
+# Set-up bureau
+\`Ecran principal :\` MSI incurvé 27"
+\`Ecran secondaire :\` Samsung 24"
+\`Casque :\` Logitech Pro X Lightspeed
+\`Souris :\` Logitech Pro X Superlight 2
+\`Caméra :\` Logitech C920
+\`Clavier :\` Razer ornata V2
+\`Micro :\` Rode NT1
+
+# Set-up VR
+Valve Index
+Oculus Quest 2
+Vive base station 2.0 x4
+Vive trackers 3.0 x3
 
 -# Je suis en stream ici : [twitch.tv/saturize](https://twitch.tv/saturize)
         `)
@@ -26,6 +37,5 @@ exports.run = (client, message, args) => {
     message.channel.send({ embeds: [planningEmbed] });
 };
 
-exports.name = "planning";
-exports.aliases = ["schedule"];
-exports.description = "Affiche le planning des prochains streams.";
+exports.name = "setup";
+exports.description = "Affiche mon set-up actuel.";
