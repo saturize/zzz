@@ -7,15 +7,15 @@ exports.run = (client, message, args) => {
         .setTitle("Planning de stream :")
         .setColor(config.embedColor)
         .setDescription(`
-**Lundi** — \`16h00\` — Jeu Solo
-**Mardi** — \`16h00\` — Jeu Solo
-**Mercredi** — \`16h00\` — Valorant
-**Jeudi** — \`OFFLINE\`
-**Vendredi** — \`21h00\` — League of Legends
-**Samedi** — \`21h00\` — Valorant
-**Dimanche** — \`OFFLINE\`
+**Lundi** — \`16h00\` — Jeu Solo\n
+**Mardi** — \`16h00\` — Jeu Solo\n
+**Mercredi** — \`16h00\` — Valorant\n
+**Jeudi** — \`OFFLINE\`\n
+**Vendredi** — \`21h00\` — League of Legends\n
+**Samedi** — \`21h00\` — Valorant\n
+**Dimanche** — \`OFFLINE\`\n
 
-📍 Tous les lives sont sur [twitch.tv/saturize](https://twitch.tv/saturize)
+*Je suis en stream ici : [twitch.tv/saturize](https://twitch.tv/saturize)*
         `)
         .setFooter({ 
             text: `Demandé par ${message.author.username}`, 
