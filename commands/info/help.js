@@ -17,46 +17,52 @@ const loadCommands = (dir) => {
 
 module.exports = {
     name: 'help',
+    description: "Affiche l'entièreté des commandes disponibles.",
 
     run: async (client, message, args) => {
 
         const { accessibility_key, notepad_file, joystick, interact, settings, help, regedit, twitch } = client.customEmojis;
 
-        const row = new ActionRowBuilder()
-            .addComponents(
-                new ButtonBuilder()
-                    .setStyle(ButtonStyle.Secondary)
-                    .setCustomId('mod')
-                    .setEmoji('<:accessibility_key:1394845540465901659>'),
-                new ButtonBuilder()
-                    .setStyle(ButtonStyle.Secondary)
-                    .setCustomId('info')
-                    .setEmoji('<:notepad_file:1394838818506674246>'),
-                new ButtonBuilder()
-                    .setStyle(ButtonStyle.Secondary)
-                    .setCustomId('fun')
-                    .setEmoji('<:joystick:1394844617928740925>'),
-                new ButtonBuilder()
-                    .setStyle(ButtonStyle.Secondary)
-                    .setCustomId('interactions')
-                    .setEmoji('<:interact:1395196085181350059>'),
-                new ButtonBuilder()
-                    .setStyle(ButtonStyle.Secondary)
-                    .setCustomId('settings')
-                    .setEmoji('<:settings:1395193663889473659>'),
-                new ButtonBuilder()
-                    .setStyle(ButtonStyle.Secondary)
-                    .setCustomId('stream')
-                    .setEmoji('<:twitch:1395205392283471943>')
-            );
+const row = new ActionRowBuilder()
+    .addComponents(
+        new ButtonBuilder()
+            .setStyle(ButtonStyle.Secondary)
+            .setCustomId('mod')
+            .setEmoji('<:accessibility_key:1394845540465901659>'),
+        new ButtonBuilder()
+            .setStyle(ButtonStyle.Secondary)
+            .setCustomId('info')
+            .setEmoji('<:notepad_file:1394838818506674246>'),
+        new ButtonBuilder()
+            .setStyle(ButtonStyle.Secondary)
+            .setCustomId('fun')
+            .setEmoji('<:joystick:1394844617928740925>')
+    );
 
-        const row2 = new ActionRowBuilder()
-            .addComponents(
-                new ButtonBuilder()
-                    .setStyle(ButtonStyle.Secondary)
-                    .setCustomId('helpEmbed')
-                    .setEmoji('<:help:1394845035241148598>')
-            );
+const row2 = new ActionRowBuilder()
+    .addComponents(
+        new ButtonBuilder()
+            .setStyle(ButtonStyle.Secondary)
+            .setCustomId('interactions')
+            .setEmoji('<:interact:1395196085181350059>'),
+        new ButtonBuilder()
+            .setStyle(ButtonStyle.Secondary)
+            .setCustomId('settings')
+            .setEmoji('<:settings:1395193663889473659>'),
+        new ButtonBuilder()
+            .setStyle(ButtonStyle.Secondary)
+            .setCustomId('stream')
+            .setEmoji('<:twitch:1395205392283471943>')
+    );
+
+
+const row3 = new ActionRowBuilder()
+    .addComponents(
+        new ButtonBuilder()
+            .setStyle(ButtonStyle.Secondary)
+            .setCustomId('helpEmbed')
+            .setEmoji('<:help:1394845035241148598>')
+    );
 
         const helpEmbed = new EmbedBuilder()
             .setTitle(".gg/saturize")
@@ -79,7 +85,7 @@ module.exports = {
 
         await message.reply({
             embeds: [helpEmbed],
-            components: [row, row2]
+            components: [row, row2, row3]
         });
     },
 
@@ -163,46 +169,50 @@ module.exports = {
 
         const selectedEmbed = embedMap[interaction.customId];
 
-        const row = new ActionRowBuilder()
-            .addComponents(
-                new ButtonBuilder()
-                    .setStyle(ButtonStyle.Secondary)
-                    .setCustomId('mod')
-                    .setEmoji('<:accessibility_key:1394845540465901659>'),
-                new ButtonBuilder()
-                    .setStyle(ButtonStyle.Secondary)
-                    .setCustomId('info')
-                    .setEmoji('<:notepad_file:1394838818506674246>'),
-                new ButtonBuilder()
-                    .setStyle(ButtonStyle.Secondary)
-                    .setCustomId('fun')
-                    .setEmoji('<:joystick:1394844617928740925>'),
-                new ButtonBuilder()
-                    .setStyle(ButtonStyle.Secondary)
-                    .setCustomId('interactions')
-                    .setEmoji('<:interact:1395196085181350059>'),
-                new ButtonBuilder()
-                    .setStyle(ButtonStyle.Secondary)
-                    .setCustomId('settings')
-                    .setEmoji('<:settings:1395193663889473659>'),
-                new ButtonBuilder()
-                    .setStyle(ButtonStyle.Secondary)
-                    .setCustomId('stream')
-                    .setEmoji('<:twitch:1395205392283471943>')
-            );
+const row = new ActionRowBuilder()
+    .addComponents(
+        new ButtonBuilder()
+            .setStyle(ButtonStyle.Secondary)
+            .setCustomId('mod')
+            .setEmoji('<:accessibility_key:1394845540465901659>'),
+        new ButtonBuilder()
+            .setStyle(ButtonStyle.Secondary)
+            .setCustomId('info')
+            .setEmoji('<:notepad_file:1394838818506674246>'),
+        new ButtonBuilder()
+            .setStyle(ButtonStyle.Secondary)
+            .setCustomId('fun')
+            .setEmoji('<:joystick:1394844617928740925>')
+    );
 
-        const row2 = new ActionRowBuilder()
-            .addComponents(
-                new ButtonBuilder()
-                    .setStyle(ButtonStyle.Secondary)
-                    .setCustomId('helpEmbed')
-                    .setEmoji('<:help:1394845035241148598>')
-            );
+const row2 = new ActionRowBuilder()
+    .addComponents(
+        new ButtonBuilder()
+            .setStyle(ButtonStyle.Secondary)
+            .setCustomId('interactions')
+            .setEmoji('<:interact:1395196085181350059>'),
+        new ButtonBuilder()
+            .setStyle(ButtonStyle.Secondary)
+            .setCustomId('settings')
+            .setEmoji('<:settings:1395193663889473659>'),
+        new ButtonBuilder()
+            .setStyle(ButtonStyle.Secondary)
+            .setCustomId('stream')
+            .setEmoji('<:twitch:1395205392283471943>')
+    );
+
+const row3 = new ActionRowBuilder()
+    .addComponents(
+        new ButtonBuilder()
+            .setStyle(ButtonStyle.Secondary)
+            .setCustomId('helpEmbed')
+            .setEmoji('<:help:1394845035241148598>')
+    );
 
         if (selectedEmbed) {
             await interaction.update({ 
                 embeds: [selectedEmbed], 
-                components: [row, row2] 
+                components: [row, row2, row3] 
             }).catch(err => {
                 console.error('Erreur lors de la mise à jour de l\'interaction:', err);
             });
@@ -211,4 +221,3 @@ module.exports = {
         }
     }
 };
-exports.description = "Affiche l'entièreté des commandes disponibles.";
