@@ -58,9 +58,9 @@ module.exports = {
             .setTitle(".gg/saturize")
             .setColor(config.embedColor)
             .setDescription(`
-                ${help} **help**\n\n
+                <:help:1394845035241148598> **help**\n\n
                 ${category} **catégories :**\n
-                ${moderation} \`modération\` | *ban, kick, clear...*\n
+                <:accessibility_key:1394845540465901659> \`modération\` | *ban, kick, clear...*\n
                 ${info} \`info\` | *serverinfo, userinfo, avatar...*\n
                 ${fun} \`fun\` | *poll, rate, snipe...*\n
                 ${interact} \`interactions\` | *hug, kiss, slap...*\n
