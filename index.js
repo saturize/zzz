@@ -7,7 +7,7 @@ const config = require("./config.json");
 const db = require('./database');
 
 const emojiHandler = require('./emojiHandler');
-//const { checkLiveStatus } = require('./twitchNotifier');
+const { checkLiveStatus } = require('./twitchNotifier');
 const helpModule = require('./commands/info/help');
 
 const client = new Client({
@@ -167,8 +167,8 @@ client.login(process.env.TOKEN).then(() => {
     db.connectToDatabase();
 
     // TWITCH CHECK
-    //setInterval(() => {
-    //    checkLiveStatus(client);
-    //}, 60000);
+    setInterval(() => {
+        checkLiveStatus(client);
+    }, 60000);
     
 });
