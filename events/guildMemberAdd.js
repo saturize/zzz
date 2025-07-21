@@ -29,7 +29,9 @@ module.exports = async (client, member) => {
         const welcomeEmbed = new EmbedBuilder()
             .setColor(config.embedColor)
             .setTitle(`${member.guild.name}`)
-            .setDescription(`Coucou <@${member.user.id}> ! Bienvenue à toi.  \n- Hésite pas à venir sur Twitch :3`)
+            .setDescription(`Coucou <@${member.user.id}> ! Bienvenue à toi.\n
+                -# Je suis en stream ici : [twitch.tv/saturize](https://twitch.tv/saturize)
+                `)
             .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
             .setFooter({ text: `Nous sommes maintenant ${member.guild.memberCount} membres` })
             .setTimestamp();
@@ -46,10 +48,15 @@ module.exports = async (client, member) => {
             .setDescription(`**Veuillez accueillir <@${member.user.id}> comme il se doit!**`)
             .setTimestamp();
 
-        await generalChannel.send({
+        const sentMessage = await generalChannel.send({
             embeds: [generalWelcomeEmbed]
-        });
-        console.log(`Message de bienvenue envoyé à ${member.user.tag} dans le salon général.`);
+            });
+            console.log(`Message de bienvenue envoyé à ${member.user.tag} dans le salon général.`);
+
+            // 5MIN SUPP
+            setTimeout(() => {sentMessage.delete().catch(err => {
+                console.error('Erreur lors de la suppression du message de bienvenue :', err);});
+            }, 5 * 60 * 1000); // 5 minutes en millisecondes
 
         // AUTOROLE
         const autoroleConfig = config.autorole;
