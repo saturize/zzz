@@ -120,46 +120,46 @@ client.on('guildMemberAdd', async (member) => {
     }
 });
 
-client.on("presenceUpdate", async (oldMember, newMember) => {
-    if (!oldMember || !newMember) return;
-    const guild = oldMember.guild;
+// client.on("presenceUpdate", async (oldMember, newMember) => {
+//     if (!oldMember || !newMember) return;
+//     const guild = oldMember.guild;
 
-    if (oldMember.status !== newMember.status) return;
+//     if (oldMember.status !== newMember.status) return;
 
-    const vanityID = '1305215473960489011';
-    const vanityRole = guild.roles.cache.get(vanityID);
-    const vanity = '.gg/uet'
+//     const vanityID = '1305215473960489011';
+//     const vanityRole = guild.roles.cache.get(vanityID);
+//     const vanity = '.gg/uet'
 
-    if (!vanityRole || vanityRole.deleted) return;
+//     if (!vanityRole || vanityRole.deleted) return;
 
-    let status = newMember.activities.map(a => a.state);
-    const member = guild.members.cache.get(newMember.user.id);
+//     let status = newMember.activities.map(a => a.state);
+//     const member = guild.members.cache.get(newMember.user.id);
 
-    if (!member) return;
-    if (newMember.guild.roles.cache.has(vanityRole)) {
-        console.error(mainFade('vanity - .gg/uet') + ` | @${member.user.tag}` + chalk.red` already ` + `has the role.`);
-    } else {
-        if (status[0] != null && status[0].includes(vanity)) {
-            try {
-                await member.roles.add(vanityID);
+//     if (!member) return;
+//     if (newMember.guild.roles.cache.has(vanityRole)) {
+//         console.error(mainFade('vanity - .gg/uet') + ` | @${member.user.tag}` + chalk.red` already ` + `has the role.`);
+//     } else {
+//         if (status[0] != null && status[0].includes(vanity)) {
+//             try {
+//                 await member.roles.add(vanityID);
     
-                console.log(mainFade('vanity - .gg/uet') + ` | @${member.user.tag} has now the vanity in his status.`);
-            } catch (error) {
-                console.error(`Error adding role: ${error}`);
-            }
-        } else {
-            if (member.roles.cache.some((r) => r.id === vanityID)) {
-                try {
-                    console.error(mainFade('vanity - .gg/uet') + ` | @${member.user.tag} removed the vanity in his status.`);
-                    await member.roles.remove(vanityID);
+//                 console.log(mainFade('vanity - .gg/uet') + ` | @${member.user.tag} has now the vanity in his status.`);
+//             } catch (error) {
+//                 console.error(`Error adding role: ${error}`);
+//             }
+//         } else {
+//             if (member.roles.cache.some((r) => r.id === vanityID)) {
+//                 try {
+//                     console.error(mainFade('vanity - .gg/uet') + ` | @${member.user.tag} removed the vanity in his status.`);
+//                     await member.roles.remove(vanityID);
     
-                } catch (error) {
-                    console.error(`Error removing role: ${error}`);
-                }
-            }
-        }
-    }
-});
+//                 } catch (error) {
+//                     console.error(`Error removing role: ${error}`);
+//                 }
+//             }
+//         }
+//     }
+// });
 
 // LOGIN
 client.login(process.env.TOKEN).then(() => {
@@ -167,9 +167,9 @@ client.login(process.env.TOKEN).then(() => {
     // DATABASE
     // db.connectToDatabase();
 
-    // TWITCH CHECK MAJ
-    // setInterval(() => {
-    //    checkLiveStatus(client);
-    //}, 60000);
+    // TWITCH CHECK
+     setInterval(() => {
+        checkLiveStatus(client);
+    }, 60000);
     
 });
