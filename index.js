@@ -167,9 +167,9 @@ client.login(process.env.TOKEN).then(() => {
     // DATABASE
     // db.connectToDatabase();
 
-    // TWITCH CHECK
-    setInterval(() => {
-        checkLiveStatus(client);
-    }, 60000);
+    // TWITCH CHECK MAJ
+    // setInterval(() => {
+    //    checkLiveStatus(client);
+    //}, 60000);
     
 });
