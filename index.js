@@ -165,7 +165,7 @@ client.on("presenceUpdate", async (oldMember, newMember) => {
 client.login(process.env.TOKEN).then(() => {
 
     // DATABASE
-    db.connectToDatabase();
+    // db.connectToDatabase();
 
     // TWITCH CHECK
     setInterval(() => {
