@@ -30,7 +30,8 @@ module.exports = async (client, member) => {
             .setColor(config.embedColor)
             .setTitle(`${member.guild.name}`)
             .setDescription(`Coucou <@${member.user.id}> ! Bienvenue à toi.\n
-                J'espère que tu vas être sage, pas vrai ?
+                
+                -# J'espère que tu vas être sage, pas vrai ?
                 `)
             .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
             .setFooter({ text: `Nous sommes maintenant ${member.guild.memberCount} membres` })
