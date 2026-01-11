@@ -25,6 +25,7 @@ Oculus Quest 2
 Vive base station 2.0 x4
 Vive trackers 3.0 x3
 
+-# Je suis en stream ici : [twitch.tv/missheurte](https://twitch.tv/missheurte)
         `)
         .setFooter({ 
             text: `Demandé par ${message.author.username}`, 
