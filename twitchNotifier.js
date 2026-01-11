@@ -40,7 +40,7 @@ async function getAccessToken() {
 async function notifyDiscord(client, streamData) {
     const channel = client.channels.cache.get(process.env.DISCORD_CHANNEL_ID);
     const guild = client.guilds.cache.get(process.env.GUILD_ID);
-    const roleId = '1383175228883996744';
+    const roleId = '1459902211453878388';
 
     if (channel && guild) {
         const role = guild.roles.cache.get(roleId);
@@ -60,7 +60,7 @@ async function notifyDiscord(client, streamData) {
             .setURL(`https://www.twitch.tv/${process.env.TWITCH_CHANNEL_NAME}`)
             .addFields({ name: 'Jeu', value: `${streamData.game_name}`, inline: false })
             .setImage(streamData.thumbnail_url.replace('{width}', '1280').replace('{height}', '720'))
-            .setFooter({ text: `ｓａｔｕｒｉｚｅ` })
+            .setFooter({ text: `h e u r t e` })
             .setTimestamp();
 
         channel.send({
