@@ -18,13 +18,13 @@ exports.run = (client, message, args) => {
 \`Caméra :\` Logitech C920
 \`Clavier :\` Razer ornata V2
 \`Micro :\` Rode NT1
+\`Carte Son :\` Focusrite Scarlett Solo
 # Set-up VR
 Valve Index
 Oculus Quest 2
 Vive base station 2.0 x4
 Vive trackers 3.0 x3
 
--# Je suis en stream ici : [twitch.tv/saturize](https://twitch.tv/saturize)
         `)
         .setFooter({ 
             text: `Demandé par ${message.author.username}`, 

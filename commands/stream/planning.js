@@ -7,15 +7,9 @@ exports.run = (client, message, args) => {
         .setTitle("Planning de stream :")
         .setColor(config.embedColor)
         .setDescription(`\n
-**Lundi** — \`16h00\` — Jeu Solo\n
-**Mardi** — \`16h00\` — Jeu Solo\n
-**Mercredi** — \`16h00\` — Valorant\n
-**Jeudi** — \`OFFLINE\`\n
-**Vendredi** — \`21h00\` — League of Legends\n
-**Samedi** — \`21h00\` — Valorant\n
-**Dimanche** — \`OFFLINE\`
+J'ai plus de planning </3 les cours m'ont tout pris mais des fois je stream le weekend c cool
 
--# Je suis en stream ici : [twitch.tv/saturize](https://twitch.tv/saturize)
+-# Je suis en stream ici : [twitch.tv/missheurte](https://twitch.tv/missheurte)
         `)
         .setFooter({ 
             text: `Demandé par ${message.author.username}`, 
