@@ -65,7 +65,7 @@ const row3 = new ActionRowBuilder()
     );
 
         const helpEmbed = new EmbedBuilder()
-            .setTitle(".gg/saturize")
+            .setTitle("cœur")
             .setColor(config.embedColor)
             .setDescription(`
                 ${help} **help**\n\n
