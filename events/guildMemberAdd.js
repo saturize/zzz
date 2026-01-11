@@ -9,8 +9,8 @@ module.exports = async (client, member) => {
         // WELCOME
         console.log(`Nouvel utilisateur: ${member.user.tag} a rejoint le serveur ${member.guild.name}`);
 
-        const welcomeChannelId = '1381770068555337818'; // welcome
-        const generalChannelId = '1381758032022601780'; // général
+        const welcomeChannelId = '1408995514023805070'; // welcome
+        const generalChannelId = '1408990731426599024'; // général
 
         const welcomeChannel = member.guild.channels.cache.get(welcomeChannelId);
         const generalChannel = member.guild.channels.cache.get(generalChannelId);
@@ -30,7 +30,7 @@ module.exports = async (client, member) => {
             .setColor(config.embedColor)
             .setTitle(`${member.guild.name}`)
             .setDescription(`Coucou <@${member.user.id}> ! Bienvenue à toi.\n
-                -# Je suis en stream ici : [twitch.tv/saturize](https://twitch.tv/saturize)
+                -# J'espère que tu vas être sage, pas vrai ?
                 `)
             .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
             .setFooter({ text: `Nous sommes maintenant ${member.guild.memberCount} membres` })
